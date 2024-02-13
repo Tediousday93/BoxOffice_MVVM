@@ -10,7 +10,6 @@
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
-		ADD87BF22B7611320065B9A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF02B7611320065B9A6 /* Main.storyboard */; };
 		ADD87BF42B7611330065B9A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF32B7611330065B9A6 /* Assets.xcassets */; };
 		ADD87BF72B7611330065B9A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */; };
 		ADD87C022B7611340065B9A6 /* BoxOffice_MVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87C012B7611340065B9A6 /* BoxOffice_MVVMTests.swift */; };
@@ -40,7 +39,6 @@
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEE2B7611320065B9A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ADD87BF12B7611320065B9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADD87BF32B7611330065B9A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADD87BF62B7611330065B9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADD87BF82B7611330065B9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,12 +97,11 @@
 		ADD87BE92B7611320065B9A6 /* BoxOffice_MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */,
-				ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */,
-				ADD87BEE2B7611320065B9A6 /* ViewController.swift */,
-				ADD87BF02B7611320065B9A6 /* Main.storyboard */,
-				ADD87BF32B7611330065B9A6 /* Assets.xcassets */,
-				ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */,
+				ADD87C1A2B7B0FB10065B9A6 /* Application */,
+				ADD87C1D2B7B0FD80065B9A6 /* Model */,
+				ADD87C1C2B7B0FCB0065B9A6 /* View */,
+				ADD87C1B2B7B0FB90065B9A6 /* Network */,
+				ADD87C1E2B7B0FF10065B9A6 /* Resources */,
 				ADD87BF82B7611330065B9A6 /* Info.plist */,
 			);
 			path = BoxOffice_MVVM;
@@ -125,6 +122,46 @@
 				ADD87C0D2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift */,
 			);
 			path = BoxOffice_MVVMUITests;
+			sourceTree = "<group>";
+		};
+		ADD87C1A2B7B0FB10065B9A6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */,
+				ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		ADD87C1B2B7B0FB90065B9A6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		ADD87C1C2B7B0FCB0065B9A6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ADD87BEE2B7611320065B9A6 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ADD87C1D2B7B0FD80065B9A6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ADD87C1E2B7B0FF10065B9A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADD87BF32B7611330065B9A6 /* Assets.xcassets */,
+				ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +270,6 @@
 			files = (
 				ADD87BF72B7611330065B9A6 /* LaunchScreen.storyboard in Resources */,
 				ADD87BF42B7611330065B9A6 /* Assets.xcassets in Resources */,
-				ADD87BF22B7611320065B9A6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +333,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		ADD87BF02B7611320065B9A6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ADD87BF12B7611320065B9A6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,7 +469,6 @@
 				INFOPLIST_FILE = BoxOffice_MVVM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -451,9 +478,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom.BoxOffice-MVVM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -468,7 +498,6 @@
 				INFOPLIST_FILE = BoxOffice_MVVM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -478,9 +507,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom.BoxOffice-MVVM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
