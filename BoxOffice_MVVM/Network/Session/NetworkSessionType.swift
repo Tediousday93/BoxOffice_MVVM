@@ -8,5 +8,13 @@
 import Foundation
 
 protocol NetworkSessionType {
+    func dataTask(
+        with request: URLRequest,
+        completion: @escaping (Result<Data, Error>) -> Void
+    )
     
+    func dataTask(
+        with url: URL,
+        completion: @escaping (Result<Data, Error>) -> Void
+    )
 }
