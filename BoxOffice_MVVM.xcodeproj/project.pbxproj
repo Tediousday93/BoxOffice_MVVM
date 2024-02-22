@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		AD1C435F2B8490D200D856EC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C435E2B8490D200D856EC /* NetworkError.swift */; };
-		AD1C43622B84928800D856EC /* NetworkProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43612B84928800D856EC /* NetworkProviderType.swift */; };
 		AD1C43682B85C75400D856EC /* NetworkSessionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43672B85C75400D856EC /* NetworkSessionType.swift */; };
 		AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43692B85C78B00D856EC /* NetworkSession.swift */; };
-		AD1C436C2B85C7AD00D856EC /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C436B2B85C7AD00D856EC /* NetworkProvider.swift */; };
 		AD1C436F2B85C9FE00D856EC /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C436E2B85C9FE00D856EC /* DailyBoxOffice.swift */; };
 		AD1C43712B85CA2800D856EC /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43702B85CA2800D856EC /* MovieDetails.swift */; };
 		AD1C43732B85CA4A00D856EC /* DaumSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */; };
+		AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43822B87471B00D856EC /* HTTPMethod.swift */; };
+		AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43872B879A1400D856EC /* NetworkProvider.swift */; };
 		AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
@@ -45,13 +45,13 @@
 
 /* Begin PBXFileReference section */
 		AD1C435E2B8490D200D856EC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		AD1C43612B84928800D856EC /* NetworkProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProviderType.swift; sourceTree = "<group>"; };
 		AD1C43672B85C75400D856EC /* NetworkSessionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionType.swift; sourceTree = "<group>"; };
 		AD1C43692B85C78B00D856EC /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
-		AD1C436B2B85C7AD00D856EC /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		AD1C436E2B85C9FE00D856EC /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		AD1C43702B85CA2800D856EC /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 		AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumSearchResult.swift; sourceTree = "<group>"; };
+		AD1C43822B87471B00D856EC /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		AD1C43872B879A1400D856EC /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,25 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				AD1C435E2B8490D200D856EC /* NetworkError.swift */,
+				AD1C43822B87471B00D856EC /* HTTPMethod.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		AD1C43642B8492A200D856EC /* Provider */ = {
-			isa = PBXGroup;
-			children = (
-				AD1C43612B84928800D856EC /* NetworkProviderType.swift */,
-				AD1C436B2B85C7AD00D856EC /* NetworkProvider.swift */,
-			);
-			path = Provider;
-			sourceTree = "<group>";
-		};
-		AD1C43652B8492B500D856EC /* Endpoint */ = {
-			isa = PBXGroup;
-			children = (
-				AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */,
-			);
-			path = Endpoint;
 			sourceTree = "<group>";
 		};
 		AD1C43662B85C73700D856EC /* Session */ = {
@@ -134,6 +118,14 @@
 				AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		AD1C43742B85DED200D856EC /* APIConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */,
+			);
+			path = APIConfiguration;
 			sourceTree = "<group>";
 		};
 		ADD87BDE2B7611320065B9A6 = {
@@ -198,9 +190,9 @@
 		ADD87C1B2B7B0FB90065B9A6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AD1C43872B879A1400D856EC /* NetworkProvider.swift */,
 				AD1C43662B85C73700D856EC /* Session */,
-				AD1C43642B8492A200D856EC /* Provider */,
-				AD1C43652B8492B500D856EC /* Endpoint */,
+				AD1C43742B85DED200D856EC /* APIConfiguration */,
 				AD1C43632B84928D00D856EC /* Common */,
 			);
 			path = Network;
@@ -363,13 +355,13 @@
 			files = (
 				ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */,
 				AD1C436F2B85C9FE00D856EC /* DailyBoxOffice.swift in Sources */,
-				AD1C43622B84928800D856EC /* NetworkProviderType.swift in Sources */,
-				AD1C436C2B85C7AD00D856EC /* NetworkProvider.swift in Sources */,
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
 				AD1C43712B85CA2800D856EC /* MovieDetails.swift in Sources */,
 				ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */,
+				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
 				AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */,
+				AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */,
 				AD1C43732B85CA4A00D856EC /* DaumSearchResult.swift in Sources */,
 				AD1C435F2B8490D200D856EC /* NetworkError.swift in Sources */,
 				AD1C43682B85C75400D856EC /* NetworkSessionType.swift in Sources */,
@@ -545,8 +537,8 @@
 				INFOPLIST_FILE = BoxOffice_MVVM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,8 +566,8 @@
 				INFOPLIST_FILE = BoxOffice_MVVM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
