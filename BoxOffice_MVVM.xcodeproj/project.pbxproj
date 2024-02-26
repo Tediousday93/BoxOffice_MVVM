@@ -15,6 +15,10 @@
 		AD1C43732B85CA4A00D856EC /* DaumSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */; };
 		AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43822B87471B00D856EC /* HTTPMethod.swift */; };
 		AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43872B879A1400D856EC /* NetworkProvider.swift */; };
+		AD1C438D2B885A7E00D856EC /* NetworkJSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C438C2B885A7E00D856EC /* NetworkJSONDecodable.swift */; };
+		AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C438E2B885AF500D856EC /* NetworkJSONDecoder.swift */; };
+		AD1C43972B888EC000D856EC /* NetworkJSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43962B888EC000D856EC /* NetworkJSONSerializer.swift */; };
+		AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43982B888F1F00D856EC /* NetworkJSONSerializable.swift */; };
 		AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
@@ -52,6 +56,10 @@
 		AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumSearchResult.swift; sourceTree = "<group>"; };
 		AD1C43822B87471B00D856EC /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		AD1C43872B879A1400D856EC /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		AD1C438C2B885A7E00D856EC /* NetworkJSONDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONDecodable.swift; sourceTree = "<group>"; };
+		AD1C438E2B885AF500D856EC /* NetworkJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONDecoder.swift; sourceTree = "<group>"; };
+		AD1C43962B888EC000D856EC /* NetworkJSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONSerializer.swift; sourceTree = "<group>"; };
+		AD1C43982B888F1F00D856EC /* NetworkJSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONSerializable.swift; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +136,33 @@
 			path = APIConfiguration;
 			sourceTree = "<group>";
 		};
+		AD1C43892B885A2700D856EC /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43912B885B0400D856EC /* Implementation */,
+				AD1C43902B885AFE00D856EC /* Interface */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		AD1C43902B885AFE00D856EC /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C438C2B885A7E00D856EC /* NetworkJSONDecodable.swift */,
+				AD1C43982B888F1F00D856EC /* NetworkJSONSerializable.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		AD1C43912B885B0400D856EC /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C438E2B885AF500D856EC /* NetworkJSONDecoder.swift */,
+				AD1C43962B888EC000D856EC /* NetworkJSONSerializer.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 		ADD87BDE2B7611320065B9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				AD1C43872B879A1400D856EC /* NetworkProvider.swift */,
+				AD1C43892B885A2700D856EC /* DataMapping */,
 				AD1C43662B85C73700D856EC /* Session */,
 				AD1C43742B85DED200D856EC /* APIConfiguration */,
 				AD1C43632B84928D00D856EC /* Common */,
@@ -356,12 +392,16 @@
 				ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */,
 				AD1C436F2B85C9FE00D856EC /* DailyBoxOffice.swift in Sources */,
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
+				AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */,
 				AD1C43712B85CA2800D856EC /* MovieDetails.swift in Sources */,
 				ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */,
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
+				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
 				AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */,
 				AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */,
+				AD1C438D2B885A7E00D856EC /* NetworkJSONDecodable.swift in Sources */,
+				AD1C43972B888EC000D856EC /* NetworkJSONSerializer.swift in Sources */,
 				AD1C43732B85CA4A00D856EC /* DaumSearchResult.swift in Sources */,
 				AD1C435F2B8490D200D856EC /* NetworkError.swift in Sources */,
 				AD1C43682B85C75400D856EC /* NetworkSessionType.swift in Sources */,
