@@ -9,9 +9,15 @@ import Foundation
 
 final class NetworkProvider {
     private let session: NetworkSessionType
+    private let jsonDecoder: NetworkJSONDecodable
+    private let jsonSerializer: NetworkJSONSerializable
     
-    init(session: NetworkSessionType) {
+    init(session: NetworkSessionType,
+         jsonDecoder: NetworkJSONDecodable,
+         jsonSerializer: NetworkJSONSerializable) {
         self.session = session
+        self.jsonDecoder = jsonDecoder
+        self.jsonSerializer = jsonSerializer
     }
     
     func request<API: APIConfigurationType>(
@@ -24,7 +30,7 @@ final class NetworkProvider {
                 switch result {
                 case let .success(data):
                     do {
-                        let response = try JSONDecoder().decode(API.Response.self, from: data)
+                        let response = try self.jsonDecoder.decode(data, to: API.Response.self)
                         completion(.success(response))
                     } catch {
                         completion(.failure(error))
@@ -64,6 +70,7 @@ extension NetworkProvider {
         }
         
         request.httpMethod = api.method.rawValue
+        request.httpBody = try jsonSerializer.serialize(api.bodyParameters)
         
         return request
     }
