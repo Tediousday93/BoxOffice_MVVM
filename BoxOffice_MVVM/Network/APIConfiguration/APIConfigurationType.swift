@@ -10,7 +10,7 @@ import Foundation
 protocol APIConfigurationType {
     associatedtype Response: Decodable
     
-    var baseURL: URL { get }
+    var baseURL: String { get }
     
     var path: String { get }
     
@@ -20,9 +20,5 @@ protocol APIConfigurationType {
     
     var queryParameters: [String: Any] { get }
     
-    var bodyParameters: [String: Any] { get set }
-}
-
-extension APIConfigurationType {
-    var bodyParameters: [String: Any] { [:] }
+    var bodyParameters: [String: Any] { get }
 }

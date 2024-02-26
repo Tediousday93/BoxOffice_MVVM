@@ -49,7 +49,7 @@ final class NetworkProvider {
 
 extension NetworkProvider {
     private func makeRequest<API: APIConfigurationType>(for api: API) throws -> URLRequest {
-        let fullPath = api.baseURL.absoluteString + api.path
+        let fullPath = api.baseURL + api.path
         
         guard var urlComponents = URLComponents(string: fullPath) else {
             throw NetworkError.invalidURL
