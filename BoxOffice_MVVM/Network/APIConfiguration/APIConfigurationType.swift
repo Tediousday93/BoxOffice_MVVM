@@ -19,4 +19,10 @@ protocol APIConfigurationType {
     var headers: [String: String] { get }
     
     var queryParameters: [String: Any] { get }
+    
+    var bodyParameters: [String: Any] { get set }
+}
+
+extension APIConfigurationType {
+    var bodyParameters: [String: Any] { [:] }
 }
