@@ -60,6 +60,10 @@
 		AD1C438E2B885AF500D856EC /* NetworkJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONDecoder.swift; sourceTree = "<group>"; };
 		AD1C43962B888EC000D856EC /* NetworkJSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONSerializer.swift; sourceTree = "<group>"; };
 		AD1C43982B888F1F00D856EC /* NetworkJSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONSerializable.swift; sourceTree = "<group>"; };
+		AD1C43A72B8C82C800D856EC /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
+		AD1C43A92B8C830D00D856EC /* BoxOfficeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeType.swift; sourceTree = "<group>"; };
+		AD1C43AE2B8C97C800D856EC /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
+		AD1C43B42B8CA11000D856EC /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +167,16 @@
 			path = Implementation;
 			sourceTree = "<group>";
 		};
+		AD1C43A62B8C829000D856EC /* BoxOffice */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43A72B8C82C800D856EC /* KobisAPI.swift */,
+				AD1C43A92B8C830D00D856EC /* BoxOfficeType.swift */,
+				AD1C43AE2B8C97C800D856EC /* BoxOffice.swift */,
+			);
+			path = BoxOffice;
+			sourceTree = "<group>";
+		};
 		ADD87BDE2B7611320065B9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -186,12 +200,13 @@
 		ADD87BE92B7611320065B9A6 /* BoxOffice_MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				ADD87BF82B7611330065B9A6 /* Info.plist */,
+				AD1C43B42B8CA11000D856EC /* Development.xcconfig */,
 				ADD87C1A2B7B0FB10065B9A6 /* Application */,
 				ADD87C1D2B7B0FD80065B9A6 /* Model */,
 				ADD87C1C2B7B0FCB0065B9A6 /* View */,
 				ADD87C1B2B7B0FB90065B9A6 /* Network */,
 				ADD87C1E2B7B0FF10065B9A6 /* Resources */,
-				ADD87BF82B7611330065B9A6 /* Info.plist */,
 			);
 			path = BoxOffice_MVVM;
 			sourceTree = "<group>";
@@ -245,6 +260,7 @@
 		ADD87C1D2B7B0FD80065B9A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AD1C43A62B8C829000D856EC /* BoxOffice */,
 				AD1C436D2B85C98300D856EC /* Data */,
 			);
 			path = Model;
@@ -454,6 +470,7 @@
 /* Begin XCBuildConfiguration section */
 		ADD87C0F2B7611340065B9A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD1C43B42B8CA11000D856EC /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
