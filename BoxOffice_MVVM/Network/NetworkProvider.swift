@@ -12,9 +12,11 @@ final class NetworkProvider {
     private let jsonDecoder: NetworkJSONDecodable
     private let jsonSerializer: NetworkJSONSerializable
     
-    init(session: NetworkSessionType,
-         jsonDecoder: NetworkJSONDecodable,
-         jsonSerializer: NetworkJSONSerializable) {
+    init(
+        session: NetworkSessionType,
+        jsonDecoder: NetworkJSONDecodable,
+        jsonSerializer: NetworkJSONSerializable
+    ) {
         self.session = session
         self.jsonDecoder = jsonDecoder
         self.jsonSerializer = jsonSerializer
