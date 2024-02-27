@@ -177,7 +177,6 @@
 		AD1C43A62B8C829000D856EC /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				AD1C43A72B8C82C800D856EC /* KobisAPI.swift */,
 				AD1C43A92B8C830D00D856EC /* BoxOfficeType.swift */,
 				AD1C43AE2B8C97C800D856EC /* BoxOffice.swift */,
 			);
@@ -188,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */,
-				AD1C43C02B8DB85400D856EC /* DaumImageSearchAPI.swift */,
 				AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */,
 			);
 			path = DaumImageSearcher;
@@ -202,6 +200,15 @@
 				AD1C43BD2B8DB81800D856EC /* DaumImageSearcher */,
 			);
 			path = ImageURLSearcher;
+			sourceTree = "<group>";
+		};
+		AD1C43CE2B8E375C00D856EC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43A72B8C82C800D856EC /* KobisAPI.swift */,
+				AD1C43C02B8DB85400D856EC /* DaumImageSearchAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		ADD87BDE2B7611320065B9A6 = {
@@ -287,6 +294,7 @@
 		ADD87C1D2B7B0FD80065B9A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AD1C43CE2B8E375C00D856EC /* API */,
 				AD1C43A62B8C829000D856EC /* BoxOffice */,
 				AD1C43C42B8DC76200D856EC /* ImageURLSearcher */,
 				AD1C436D2B85C98300D856EC /* Data */,
