@@ -29,7 +29,7 @@ struct DaumImageSearchAPI: APIConfigurationType {
     
     var bodyParameters: [String : Any] = [:]
     
-    mutating func addQuery(parameters: QueryParameter...) {
+    mutating func setQuery(parameters: QueryParameter...) {
         parameters.forEach { parameter in
             queryParameters[parameter.key] = parameter.value
         }
