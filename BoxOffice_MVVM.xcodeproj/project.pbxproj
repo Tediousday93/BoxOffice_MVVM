@@ -19,6 +19,7 @@
 		AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C438E2B885AF500D856EC /* NetworkJSONDecoder.swift */; };
 		AD1C43972B888EC000D856EC /* NetworkJSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43962B888EC000D856EC /* NetworkJSONSerializer.swift */; };
 		AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43982B888F1F00D856EC /* NetworkJSONSerializable.swift */; };
+		AD1C43C12B8DB85400D856EC /* DaumSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43C02B8DB85400D856EC /* DaumSearchAPI.swift */; };
 		AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
@@ -64,6 +65,7 @@
 		AD1C43A92B8C830D00D856EC /* BoxOfficeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeType.swift; sourceTree = "<group>"; };
 		AD1C43AE2B8C97C800D856EC /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
 		AD1C43B42B8CA11000D856EC /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD1C43C02B8DB85400D856EC /* DaumSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumSearchAPI.swift; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +179,22 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
+		AD1C43BD2B8DB81800D856EC /* DaumSearchEngine */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43C02B8DB85400D856EC /* DaumSearchAPI.swift */,
+			);
+			path = DaumSearchEngine;
+			sourceTree = "<group>";
+		};
+		AD1C43BE2B8DB83000D856EC /* ImageProvider */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43BD2B8DB81800D856EC /* DaumSearchEngine */,
+			);
+			path = ImageProvider;
+			sourceTree = "<group>";
+		};
 		ADD87BDE2B7611320065B9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +278,7 @@
 		ADD87C1D2B7B0FD80065B9A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AD1C43BE2B8DB83000D856EC /* ImageProvider */,
 				AD1C43A62B8C829000D856EC /* BoxOffice */,
 				AD1C436D2B85C98300D856EC /* Data */,
 			);
@@ -411,6 +430,7 @@
 				AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */,
 				AD1C43712B85CA2800D856EC /* MovieDetails.swift in Sources */,
 				ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */,
+				AD1C43C12B8DB85400D856EC /* DaumSearchAPI.swift in Sources */,
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
 				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
