@@ -1,5 +1,5 @@
 //
-//  DaumSearchAPI.swift
+//  DaumImageSearchAPI.swift
 //  BoxOffice_MVVM
 //
 //  Created by Rowan on 2024/02/27.
@@ -25,14 +25,17 @@ struct DaumImageSearchAPI: APIConfigurationType {
         ]
     }
     
-    var queryParameters: [String : Any] = [:]
+    var queryParameters: [String : Any]
     
-    var bodyParameters: [String : Any] = [:]
+    var bodyParameters: [String : Any] { [:] }
     
-    mutating func setQuery(parameters: QueryParameter...) {
-        parameters.forEach { parameter in
-            queryParameters[parameter.key] = parameter.value
+    init(queryParameters: QueryParameter...) {
+        var queries: [String: Any] = [:]
+        queryParameters.forEach { parameter in
+            queries[parameter.key] = parameter.value
         }
+        
+        self.queryParameters = queries
     }
 }
 
