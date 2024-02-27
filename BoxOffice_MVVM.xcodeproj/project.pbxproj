@@ -22,6 +22,7 @@
 		AD1C43C12B8DB85400D856EC /* DaumImageSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43C02B8DB85400D856EC /* DaumImageSearchAPI.swift */; };
 		AD1C43C32B8DC61200D856EC /* ImageURLSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43C22B8DC61200D856EC /* ImageURLSearchable.swift */; };
 		AD1C43C62B8DCDB500D856EC /* DaumImageSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */; };
+		AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */; };
 		AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
@@ -70,6 +71,7 @@
 		AD1C43C02B8DB85400D856EC /* DaumImageSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumImageSearchAPI.swift; sourceTree = "<group>"; };
 		AD1C43C22B8DC61200D856EC /* ImageURLSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLSearchable.swift; sourceTree = "<group>"; };
 		AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumImageSearcher.swift; sourceTree = "<group>"; };
+		AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLSearchError.swift; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,18 +194,11 @@
 			path = DaumImageSearcher;
 			sourceTree = "<group>";
 		};
-		AD1C43BE2B8DB83000D856EC /* ImageProvider */ = {
-			isa = PBXGroup;
-			children = (
-				AD1C43C42B8DC76200D856EC /* ImageURLSearcher */,
-			);
-			path = ImageProvider;
-			sourceTree = "<group>";
-		};
 		AD1C43C42B8DC76200D856EC /* ImageURLSearcher */ = {
 			isa = PBXGroup;
 			children = (
 				AD1C43C22B8DC61200D856EC /* ImageURLSearchable.swift */,
+				AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */,
 				AD1C43BD2B8DB81800D856EC /* DaumImageSearcher */,
 			);
 			path = ImageURLSearcher;
@@ -292,8 +287,8 @@
 		ADD87C1D2B7B0FD80065B9A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AD1C43BE2B8DB83000D856EC /* ImageProvider */,
 				AD1C43A62B8C829000D856EC /* BoxOffice */,
+				AD1C43C42B8DC76200D856EC /* ImageURLSearcher */,
 				AD1C436D2B85C98300D856EC /* Data */,
 			);
 			path = Model;
@@ -448,6 +443,7 @@
 				AD1C43C12B8DB85400D856EC /* DaumImageSearchAPI.swift in Sources */,
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
+				AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */,
 				AD1C43C32B8DC61200D856EC /* ImageURLSearchable.swift in Sources */,
 				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
 				AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */,

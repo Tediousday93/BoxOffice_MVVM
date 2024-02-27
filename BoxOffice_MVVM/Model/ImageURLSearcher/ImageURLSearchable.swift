@@ -8,6 +8,11 @@
 import Foundation
 
 protocol ImageURLSearchable {
+    func searchSingle(
+        for keyword: String,
+        completion: @escaping (Result<URL, Error>) -> Void
+    )
+    
     func search(
         for keyword: String,
         completion: @escaping (Result<[URL], Error>) -> Void
