@@ -15,11 +15,11 @@ final class InMemoryCacheStorage {
         storage.countLimit = countLimit
     }
     
-    func store(for key: String, data: UIImage) {
-        storage.setObject(data, forKey: key as NSString)
+    func store(value: UIImage, for key: String) {
+        storage.setObject(value, forKey: key as NSString)
     }
     
-    func retrive(for key: String) -> UIImage? {
+    func value(for key: String) -> UIImage? {
         storage.object(forKey: key as NSString)
     }
 }
