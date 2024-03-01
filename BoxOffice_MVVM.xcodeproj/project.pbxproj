@@ -25,6 +25,7 @@
 		AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */; };
 		AD1C43D62B8E43AE00D856EC /* CacheStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43D52B8E43AE00D856EC /* CacheStorageType.swift */; };
 		AD1C43DA2B8F224F00D856EC /* InMemoryCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */; };
+		AD1C43E32B91AB8A00D856EC /* OnDiskCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43E22B91AB8A00D856EC /* OnDiskCacheStorage.swift */; };
 		AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
@@ -76,6 +77,7 @@
 		AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLSearchError.swift; sourceTree = "<group>"; };
 		AD1C43D52B8E43AE00D856EC /* CacheStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStorageType.swift; sourceTree = "<group>"; };
 		AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheStorage.swift; sourceTree = "<group>"; };
+		AD1C43E22B91AB8A00D856EC /* OnDiskCacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDiskCacheStorage.swift; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				AD1C43D52B8E43AE00D856EC /* CacheStorageType.swift */,
 				AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */,
+				AD1C43E22B91AB8A00D856EC /* OnDiskCacheStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				AD1C43C62B8DCDB500D856EC /* DaumImageSearcher.swift in Sources */,
 				AD1C43D62B8E43AE00D856EC /* CacheStorageType.swift in Sources */,
 				AD1C43712B85CA2800D856EC /* MovieDetails.swift in Sources */,
+				AD1C43E32B91AB8A00D856EC /* OnDiskCacheStorage.swift in Sources */,
 				ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */,
 				AD1C43C12B8DB85400D856EC /* DaumImageSearchAPI.swift in Sources */,
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
