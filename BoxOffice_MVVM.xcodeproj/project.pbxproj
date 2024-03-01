@@ -23,6 +23,8 @@
 		AD1C43C32B8DC61200D856EC /* ImageURLSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43C22B8DC61200D856EC /* ImageURLSearchable.swift */; };
 		AD1C43C62B8DCDB500D856EC /* DaumImageSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */; };
 		AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */; };
+		AD1C43D62B8E43AE00D856EC /* CacheStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43D52B8E43AE00D856EC /* CacheStorageType.swift */; };
+		AD1C43DA2B8F224F00D856EC /* InMemoryCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */; };
 		AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
@@ -72,6 +74,8 @@
 		AD1C43C22B8DC61200D856EC /* ImageURLSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLSearchable.swift; sourceTree = "<group>"; };
 		AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumImageSearcher.swift; sourceTree = "<group>"; };
 		AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLSearchError.swift; sourceTree = "<group>"; };
+		AD1C43D52B8E43AE00D856EC /* CacheStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStorageType.swift; sourceTree = "<group>"; };
+		AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheStorage.swift; sourceTree = "<group>"; };
 		AD2D7A2A2B7DC6C100F5A7C0 /* APIConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurationType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +215,31 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		AD1C43CF2B8E422700D856EC /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43D42B8E42A000D856EC /* Storage */,
+				AD1C43D32B8E429B00D856EC /* Loader */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		AD1C43D32B8E429B00D856EC /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		AD1C43D42B8E42A000D856EC /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				AD1C43D52B8E43AE00D856EC /* CacheStorageType.swift */,
+				AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		ADD87BDE2B7611320065B9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +269,7 @@
 				ADD87C1D2B7B0FD80065B9A6 /* Model */,
 				ADD87C1C2B7B0FCB0065B9A6 /* View */,
 				ADD87C1B2B7B0FB90065B9A6 /* Network */,
+				AD1C43CF2B8E422700D856EC /* Cache */,
 				ADD87C1E2B7B0FF10065B9A6 /* Resources */,
 			);
 			path = BoxOffice_MVVM;
@@ -446,6 +476,7 @@
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
 				AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */,
 				AD1C43C62B8DCDB500D856EC /* DaumImageSearcher.swift in Sources */,
+				AD1C43D62B8E43AE00D856EC /* CacheStorageType.swift in Sources */,
 				AD1C43712B85CA2800D856EC /* MovieDetails.swift in Sources */,
 				ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */,
 				AD1C43C12B8DB85400D856EC /* DaumImageSearchAPI.swift in Sources */,
@@ -456,6 +487,7 @@
 				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
 				AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */,
 				AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */,
+				AD1C43DA2B8F224F00D856EC /* InMemoryCacheStorage.swift in Sources */,
 				AD1C438D2B885A7E00D856EC /* NetworkJSONDecodable.swift in Sources */,
 				AD1C43972B888EC000D856EC /* NetworkJSONSerializer.swift in Sources */,
 				AD1C43732B85CA4A00D856EC /* DaumSearchResult.swift in Sources */,
