@@ -21,6 +21,10 @@ enum OnDiskCacheError: Error {
     case cannotRemoveFile(url: URL, error: Error)
     
     case cannotFindValue(url: URL, error: Error)
+    
+    case directoryEnumeratorCreationFail(url: URL)
+    
+    case invalidURLContained(url: URL)
 }
 
 final class OnDiskCacheStorage {
@@ -30,9 +34,15 @@ final class OnDiskCacheStorage {
     
     private var isStorageReady: Bool = true
     
-    init(fileManager: FileManager = .default) {
+    private let countLimit: Int
+    
+    init(
+        fileManager: FileManager = .default,
+        countLimit: Int
+    ) {
         self.fileManager = fileManager
         self.directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        self.countLimit = countLimit
         try? prepareDirectory()
     }
     
@@ -133,6 +143,46 @@ final class OnDiskCacheStorage {
         ]
         
         try? fileManager.setAttributes(attributes, ofItemAtPath: filePath)
+    }
+    
+    func removeExpiredValues() throws {
+        let fileURLs = try allFileURLs(for: [.creationDateKey, .contentModificationDateKey])
+        let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
+        let expiredFileURLs = fileURLs.filter { fileURL in
+            let resourceValues: URLResourceValues
+            do {
+                resourceValues = try fileURL.resourceValues(forKeys: resourceKeys)
+            } catch {
+                return true
+            }
+            
+            return resourceValues.contentModificationDate?.isPast(referenceDate: Date()) ?? true
+        }
+        
+        try expiredFileURLs.forEach { fileURL in
+            do {
+                try fileManager.removeItem(at: fileURL)
+            } catch {
+                throw OnDiskCacheError.cannotRemoveFile(url: fileURL, error: error)
+            }
+        }
+    }
+    
+    private func allFileURLs(for resourceKeys: [URLResourceKey]) throws -> [URL] {
+        guard let directoryEnumerator = fileManager.enumerator(
+            at: directoryURL,
+            includingPropertiesForKeys: resourceKeys,
+            options: .skipsHiddenFiles
+        ) else {
+            throw OnDiskCacheError.directoryEnumeratorCreationFail(url: directoryURL)
+        }
+        
+        guard let fileURLs = directoryEnumerator.allObjects as? [URL]
+        else {
+            throw OnDiskCacheError.invalidURLContained(url: directoryURL)
+        }
+        
+        return fileURLs
     }
 }
 
