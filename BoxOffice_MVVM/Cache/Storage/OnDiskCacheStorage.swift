@@ -242,9 +242,3 @@ final class OnDiskCacheStorage {
         try? fileManager.setAttributes(attributes, ofItemAtPath: filePath)
     }
 }
-
-extension Date {
-    func isPast(referenceDate: Date) -> Bool {
-        self.timeIntervalSince(referenceDate) <= 0
-    }
-}
