@@ -11,11 +11,15 @@ import UIKit.UIImage
 final class InMemoryCacheStorage {
     private let storage: NSCache<NSString, UIImage> = .init()
     
+    private let lock: NSLock = .init()
+    
     init(countLimit: Int) {
         storage.countLimit = countLimit
     }
     
     func store(value: UIImage, for key: String) {
+        lock.lock()
+        defer { lock.unlock() }
         storage.setObject(value, forKey: key as NSString)
     }
     
