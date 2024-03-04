@@ -146,10 +146,10 @@ final class OnDiskCacheStorage {
         
         let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
         var sortedFileURLs = try urls.sorted { leftURL, rightURL in
-            let leftExpiration = try resourceValue(for: resourceKeys, at: leftURL)
+            let leftExpiration = try resourceValues(for: resourceKeys, at: leftURL)
                 .contentModificationDate ?? Date()
             
-            let rightExpiration = try resourceValue(for: resourceKeys, at: rightURL)
+            let rightExpiration = try resourceValues(for: resourceKeys, at: rightURL)
                 .contentModificationDate ?? Date()
             
             return leftExpiration > rightExpiration
@@ -163,7 +163,7 @@ final class OnDiskCacheStorage {
         return exceedingFileURLs
     }
     
-    private func resourceValue(
+    private func resourceValues(
         for keys: Set<URLResourceKey>,
         at url: URL
     ) throws -> URLResourceValues {
@@ -180,15 +180,18 @@ final class OnDiskCacheStorage {
         return urlResourceValues
     }
     
-    private func removeValue(at url: URL) throws {
-        do {
-            try fileManager.removeItem(at: url)
-        } catch {
-            throw OnDiskCacheError.cannotRemoveFile(url: url, error: error)
-        }
+    func value(for key: String) throws -> Data? {
+        try value(for: key, actuallyLoad: true)
     }
     
-    func value(for key: String) throws -> Data? {
+    private func value(
+        for key: String,
+        actuallyLoad: Bool
+    ) throws -> Data? {
+        guard isStorageReady else {
+            throw OnDiskCacheError.storageNotReady
+        }
+        
         let fileURL = directoryURL.appending(path: key)
         
         guard fileManager.fileExists(atPath: fileURL.path) else {
@@ -196,19 +199,12 @@ final class OnDiskCacheStorage {
         }
         
         let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
-        let urlResourceValues: URLResourceValues
-        
-        do {
-            urlResourceValues = try fileURL.resourceValues(forKeys: resourceKeys)
-        } catch {
-            throw OnDiskCacheError.invalidURLResource(
-                keys: resourceKeys, url: fileURL, error: error
-            )
-        }
-        
-        let isExpired = urlResourceValues.contentModificationDate?.isPast(referenceDate: Date()) ?? true
+        let urlResourceValues = try resourceValues(for: resourceKeys, at: fileURL)
+        let isExpired = urlResourceValues.contentModificationDate?
+            .isPast(referenceDate: Date()) ?? true
         
         if isExpired { return nil }
+        if !actuallyLoad { return Data() }
         
         do {
             let value = try Data(contentsOf: fileURL)
@@ -240,5 +236,28 @@ final class OnDiskCacheStorage {
         ]
         
         try? fileManager.setAttributes(attributes, ofItemAtPath: filePath)
+    }
+    
+    func removeValue(for key: String) throws {
+        let fileURL = directoryURL.appending(path: key)
+        try removeValue(at: fileURL)
+    }
+    
+    func removeAll() throws {
+        try removeValue(at: directoryURL)
+        try prepareDirectory()
+    }
+    
+    private func removeValue(at url: URL) throws {
+        do {
+            try fileManager.removeItem(at: url)
+        } catch {
+            throw OnDiskCacheError.cannotRemoveFile(url: url, error: error)
+        }
+    }
+    
+    func isCached(for key: String) throws -> Bool {
+        let result = try value(for: key, actuallyLoad: false)
+        return result != nil
     }
 }
