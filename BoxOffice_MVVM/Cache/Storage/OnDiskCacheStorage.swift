@@ -63,8 +63,11 @@ final class OnDiskCacheStorage {
         }
     }
     
-    private func removeExpiredValues() throws {
+    func removeExpiredValues() throws {
         let fileURLs = try allFileURLs(for: [.creationDateKey, .contentModificationDateKey])
+        
+        guard fileURLs.count > 0 else { return }
+        
         let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
         let expiredFileURLs = fileURLs.filter { fileURL in
             let resourceValues: URLResourceValues
