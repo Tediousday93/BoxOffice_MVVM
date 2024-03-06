@@ -17,7 +17,7 @@ final class InMemoryCacheStorage {
         storage.countLimit = countLimit
     }
     
-    func store(value: UIImage, for key: String) {
+    func store(_ value: UIImage, for key: String) {
         lock.lock()
         defer { lock.unlock() }
         storage.setObject(value, forKey: key as NSString)
