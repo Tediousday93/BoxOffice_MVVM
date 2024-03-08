@@ -25,7 +25,7 @@ enum ImageCacheError: Error {
 final class ImageCache {
     static let `default`: ImageCache = .init(memoryCacheLimit: 30, diskCacheLimit: 100)
     
-    private let memoryStorage: InMemoryCacheStorage
+    private let memoryStorage: InMemoryCacheStorage<Image>
     private let diskStorage: OnDiskCacheStorage
     
     convenience init(memoryCacheLimit: Int, diskCacheLimit: Int) {
@@ -36,7 +36,7 @@ final class ImageCache {
     }
     
     init(
-        memoryStorage: InMemoryCacheStorage,
+        memoryStorage: InMemoryCacheStorage<Image>,
         diskStorage: OnDiskCacheStorage
     ) {
         self.memoryStorage = memoryStorage
