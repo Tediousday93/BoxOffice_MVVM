@@ -18,6 +18,8 @@ enum OnDiskCacheError: Error {
     
     case invalidURLResource(keys: Set<URLResourceKey>, url: URL, error: Error)
     
+    case expirationNotContained(url: URL)
+    
     case cannotRemoveFile(url: URL, error: Error)
     
     case cannotFindValue(url: URL, error: Error)
@@ -44,7 +46,7 @@ final class OnDiskCacheStorage {
         self.directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         self.countLimit = countLimit
         try? prepareDirectory()
-        try? removeExpiredValues()
+        try? removeExpired()
     }
     
     private func prepareDirectory() throws {
@@ -63,7 +65,7 @@ final class OnDiskCacheStorage {
         }
     }
     
-    func removeExpiredValues() throws {
+    func removeExpired() throws {
         let fileURLs = try allFileURLs(for: [.creationDateKey, .contentModificationDateKey])
         
         guard fileURLs.count > 0 else { return }
@@ -149,17 +151,17 @@ final class OnDiskCacheStorage {
         
         let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
         var sortedFileURLs = try urls.sorted { leftURL, rightURL in
-            let leftExpiration = try resourceValues(for: resourceKeys, at: leftURL)
-                .contentModificationDate ?? Date()
+            guard let leftExpiration = try resourceValues(for: resourceKeys, at: leftURL).contentModificationDate
+            else { throw OnDiskCacheError.expirationNotContained(url: leftURL) }
             
-            let rightExpiration = try resourceValues(for: resourceKeys, at: rightURL)
-                .contentModificationDate ?? Date()
+            guard let rightExpiration = try resourceValues(for: resourceKeys, at: rightURL).contentModificationDate
+            else { throw OnDiskCacheError.expirationNotContained(url: rightURL) }
             
-            return leftExpiration > rightExpiration
+            return rightExpiration.isPast(referenceDate: leftExpiration)
         }
         
         var exceedingFileURLs: [URL] = []
-        for _ in 0..<exceedingCount {
+        for _ in 0...exceedingCount {
             exceedingFileURLs.append(sortedFileURLs.removeLast())
         }
         
@@ -231,10 +233,11 @@ final class OnDiskCacheStorage {
             return
         }
         
+        let accessDate = Date()
         let originalExpiration = lastEstimatedExpirationDate.timeIntervalSince(lastAccessDate)
-        let expirationDate = Date().addingTimeInterval(originalExpiration)
+        let expirationDate = accessDate.addingTimeInterval(originalExpiration)
         let attributes: [FileAttributeKey: Any] = [
-            .creationDate: Date() as NSDate,
+            .creationDate: accessDate as NSDate,
             .modificationDate: expirationDate as NSDate
         ]
         
