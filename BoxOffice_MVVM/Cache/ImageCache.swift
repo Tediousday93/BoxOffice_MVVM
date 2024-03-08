@@ -89,4 +89,10 @@ final class ImageCache {
         else { throw ImageCacheError.expiredImage(key: key) }
         return Image(data: imageData)
     }
+    
+    func isCached(for key: String) throws -> Bool {
+        let isCachedInMemory = memoryStorage.isCached(for: key)
+        let isCachedOnDisk = try diskStorage.isCached(for: key)
+        return isCachedInMemory || isCachedOnDisk
+    }
 }

@@ -222,7 +222,7 @@
 		AD1C43CF2B8E422700D856EC /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				AD32E7F62B970B3F002AD62C /* ImageCache */,
+				AD32E7F72B970B70002AD62C /* ImageCache.swift */,
 				AD1C43D42B8E42A000D856EC /* Storage */,
 				AD32E7E72B95E3C2002AD62C /* Helper */,
 			);
@@ -244,14 +244,6 @@
 				AD32E7E82B95E3D4002AD62C /* Date+.swift */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		AD32E7F62B970B3F002AD62C /* ImageCache */ = {
-			isa = PBXGroup;
-			children = (
-				AD32E7F72B970B70002AD62C /* ImageCache.swift */,
-			);
-			path = ImageCache;
 			sourceTree = "<group>";
 		};
 		ADD87BDE2B7611320065B9A6 = {
