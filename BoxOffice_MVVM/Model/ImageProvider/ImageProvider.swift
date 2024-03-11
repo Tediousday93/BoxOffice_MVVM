@@ -27,12 +27,36 @@ final class ImageProvider {
     func fetchImage(
         from url: URL,
         completion: @escaping (Result<UIImage, Error>) -> Void
-    ) throws {
-        if try cache.isCached(for: url.cacheKey),
-           let cachedImage = try cache.retrieveImage(for: url.cacheKey) {
-            completion(.success(cachedImage))
+    ) {
+        do {
+            if try cache.isCached(for: url.cacheKey),
+               let cachedImage = try cache.retrieveImage(for: url.cacheKey) {
+                completion(.success(cachedImage))
+                return
+            }
+        } catch {
+            completion(.failure(error))
         }
         
+        downloadImage(from: url) { result in
+            switch result {
+            case let .success(image):
+                do {
+                    try self.cache.store(image, for: url.cacheKey)
+                    completion(.success(image))
+                } catch {
+                    completion(.failure(error))
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func downloadImage(
+        from url: URL,
+        completion: @escaping (Result<UIImage, Error>) -> Void
+    ) {
         loader.dataTask(with: url) { result in
             switch result {
             case let .success(data):
