@@ -9,9 +9,7 @@ import Foundation
 
 final class InMemoryCacheStorage<T> {
     private let storage: NSCache<NSString, CacheObject<T>> = .init()
-    
     private let lock: NSLock = .init()
-    
     private var keys: Set<String> = []
     
     init(countLimit: Int) {
@@ -31,12 +29,12 @@ final class InMemoryCacheStorage<T> {
         keys.insert(key)
     }
     
-    func value(for key: String) -> T? {
+    func value(for key: String, extendingExpiration: Bool = true) -> T? {
         guard let cacheObject = storage.object(forKey: key as NSString)
         else { return nil }
         
         if cacheObject.isExpired { return nil }
-        cacheObject.extendExpiration()
+        if extendingExpiration { cacheObject.extendExpiration() }
         
         return cacheObject.value
     }
@@ -75,7 +73,7 @@ final class InMemoryCacheStorage<T> {
     }
     
     func isCached(for key: String) -> Bool {
-        guard let cacheObject = value(for: key) else {
+        guard value(for: key, extendingExpiration: false) != nil else {
             return false
         }
         return true
