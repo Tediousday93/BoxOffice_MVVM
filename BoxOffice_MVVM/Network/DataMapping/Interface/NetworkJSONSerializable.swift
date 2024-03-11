@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkJSONSerializable {
-    func serialize(_ parameters: [String: Any]) throws -> Data
+    func serialize(_ parameters: [String: Any]) throws -> Data?
 }
