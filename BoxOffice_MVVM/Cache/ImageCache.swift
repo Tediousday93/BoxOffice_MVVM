@@ -10,41 +10,44 @@ import UIKit.UIImage
 
 typealias Image = UIImage
 
-enum CacheOption {
-    case all
-    case memory
-    case disk
-    case none
-}
-
 enum ImageCacheError: Error {
     case cannotSerializeImage
     case expiredImage(key: String)
 }
 
 final class ImageCache: ImageCacheType {
-    static let `default`: ImageCache = .init(memoryCacheLimit: 30, diskCacheLimit: 100)
+    static let `default`: ImageCache = .init(memoryCacheLimit: 30, diskCacheLimit: 100, option: .all)
     
     private let memoryStorage: InMemoryCacheStorage<Image>
+    
     private let diskStorage: OnDiskCacheStorage
     
-    convenience init(memoryCacheLimit: Int, diskCacheLimit: Int) {
+    private let cacheOption: CacheOption
+    
+    convenience init(
+        memoryCacheLimit: Int,
+        diskCacheLimit: Int,
+        option: CacheOption
+    ) {
         self.init(
             memoryStorage: .init(countLimit: memoryCacheLimit),
-            diskStorage: .init(countLimit: diskCacheLimit)
+            diskStorage: .init(countLimit: diskCacheLimit),
+            option: option
         )
     }
     
     init(
         memoryStorage: InMemoryCacheStorage<Image>,
-        diskStorage: OnDiskCacheStorage
+        diskStorage: OnDiskCacheStorage,
+        option: CacheOption
     ) {
         self.memoryStorage = memoryStorage
         self.diskStorage = diskStorage
+        self.cacheOption = option
     }
     
-    func store(_ image: Image, for key: String, option: CacheOption) throws {
-        switch option {
+    func store(_ image: Image, for key: String) throws {
+        switch cacheOption {
         case .all:
             storeToMemory(image, for: key)
             try storeToDisk(image, for: key)
@@ -94,5 +97,14 @@ final class ImageCache: ImageCacheType {
         let isCachedInMemory = memoryStorage.isCached(for: key)
         let isCachedOnDisk = try diskStorage.isCached(for: key)
         return isCachedInMemory || isCachedOnDisk
+    }
+}
+
+extension ImageCache {
+    enum CacheOption {
+        case all
+        case memory
+        case disk
+        case none
     }
 }

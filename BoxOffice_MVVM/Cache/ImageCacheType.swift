@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ImageCacheType {
-    func store(_ image: Image, for key: String, option: CacheOption) throws
+    func store(_ image: Image, for key: String) throws
     
     func retrieveImage(for key: String) throws -> Image?
     
