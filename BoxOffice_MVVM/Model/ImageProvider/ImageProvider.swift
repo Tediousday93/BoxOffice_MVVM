@@ -18,7 +18,7 @@ final class ImageProvider {
     
     init(
         cache: ImageCacheType = ImageCache.default,
-        loader: NetworkSessionType = NetworkSession()
+        loader: NetworkSessionType = NetworkSession(session: .init(configuration: .ephemeral))
     ) {
         self.cache = cache
         self.loader = loader
