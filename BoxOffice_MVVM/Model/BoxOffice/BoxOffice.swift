@@ -8,9 +8,9 @@
 import Foundation
 
 final class BoxOffice: BoxOfficeType {
-    private let provider: NetworkProvider
+    private let provider: NetworkProvider<KobisAPI>
     
-    init(provider: NetworkProvider) {
+    init(provider: NetworkProvider<KobisAPI>) {
         self.provider = provider
     }
     
@@ -19,7 +19,7 @@ final class BoxOffice: BoxOfficeType {
         completion: @escaping (Result<DailyBoxOffice, Error>) -> Void
     ) {
         provider.request(
-            KobisAPI.dailyBoxOffice(responseType: DailyBoxOffice.self, targetDate: targetDate)
+            .dailyBoxOffice(responseType: DailyBoxOffice.self, targetDate: targetDate)
         ) { result in
             switch result {
             case let .success(dailyBoxOffice):
@@ -35,7 +35,7 @@ final class BoxOffice: BoxOfficeType {
         completion: @escaping (Result<MovieDetails, Error>) -> Void
     ) {
         provider.request(
-            KobisAPI.movieDetail(responseType: MovieDetails.self, movieCode: movieCode)
+            .movieDetail(responseType: MovieDetails.self, movieCode: movieCode)
         ) { result in
             switch result {
             case let .success(movieDetails):

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class NetworkProvider {
+final class NetworkProvider<API: APIConfigurationType> {
     private let session: NetworkSessionType
     private let jsonDecoder: NetworkJSONDecodable
     private let jsonSerializer: NetworkJSONSerializable
@@ -22,7 +22,7 @@ final class NetworkProvider {
         self.jsonSerializer = jsonSerializer
     }
     
-    func request<API: APIConfigurationType>(
+    func request(
         _ api: API,
         completion: @escaping (Result<API.Response, Error>) -> Void
     ) {
@@ -48,7 +48,7 @@ final class NetworkProvider {
 }
 
 extension NetworkProvider {
-    private func makeRequest<API: APIConfigurationType>(for api: API) throws -> URLRequest {
+    private func makeRequest(for api: API) throws -> URLRequest {
         let fullPath = api.baseURL + api.path
         
         guard var urlComponents = URLComponents(string: fullPath) else {

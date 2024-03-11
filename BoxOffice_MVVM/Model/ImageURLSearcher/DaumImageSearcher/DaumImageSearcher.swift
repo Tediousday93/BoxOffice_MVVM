@@ -8,9 +8,9 @@
 import Foundation
 
 final class DaumImageSearcher: ImageURLSearchable {
-    private let provider: NetworkProvider
+    private let provider: NetworkProvider<DaumImageSearchAPI>
     
-    init(provider: NetworkProvider) {
+    init(provider: NetworkProvider<DaumImageSearchAPI>) {
         self.provider = provider
     }
     
@@ -19,7 +19,7 @@ final class DaumImageSearcher: ImageURLSearchable {
         completion: @escaping (Result<URL, Error>) -> Void
     ) {
         provider.request(
-            DaumImageSearchAPI(queryParameters: .query(keyword: keyword))
+            .init(queryParameters: .query(keyword: keyword))
         ) { result in
             switch result {
             case let .success(searchResult):
@@ -40,7 +40,7 @@ final class DaumImageSearcher: ImageURLSearchable {
         completion: @escaping (Result<[URL], Error>) -> Void
     ) {
         provider.request(
-            DaumImageSearchAPI(queryParameters: .query(keyword: keyword))
+            .init(queryParameters: .query(keyword: keyword))
         ) { result in
             switch result {
             case let .success(searchResult):
