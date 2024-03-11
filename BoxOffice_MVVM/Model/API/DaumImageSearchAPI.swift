@@ -21,7 +21,7 @@ struct DaumImageSearchAPI: APIConfigurationType {
         else { fatalError("Could not find DAUM_SEARCH_API_KEY from main bundle's infoDictionary") }
         
         return [
-            "Authorization": key
+            "Authorization": "KakaoAK " + key
         ]
     }
     
