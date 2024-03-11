@@ -13,12 +13,12 @@ enum ImageProviderError: Error {
 }
 
 final class ImageProvider {
-    private let cache: ImageCache
+    private let cache: ImageCacheType
     private let loader: NetworkSessionType
     
     init(
-        cache: ImageCache = .default,
-        loader: NetworkSessionType
+        cache: ImageCacheType = ImageCache.default,
+        loader: NetworkSessionType = NetworkSession()
     ) {
         self.cache = cache
         self.loader = loader

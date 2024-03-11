@@ -22,7 +22,7 @@ enum ImageCacheError: Error {
     case expiredImage(key: String)
 }
 
-final class ImageCache {
+final class ImageCache: ImageCacheType {
     static let `default`: ImageCache = .init(memoryCacheLimit: 30, diskCacheLimit: 100)
     
     private let memoryStorage: InMemoryCacheStorage<Image>

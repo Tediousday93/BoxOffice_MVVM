@@ -30,6 +30,7 @@
 		AD32E7F82B970B70002AD62C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E7F72B970B70002AD62C /* ImageCache.swift */; };
 		AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8012B9B250D002AD62C /* ImageProviderType.swift */; };
 		AD32E8042B9B2515002AD62C /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8032B9B2515002AD62C /* ImageProvider.swift */; };
+		AD32E8062B9C4F20002AD62C /* ImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8052B9C4F20002AD62C /* ImageCacheType.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
@@ -85,6 +86,7 @@
 		AD32E7F72B970B70002AD62C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		AD32E8012B9B250D002AD62C /* ImageProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProviderType.swift; sourceTree = "<group>"; };
 		AD32E8032B9B2515002AD62C /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		AD32E8052B9C4F20002AD62C /* ImageCacheType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheType.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		AD1C43CF2B8E422700D856EC /* Cache */ = {
 			isa = PBXGroup;
 			children = (
+				AD32E8052B9C4F20002AD62C /* ImageCacheType.swift */,
 				AD32E7F72B970B70002AD62C /* ImageCache.swift */,
 				AD1C43D42B8E42A000D856EC /* Storage */,
 				AD32E7E72B95E3C2002AD62C /* Helper */,
@@ -517,6 +520,7 @@
 				AD1C43682B85C75400D856EC /* NetworkSessionType.swift in Sources */,
 				AD32E8042B9B2515002AD62C /* ImageProvider.swift in Sources */,
 				AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */,
+				AD32E8062B9C4F20002AD62C /* ImageCacheType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
