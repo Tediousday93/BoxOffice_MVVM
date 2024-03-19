@@ -8,16 +8,16 @@
 import Foundation
 
 final class NetworkProvider<API: APIConfigurationType> {
-    private let session: NetworkSessionType
+    private let networkSession: NetworkSessionType
     private let jsonDecoder: NetworkJSONDecodable
     private let jsonSerializer: NetworkJSONSerializable
     
     init(
-        session: NetworkSessionType,
-        jsonDecoder: NetworkJSONDecodable,
-        jsonSerializer: NetworkJSONSerializable
+        networkSession: NetworkSessionType = NetworkSession.default,
+        jsonDecoder: NetworkJSONDecodable = NetworkJSONDecoder(),
+        jsonSerializer: NetworkJSONSerializable = NetworkJSONSerializer()
     ) {
-        self.session = session
+        self.networkSession = networkSession
         self.jsonDecoder = jsonDecoder
         self.jsonSerializer = jsonSerializer
     }
@@ -28,7 +28,7 @@ final class NetworkProvider<API: APIConfigurationType> {
     ) {
         do {
             let request = try makeRequest(for: api)
-            session.dataTask(with: request) { result in
+            networkSession.dataTask(with: request) { result in
                 switch result {
                 case let .success(data):
                     do {

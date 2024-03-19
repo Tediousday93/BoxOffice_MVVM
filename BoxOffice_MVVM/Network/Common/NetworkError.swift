@@ -5,10 +5,10 @@
 //  Created by Rowan on 2024/02/20.
 //
 
-enum NetworkError: Error {
+enum NetworkError: Error, Equatable {
     case unknown
     case responseNotFound
     case invalidHttpStatusCode(statusCode: Int)
-    case emptyData
+    case nilData
     case invalidURL
 }

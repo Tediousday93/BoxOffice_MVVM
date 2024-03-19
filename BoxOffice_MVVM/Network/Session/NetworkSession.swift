@@ -8,6 +8,8 @@
 import Foundation
 
 final class NetworkSession: NetworkSessionType {
+    static let `default` = NetworkSession()
+    
     private let session: URLSession
     
     init(session: URLSession = URLSession.shared) {
@@ -56,7 +58,7 @@ extension NetworkSession {
         }
         
         guard let data else {
-            return .failure(NetworkError.emptyData)
+            return .failure(NetworkError.nilData)
         }
         
         return .success(data)

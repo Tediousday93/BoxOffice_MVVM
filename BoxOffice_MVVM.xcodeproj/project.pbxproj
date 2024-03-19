@@ -31,6 +31,14 @@
 		AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8012B9B250D002AD62C /* ImageProviderType.swift */; };
 		AD32E8042B9B2515002AD62C /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8032B9B2515002AD62C /* ImageProvider.swift */; };
 		AD32E8062B9C4F20002AD62C /* ImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8052B9C4F20002AD62C /* ImageCacheType.swift */; };
+		AD32E80C2B9EE431002AD62C /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E80B2B9EE431002AD62C /* MockURLProtocol.swift */; };
+		AD32E80F2B9EE958002AD62C /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E80E2B9EE958002AD62C /* MockData.swift */; };
+		AD32E8212BA46598002AD62C /* DailyBoxOfficeAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8202BA46598002AD62C /* DailyBoxOfficeAPITest.swift */; };
+		AD32E8232BA46633002AD62C /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43AE2B8C97C800D856EC /* BoxOffice.swift */; };
+		AD32E8242BA46635002AD62C /* BoxOfficeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1C43A92B8C830D00D856EC /* BoxOfficeType.swift */; };
+		AD32E8262BA4681A002AD62C /* DailyBoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8252BA4681A002AD62C /* DailyBoxOfficeAPI.swift */; };
+		AD32E8282BA4684C002AD62C /* MovieDetailsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8272BA4684C002AD62C /* MovieDetailsAPI.swift */; };
+		AD32E82B2BA8542C002AD62C /* NetworkSessionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E82A2BA8542C002AD62C /* NetworkSessionTest.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
@@ -71,7 +79,6 @@
 		AD1C438E2B885AF500D856EC /* NetworkJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONDecoder.swift; sourceTree = "<group>"; };
 		AD1C43962B888EC000D856EC /* NetworkJSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONSerializer.swift; sourceTree = "<group>"; };
 		AD1C43982B888F1F00D856EC /* NetworkJSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONSerializable.swift; sourceTree = "<group>"; };
-		AD1C43A72B8C82C800D856EC /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
 		AD1C43A92B8C830D00D856EC /* BoxOfficeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeType.swift; sourceTree = "<group>"; };
 		AD1C43AE2B8C97C800D856EC /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
 		AD1C43B42B8CA11000D856EC /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
@@ -87,6 +94,12 @@
 		AD32E8012B9B250D002AD62C /* ImageProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProviderType.swift; sourceTree = "<group>"; };
 		AD32E8032B9B2515002AD62C /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		AD32E8052B9C4F20002AD62C /* ImageCacheType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheType.swift; sourceTree = "<group>"; };
+		AD32E80B2B9EE431002AD62C /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		AD32E80E2B9EE958002AD62C /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		AD32E8202BA46598002AD62C /* DailyBoxOfficeAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeAPITest.swift; sourceTree = "<group>"; };
+		AD32E8252BA4681A002AD62C /* DailyBoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeAPI.swift; sourceTree = "<group>"; };
+		AD32E8272BA4684C002AD62C /* MovieDetailsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsAPI.swift; sourceTree = "<group>"; };
+		AD32E82A2BA8542C002AD62C /* NetworkSessionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionTest.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -219,8 +232,9 @@
 		AD1C43CE2B8E375C00D856EC /* API */ = {
 			isa = PBXGroup;
 			children = (
-				AD1C43A72B8C82C800D856EC /* KobisAPI.swift */,
 				AD1C43C02B8DB85400D856EC /* DaumImageSearchAPI.swift */,
+				AD32E8252BA4681A002AD62C /* DailyBoxOfficeAPI.swift */,
+				AD32E8272BA4684C002AD62C /* MovieDetailsAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -262,6 +276,31 @@
 			path = ImageProvider;
 			sourceTree = "<group>";
 		};
+		AD32E8092B9EE02F002AD62C /* APITests */ = {
+			isa = PBXGroup;
+			children = (
+				AD32E8202BA46598002AD62C /* DailyBoxOfficeAPITest.swift */,
+			);
+			path = APITests;
+			sourceTree = "<group>";
+		};
+		AD32E80A2B9EE412002AD62C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				AD32E80B2B9EE431002AD62C /* MockURLProtocol.swift */,
+				AD32E80E2B9EE958002AD62C /* MockData.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		AD32E8292BA85419002AD62C /* NetworkSessionTest */ = {
+			isa = PBXGroup;
+			children = (
+				AD32E82A2BA8542C002AD62C /* NetworkSessionTest.swift */,
+			);
+			path = NetworkSessionTest;
+			sourceTree = "<group>";
+		};
 		ADD87BDE2B7611320065B9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +340,9 @@
 			isa = PBXGroup;
 			children = (
 				ADD87C012B7611340065B9A6 /* BoxOffice_MVVMTests.swift */,
+				AD32E80A2B9EE412002AD62C /* Mock */,
+				AD32E8292BA85419002AD62C /* NetworkSessionTest */,
+				AD32E8092B9EE02F002AD62C /* APITests */,
 			);
 			path = BoxOffice_MVVMTests;
 			sourceTree = "<group>";
@@ -506,9 +548,12 @@
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
 				AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */,
+				AD32E8232BA46633002AD62C /* BoxOffice.swift in Sources */,
 				AD1C43C32B8DC61200D856EC /* ImageURLSearchable.swift in Sources */,
 				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
 				AD32E7E92B95E3D4002AD62C /* Date+.swift in Sources */,
+				AD32E8282BA4684C002AD62C /* MovieDetailsAPI.swift in Sources */,
+				AD32E8262BA4681A002AD62C /* DailyBoxOfficeAPI.swift in Sources */,
 				AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */,
 				AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */,
 				AD1C43DA2B8F224F00D856EC /* InMemoryCacheStorage.swift in Sources */,
@@ -521,6 +566,7 @@
 				AD32E8042B9B2515002AD62C /* ImageProvider.swift in Sources */,
 				AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */,
 				AD32E8062B9C4F20002AD62C /* ImageCacheType.swift in Sources */,
+				AD32E8242BA46635002AD62C /* BoxOfficeType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +575,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADD87C022B7611340065B9A6 /* BoxOffice_MVVMTests.swift in Sources */,
+				AD32E80F2B9EE958002AD62C /* MockData.swift in Sources */,
+				AD32E80C2B9EE431002AD62C /* MockURLProtocol.swift in Sources */,
+				AD32E82B2BA8542C002AD62C /* NetworkSessionTest.swift in Sources */,
+				AD32E8212BA46598002AD62C /* DailyBoxOfficeAPITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
