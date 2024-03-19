@@ -18,7 +18,7 @@ class DailyBoxOfficeAPITest: XCTestCase {
         let urlSession = URLSession(configuration: configuration)
         
         apiProvider = .init(networkSession: NetworkSession(session: urlSession))
-        expectation = .init(description: "DailyBoxOffice Expectation")
+        expectation = .init(description: "DailyBoxOfficeAPI Expectation")
     }
     
     override func tearDown() {
