@@ -8,18 +8,24 @@
 import Foundation
 
 final class BoxOffice: BoxOfficeType {
-    private let provider: NetworkProvider<KobisAPI>
+    private let dailyBoxOfficeProvider: NetworkProvider<DailyBoxOfficeAPI>
     
-    init(provider: NetworkProvider<KobisAPI>) {
-        self.provider = provider
+    private let movieDetailsProvider: NetworkProvider<MovieDetailsAPI>
+    
+    init(
+        dailyBoxOfficeProvider: NetworkProvider<DailyBoxOfficeAPI>,
+        movieDetailsProvider: NetworkProvider<MovieDetailsAPI>
+    ) {
+        self.dailyBoxOfficeProvider = dailyBoxOfficeProvider
+        self.movieDetailsProvider = movieDetailsProvider
     }
     
     func getDaily(
         targetDate: String,
         completion: @escaping (Result<DailyBoxOffice, Error>) -> Void
     ) {
-        provider.request(
-            .dailyBoxOffice(responseType: DailyBoxOffice.self, targetDate: targetDate)
+        dailyBoxOfficeProvider.request(
+            .init(targetDate: targetDate)
         ) { result in
             switch result {
             case let .success(dailyBoxOffice):
@@ -34,8 +40,8 @@ final class BoxOffice: BoxOfficeType {
         movieCode: String,
         completion: @escaping (Result<MovieDetails, Error>) -> Void
     ) {
-        provider.request(
-            .movieDetail(responseType: MovieDetails.self, movieCode: movieCode)
+        movieDetailsProvider.request(
+            .init(movieCode: movieCode)
         ) { result in
             switch result {
             case let .success(movieDetails):
