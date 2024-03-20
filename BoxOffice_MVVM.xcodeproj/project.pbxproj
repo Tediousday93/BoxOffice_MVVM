@@ -46,7 +46,6 @@
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
 		ADD87BF42B7611330065B9A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF32B7611330065B9A6 /* Assets.xcassets */; };
 		ADD87BF72B7611330065B9A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */; };
-		ADD87C022B7611340065B9A6 /* BoxOffice_MVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87C012B7611340065B9A6 /* BoxOffice_MVVMTests.swift */; };
 		ADD87C0C2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87C0B2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift */; };
 		ADD87C0E2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87C0D2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -112,7 +111,6 @@
 		ADD87BF62B7611330065B9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADD87BF82B7611330065B9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADD87BFD2B7611340065B9A6 /* BoxOffice_MVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOffice_MVVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADD87C012B7611340065B9A6 /* BoxOffice_MVVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice_MVVMTests.swift; sourceTree = "<group>"; };
 		ADD87C072B7611340065B9A6 /* BoxOffice_MVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOffice_MVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87C0B2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice_MVVMUITests.swift; sourceTree = "<group>"; };
 		ADD87C0D2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice_MVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 		ADD87C002B7611340065B9A6 /* BoxOffice_MVVMTests */ = {
 			isa = PBXGroup;
 			children = (
-				ADD87C012B7611340065B9A6 /* BoxOffice_MVVMTests.swift */,
 				AD32E80A2B9EE412002AD62C /* Mock */,
 				AD32E8292BA85419002AD62C /* NetworkSessionTest */,
 				AD32E8092B9EE02F002AD62C /* APITests */,
@@ -580,7 +577,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADD87C022B7611340065B9A6 /* BoxOffice_MVVMTests.swift in Sources */,
 				AD32E80F2B9EE958002AD62C /* MockData.swift in Sources */,
 				AD32E80C2B9EE431002AD62C /* MockURLProtocol.swift in Sources */,
 				AD32E82B2BA8542C002AD62C /* NetworkSessionTest.swift in Sources */,
