@@ -29,7 +29,7 @@ enum OnDiskCacheError: Error {
     case invalidURLContained(url: URL)
 }
 
-final class OnDiskCacheStorage {
+final class OnDiskCacheStorage<T: DataConvertible> {
     private let fileManager: FileManager
     
     private let directoryURL: URL
@@ -83,7 +83,7 @@ final class OnDiskCacheStorage {
         }
         
         try expiredFileURLs.forEach { fileURL in
-            try removeValue(at: fileURL)
+            try removeData(at: fileURL)
         }
     }
     
@@ -104,21 +104,22 @@ final class OnDiskCacheStorage {
         return fileURLs
     }
     
-    func store(value: Data, for key: String) throws {
+    func store(value: T, for key: String) throws {
         guard isStorageReady else {
             throw OnDiskCacheError.storageNotReady
         }
         
         if let limitExceedings = try exceedingCountLimitFileURLs() {
             try limitExceedings.forEach { fileURL in
-                try removeValue(at: fileURL)
+                try removeData(at: fileURL)
             }
         }
         
         let fileURL = directoryURL.appending(path: key)
+        let data = try value.toData()
         
         do {
-            try value.write(to: fileURL)
+            try data.write(to: fileURL)
         } catch {
             throw OnDiskCacheError.cannotCreateFile(url: fileURL, error: error)
         }
@@ -185,14 +186,14 @@ final class OnDiskCacheStorage {
         return urlResourceValues
     }
     
-    func value(for key: String) throws -> Data? {
-        try value(for: key, actuallyLoad: true)
+    func value(for key: String) throws -> T? {
+        return try data(for: key, actuallyLoad: true)
     }
     
-    private func value(
+    private func data(
         for key: String,
         actuallyLoad: Bool
-    ) throws -> Data? {
+    ) throws -> T? {
         guard isStorageReady else {
             throw OnDiskCacheError.storageNotReady
         }
@@ -209,16 +210,16 @@ final class OnDiskCacheStorage {
             .isPast(referenceDate: Date()) ?? true
         
         if isExpired { return nil }
-        if !actuallyLoad { return Data() }
+        if !actuallyLoad { return T.empty }
         
         do {
-            let value = try Data(contentsOf: fileURL)
+            let data = try Data(contentsOf: fileURL)
             extendExpiration(
                 filePath: fileURL.path,
                 lastAccessDate: urlResourceValues.creationDate,
                 lastEstimatedExpirationDate: urlResourceValues.contentModificationDate
             )
-            return value
+            return try T.fromData(data)
         } catch {
             throw OnDiskCacheError.cannotFindValue(url: fileURL, error: error)
         }
@@ -246,15 +247,15 @@ final class OnDiskCacheStorage {
     
     func removeValue(for key: String) throws {
         let fileURL = directoryURL.appending(path: key)
-        try removeValue(at: fileURL)
+        try removeData(at: fileURL)
     }
     
     func removeAll() throws {
-        try removeValue(at: directoryURL)
+        try removeData(at: directoryURL)
         try prepareDirectory()
     }
     
-    private func removeValue(at url: URL) throws {
+    private func removeData(at url: URL) throws {
         do {
             try fileManager.removeItem(at: url)
         } catch {
@@ -263,7 +264,7 @@ final class OnDiskCacheStorage {
     }
     
     func isCached(for key: String) throws -> Bool {
-        let result = try value(for: key, actuallyLoad: false)
+        let result = try data(for: key, actuallyLoad: false)
         return result != nil
     }
 }

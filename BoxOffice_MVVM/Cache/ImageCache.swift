@@ -9,10 +9,20 @@ import Foundation
 import UIKit.UIImage
 
 typealias Image = UIImage
-
-enum ImageCacheError: Error {
-    case cannotSerializeImage
-    case expiredImage(key: String)
+extension Image: DataConvertible {
+    func toData() throws -> Data {
+        guard let data = jpegData(compressionQuality: 1.0)
+        else { throw DataConvertError.cannotConvertToData }
+        return data
+    }
+    
+    static func fromData(_ data: Data) throws -> Self {
+        guard let image = Image(data: data) as? Self
+        else { throw DataConvertError.cannotConvertFromData }
+        return image
+    }
+    
+    static var empty: Self { Self() }
 }
 
 final class ImageCache: ImageCacheType {
@@ -20,7 +30,7 @@ final class ImageCache: ImageCacheType {
     
     private let memoryStorage: InMemoryCacheStorage<Image>
     
-    private let diskStorage: OnDiskCacheStorage
+    private let diskStorage: OnDiskCacheStorage<Image>
     
     private let cacheOption: CacheOption
     
@@ -38,7 +48,7 @@ final class ImageCache: ImageCacheType {
     
     init(
         memoryStorage: InMemoryCacheStorage<Image>,
-        diskStorage: OnDiskCacheStorage,
+        diskStorage: OnDiskCacheStorage<Image>,
         option: CacheOption
     ) {
         self.memoryStorage = memoryStorage
@@ -65,9 +75,7 @@ final class ImageCache: ImageCacheType {
     }
     
     private func storeToDisk(_ image: Image, for key: String) throws {
-        guard let imageData = image.jpegData(compressionQuality: 1.0)
-        else { throw ImageCacheError.cannotSerializeImage }
-        try diskStorage.store(value: imageData, for: key)
+        try diskStorage.store(value: image, for: key)
     }
     
     func retrieveImage(for key: String) throws -> Image? {
@@ -88,9 +96,7 @@ final class ImageCache: ImageCacheType {
     }
     
     private func retrieveImageInDisk(for key: String) throws -> Image? {
-        guard let imageData = try diskStorage.value(for: key)
-        else { throw ImageCacheError.expiredImage(key: key) }
-        return Image(data: imageData)
+        return try diskStorage.value(for: key)
     }
     
     func isCached(for key: String) throws -> Bool {
