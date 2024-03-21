@@ -42,6 +42,8 @@
 		AD32E8382BA9A861002AD62C /* MovieDetailsAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8372BA9A861002AD62C /* MovieDetailsAPITest.swift */; };
 		AD32E83A2BA9B3DB002AD62C /* DaumImageSearchAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8392BA9B3DB002AD62C /* DaumImageSearchAPITest.swift */; };
 		AD32E8412BAB07FF002AD62C /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8402BAB07FF002AD62C /* DataConvertible.swift */; };
+		AD32E8452BAC435F002AD62C /* Image+DataConvertibleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8442BAC435F002AD62C /* Image+DataConvertibleTest.swift */; };
+		AD6E88D82BAC517100F28458 /* InMemoryCacheStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
@@ -105,6 +107,8 @@
 		AD32E8372BA9A861002AD62C /* MovieDetailsAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsAPITest.swift; sourceTree = "<group>"; };
 		AD32E8392BA9B3DB002AD62C /* DaumImageSearchAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumImageSearchAPITest.swift; sourceTree = "<group>"; };
 		AD32E8402BAB07FF002AD62C /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
+		AD32E8442BAC435F002AD62C /* Image+DataConvertibleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+DataConvertibleTest.swift"; sourceTree = "<group>"; };
+		AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheStorageTest.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -311,6 +315,8 @@
 		AD32E83F2BAAFB98002AD62C /* CacheTest */ = {
 			isa = PBXGroup;
 			children = (
+				AD32E8442BAC435F002AD62C /* Image+DataConvertibleTest.swift */,
+				AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */,
 			);
 			path = CacheTest;
 			sourceTree = "<group>";
@@ -589,7 +595,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD32E8452BAC435F002AD62C /* Image+DataConvertibleTest.swift in Sources */,
 				AD32E80F2B9EE958002AD62C /* MockData.swift in Sources */,
+				AD6E88D82BAC517100F28458 /* InMemoryCacheStorageTest.swift in Sources */,
 				AD32E80C2B9EE431002AD62C /* MockURLProtocol.swift in Sources */,
 				AD32E82B2BA8542C002AD62C /* NetworkSessionTest.swift in Sources */,
 				AD32E83A2BA9B3DB002AD62C /* DaumImageSearchAPITest.swift in Sources */,
