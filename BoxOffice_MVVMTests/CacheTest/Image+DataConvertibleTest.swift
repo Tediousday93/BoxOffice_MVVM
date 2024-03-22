@@ -12,7 +12,7 @@ class ImageDataConvertibleTest: XCTestCase {
     var image: Image!
     
     override func setUp() {
-        image = Image(named: "samplePoster")
+        image = Image(data: MockData.sampleImageData)
     }
     
     override func tearDown() {
@@ -34,17 +34,17 @@ class ImageDataConvertibleTest: XCTestCase {
     }
     
     func test_fromData() {
-        guard let jpegData = image.jpegData(compressionQuality: 1.0) else {
-            XCTFail("Converting image to jpeg failed")
-            return
+        do {
+            let image = try Image.fromData(MockData.sampleImageData)
+            XCTAssertTrue(type(of: image) == Image.self)
+        } catch {
+            XCTFail("Not Expected Error: \(error)")
         }
-        
-        XCTAssertNoThrow(try Image.fromData(jpegData))
     }
     
     func test_empty() {
         let emptyImage = Image.empty
-        
+        XCTAssertTrue(type(of: emptyImage) == Image.self)
         XCTAssertNil(emptyImage.jpegData(compressionQuality: 1.0))
     }
 }
