@@ -10,18 +10,28 @@ import Foundation
 final class InMemoryCacheStorage<T> {
     private let storage: NSCache<NSString, CacheObject<T>> = .init()
     private let lock: NSLock = .init()
+    private var cleanTimer: Timer? = nil
     private var keys: Set<String> = []
     
-    init(countLimit: Int) {
+    init(countLimit: Int, cleanInterval: TimeInterval = 120) {
         storage.countLimit = countLimit
+        
+        cleanTimer = .scheduledTimer(
+            withTimeInterval: cleanInterval,
+            repeats: true,
+            block: { [weak self] _ in
+                guard let self else { return }
+                self.removeExpired()
+            }
+        )
     }
     
-    func store(_ value: T, for key: String) {
+    func store(_ value: T, for key: String, expiration: TimeInterval? = nil) {
         lock.lock()
         defer { lock.unlock() }
         
         let now = Date()
-        let expiration = TimeInterval(60 * 5)
+        let expiration = expiration ?? TimeInterval(300)
         let estimatedExpiration = now.addingTimeInterval(expiration)
         let cacheObject = CacheObject(value: value,
                                       expiration: estimatedExpiration)
@@ -94,8 +104,8 @@ private extension InMemoryCacheStorage {
             expiration.isPast(referenceDate: Date())
         }
         
-        func extendExpiration() {
-            let extendingExpiration = TimeInterval(60 * 5)
+        func extendExpiration(_ extending: TimeInterval? = nil) {
+            let extendingExpiration = extending ?? TimeInterval(300)
             self.expiration = expiration.addingTimeInterval(extendingExpiration)
         }
     }
