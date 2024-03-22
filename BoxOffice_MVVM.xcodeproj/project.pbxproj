@@ -44,6 +44,7 @@
 		AD32E8412BAB07FF002AD62C /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8402BAB07FF002AD62C /* DataConvertible.swift */; };
 		AD32E8452BAC435F002AD62C /* Image+DataConvertibleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E8442BAC435F002AD62C /* Image+DataConvertibleTest.swift */; };
 		AD6E88D82BAC517100F28458 /* InMemoryCacheStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */; };
+		AD6E88E02BAD9B3800F28458 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
@@ -109,6 +110,7 @@
 		AD32E8402BAB07FF002AD62C /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		AD32E8442BAC435F002AD62C /* Image+DataConvertibleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+DataConvertibleTest.swift"; sourceTree = "<group>"; };
 		AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheStorageTest.swift; sourceTree = "<group>"; };
+		AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 		ADD87C002B7611340065B9A6 /* BoxOffice_MVVMTests */ = {
 			isa = PBXGroup;
 			children = (
+				AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */,
 				AD32E80A2B9EE412002AD62C /* Mock */,
 				AD32E8292BA85419002AD62C /* NetworkSessionTest */,
 				AD32E8092B9EE02F002AD62C /* APITests */,
@@ -601,6 +604,7 @@
 				AD32E80C2B9EE431002AD62C /* MockURLProtocol.swift in Sources */,
 				AD32E82B2BA8542C002AD62C /* NetworkSessionTest.swift in Sources */,
 				AD32E83A2BA9B3DB002AD62C /* DaumImageSearchAPITest.swift in Sources */,
+				AD6E88E02BAD9B3800F28458 /* TestHelper.swift in Sources */,
 				AD32E8382BA9A861002AD62C /* MovieDetailsAPITest.swift in Sources */,
 				AD32E8212BA46598002AD62C /* DailyBoxOfficeAPITest.swift in Sources */,
 			);
