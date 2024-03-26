@@ -254,6 +254,7 @@
 			children = (
 				AD32E8052B9C4F20002AD62C /* ImageCacheType.swift */,
 				AD32E7F72B970B70002AD62C /* ImageCache.swift */,
+				AD32E8402BAB07FF002AD62C /* DataConvertible.swift */,
 				AD1C43D42B8E42A000D856EC /* Storage */,
 				AD32E7E72B95E3C2002AD62C /* Helper */,
 			);
@@ -265,7 +266,6 @@
 			children = (
 				AD1C43D92B8F224F00D856EC /* InMemoryCacheStorage.swift */,
 				AD1C43E22B91AB8A00D856EC /* OnDiskCacheStorage.swift */,
-				AD32E8402BAB07FF002AD62C /* DataConvertible.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
