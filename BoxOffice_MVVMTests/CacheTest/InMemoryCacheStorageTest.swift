@@ -83,8 +83,13 @@ class InMemoryCacheStorageTest: XCTestCase {
         memoryStorage.store(value, for: key, expiration: 0.2)
         XCTAssertTrue(memoryStorage.isCached(for: key))
         
-        let cached = memoryStorage.value(for: key, extendingExpiration: .extend(second: 0.5))
-        XCTAssertEqual(value, cached)
+        let cacheObject = self.innerStorage.object(forKey: key as NSString)
+        XCTAssertNotNil(cacheObject)
+        
+        let beforeDate = cacheObject!.expiration
+        _ = memoryStorage.value(for: key, extendingExpiration: .extend(second: 0.5))
+        let afterDate = cacheObject!.expiration
+        XCTAssertNotEqual(beforeDate, afterDate)
         
         delay(0.5) {
             XCTAssertTrue(self.memoryStorage.isCached(for: key))
@@ -97,6 +102,22 @@ class InMemoryCacheStorageTest: XCTestCase {
         }
         
         wait(for: [stillCachedExpectation, extendedExpirationExpectation], timeout: 2)
+    }
+    
+    func test_getValueNotExtendingExpiration() {
+        let (key, value) = ("one", 1)
+        XCTAssertFalse(memoryStorage.isCached(for: key))
+        memoryStorage.store(value, for: key)
+        XCTAssertTrue(memoryStorage.isCached(for: key))
+        
+        let cacheObject = innerStorage.object(forKey: key as NSString)
+        XCTAssertNotNil(cacheObject)
+        
+        let beforeDate = cacheObject!.expiration
+        _ = memoryStorage.value(for: key, extendingExpiration: .none)
+        let afterDate = cacheObject!.expiration
+        
+        XCTAssertEqual(beforeDate, afterDate)
     }
     
     func test_removeExpired() {
@@ -148,5 +169,16 @@ class InMemoryCacheStorageTest: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 3)
+    }
+    
+    func test_removeValue() {
+        let (key, value) = ("one", 1)
+        XCTAssertFalse(memoryStorage.isCached(for: key))
+        memoryStorage.store(value, for: key)
+        XCTAssertTrue(memoryStorage.isCached(for: key))
+        
+        memoryStorage.removeValue(for: key)
+        XCTAssertFalse(memoryStorage.isCached(for: key))
+        XCTAssertNil(innerStorage.object(forKey: key as NSString))
     }
 }
