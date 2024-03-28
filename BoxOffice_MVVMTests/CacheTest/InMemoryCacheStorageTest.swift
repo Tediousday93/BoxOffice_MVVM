@@ -43,20 +43,23 @@ class InMemoryCacheStorageTest: XCTestCase {
     }
     
     func test_storeWithExpiration() {
-        let expectation = XCTestExpectation(description: "storeWithExpiration Expectation")
+        let expectation = expectation(description: "storeWithExpiration Expectation")
         
-        let key = "one"
-        let value = 1
-        let expiration = TimeInterval(0.5)
-        memoryStorage.store(value, for: key, expiration: expiration)
+        let (firstKey, firstValue) = ("one", 1)
+        let (secondKey, secondValue) = ("three", 3)
+        memoryStorage.store(firstValue, for: firstKey, expiration: 0.5)
+        memoryStorage.store(secondValue, for: secondKey, expiration: 3)
         
-        let cached = memoryStorage.value(for: key, extendingExpiration: false)
-        XCTAssertTrue(memoryStorage.isCached(for: key))
-        XCTAssertEqual(cached, value)
+        XCTAssertTrue(memoryStorage.isCached(for: firstKey))
+        XCTAssertTrue(memoryStorage.isCached(for: secondKey))
         
         delay(0.5) {
-            XCTAssertFalse(self.memoryStorage.isCached(for: key))
-            XCTAssertNil(self.memoryStorage.value(for: key))
+            XCTAssertFalse(self.memoryStorage.isCached(for: firstKey))
+            XCTAssertNil(self.memoryStorage.value(for: firstKey))
+            
+            XCTAssertTrue(self.memoryStorage.isCached(for: secondKey))
+            let notExpired = self.memoryStorage.value(for: secondKey)
+            XCTAssertNotNil(notExpired)
             expectation.fulfill()
         }
         
@@ -64,7 +67,7 @@ class InMemoryCacheStorageTest: XCTestCase {
     }
     
     func test_getValueWithExtendingExpiration() {
-        let expectation = XCTestExpectation(description: "getValueWithExtendingExpiration Expectation")
+        let expectation = expectation(description: "getValueWithExtendingExpiration Expectation")
         
         let key = "one"
         let value = 1
@@ -78,7 +81,7 @@ class InMemoryCacheStorageTest: XCTestCase {
     }
     
     func test_removeExpired() {
-        let expectation = XCTestExpectation(description: "removeExpired Expectation")
+        let expectation = expectation(description: "removeExpired Expectation")
         
         let (firstKey, firstValue) = ("one", 1)
         let (secondKey, secondValue) = ("two", 2)
