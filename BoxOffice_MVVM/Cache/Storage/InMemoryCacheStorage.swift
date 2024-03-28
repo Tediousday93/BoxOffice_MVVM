@@ -9,11 +9,14 @@ import Foundation
 
 final class InMemoryCacheStorage<T> {
     private let storage: NSCache<NSString, CacheObject<T>> = .init()
+    
     private let lock: NSLock = .init()
+    
     private var cleanTimer: Timer? = nil
+    
     private var keys: Set<String> = []
     
-    init(countLimit: Int, cleanInterval: TimeInterval = 120) {
+    init(countLimit: Int, cleanInterval: TimeInterval = 180) {
         storage.countLimit = countLimit
         
         cleanTimer = .scheduledTimer(
@@ -26,12 +29,11 @@ final class InMemoryCacheStorage<T> {
         )
     }
     
-    func store(_ value: T, for key: String, expiration: TimeInterval? = nil) {
+    func store(_ value: T, for key: String, expiration: TimeInterval = 300) {
         lock.lock()
         defer { lock.unlock() }
         
         let now = Date()
-        let expiration = expiration ?? TimeInterval(300)
         let estimatedExpiration = now.addingTimeInterval(expiration)
         let cacheObject = CacheObject(value: value,
                                       expiration: estimatedExpiration)
@@ -39,12 +41,12 @@ final class InMemoryCacheStorage<T> {
         keys.insert(key)
     }
     
-    func value(for key: String, extendingExpiration: Bool = true) -> T? {
+    func value(for key: String, extendingExpiration: ExpirationExtending = .extend(second: 180)) -> T? {
         guard let cacheObject = storage.object(forKey: key as NSString)
         else { return nil }
         
         if cacheObject.isExpired { return nil }
-        if extendingExpiration { cacheObject.extendExpiration() }
+        cacheObject.extendExpiration(extendingExpiration)
         
         return cacheObject.value
     }
@@ -83,7 +85,7 @@ final class InMemoryCacheStorage<T> {
     }
     
     func isCached(for key: String) -> Bool {
-        guard value(for: key, extendingExpiration: false) != nil else {
+        guard value(for: key, extendingExpiration: .none) != nil else {
             return false
         }
         return true
@@ -104,9 +106,13 @@ private extension InMemoryCacheStorage {
             expiration.isPast(referenceDate: Date())
         }
         
-        func extendExpiration(_ extending: TimeInterval? = nil) {
-            let extendingExpiration = extending ?? TimeInterval(300)
-            self.expiration = expiration.addingTimeInterval(extendingExpiration)
+        func extendExpiration(_ extending: ExpirationExtending) {
+            switch extending {
+            case let .extend(second):
+                self.expiration = expiration.addingTimeInterval(second)
+            case .none:
+                return
+            }
         }
     }
 }
