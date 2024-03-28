@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "22D9C13A-4617-4354-9119-0CCDBFAADE85",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:BoxOffice_MVVM.xcodeproj",
+      "identifier" : "ADD87BE62B7611320065B9A6",
+      "name" : "BoxOffice_MVVM"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:BoxOffice_MVVM.xcodeproj",
+        "identifier" : "ADD87BFC2B7611340065B9A6",
+        "name" : "BoxOffice_MVVMTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:BoxOffice_MVVM.xcodeproj",
+        "identifier" : "ADD87C062B7611340065B9A6",
+        "name" : "BoxOffice_MVVMUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -110,6 +110,7 @@
 		AD32E8392BA9B3DB002AD62C /* DaumImageSearchAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaumImageSearchAPITest.swift; sourceTree = "<group>"; };
 		AD32E8402BAB07FF002AD62C /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		AD32E8442BAC435F002AD62C /* Image+DataConvertibleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+DataConvertibleTest.swift"; sourceTree = "<group>"; };
+		AD3577782BB5DACA004FB41A /* BoxOffice_MVVM.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BoxOffice_MVVM.xctestplan; sourceTree = "<group>"; };
 		AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheStorageTest.swift; sourceTree = "<group>"; };
 		AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		AD6E89262BB58AA200F28458 /* ExpirationExtending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationExtending.swift; sourceTree = "<group>"; };
@@ -329,6 +330,7 @@
 		ADD87BDE2B7611320065B9A6 = {
 			isa = PBXGroup;
 			children = (
+				AD3577782BB5DACA004FB41A /* BoxOffice_MVVM.xctestplan */,
 				ADD87BE92B7611320065B9A6 /* BoxOffice_MVVM */,
 				ADD87C002B7611340065B9A6 /* BoxOffice_MVVMTests */,
 				ADD87C0A2B7611340065B9A6 /* BoxOffice_MVVMUITests */,
