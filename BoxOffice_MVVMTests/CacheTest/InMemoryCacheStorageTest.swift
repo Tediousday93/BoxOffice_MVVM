@@ -9,13 +9,20 @@ import XCTest
 @testable import BoxOffice_MVVM
 
 class InMemoryCacheStorageTest: XCTestCase {
+    typealias TestCacheObject = InMemoryCacheStorage<Int>.CacheObject<Int>
+    
+    var innerStorage: NSCache<NSString, TestCacheObject>!
     var memoryStorage: InMemoryCacheStorage<Int>!
     
     override func setUp() {
-        memoryStorage = .init(countLimit: 5)
+        innerStorage = .init()
+        innerStorage.countLimit = 5
+        
+        memoryStorage = .init(storage: innerStorage, cleanInterval: 2)
     }
     
     override func tearDown() {
+        innerStorage = nil
         memoryStorage = nil
     }
     
@@ -104,13 +111,42 @@ class InMemoryCacheStorageTest: XCTestCase {
         
         delay(0.3) {
             self.memoryStorage.removeExpired()
+            
             XCTAssertFalse(self.memoryStorage.isCached(for: firstKey))
+            XCTAssertNil(self.memoryStorage.value(for: firstKey))
             XCTAssertTrue(self.memoryStorage.isCached(for: secondKey))
             XCTAssertEqual(self.memoryStorage.value(for: secondKey), secondValue)
-            XCTAssertNil(self.memoryStorage.value(for: firstKey))
+            
+            XCTAssertNil(self.innerStorage.object(forKey: firstKey as NSString))
+            
             expectation.fulfill()
         }
         
         wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_autoClean() {
+        let expectation = expectation(description: "autoRemoveExpired Expectation")
+        
+        let (firstKey, firstValue) = ("one", 1)
+        let (secondKey, secondValue) = ("ten", 10)
+        memoryStorage.store(firstValue, for: firstKey, expiration: 1)
+        memoryStorage.store(secondValue, for: secondKey, expiration: 10)
+        XCTAssertTrue(memoryStorage.isCached(for: firstKey))
+        XCTAssertTrue(memoryStorage.isCached(for: secondKey))
+        
+        delay(2) {
+            XCTAssertFalse(self.memoryStorage.isCached(for: firstKey))
+            XCTAssertTrue(self.memoryStorage.isCached(for: secondKey))
+            XCTAssertNil(self.innerStorage.object(forKey: firstKey as NSString))
+            
+            let cachedObject = self.innerStorage.object(forKey: secondKey as NSString)
+            XCTAssertNotNil(cachedObject)
+            XCTAssertEqual(cachedObject!.value, secondValue)
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 3)
     }
 }
