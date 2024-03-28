@@ -67,17 +67,29 @@ class InMemoryCacheStorageTest: XCTestCase {
     }
     
     func test_getValueWithExtendingExpiration() {
-        let expectation = expectation(description: "getValueWithExtendingExpiration Expectation")
+        let stillCachedExpectation = expectation(description: "getValueWithExtendingExpiration Still Cached Expectation")
+        let extendedExpirationExpectation = expectation(description: "getValueWithExtendingExpiration Extended Expiration Expectation")
         
         let key = "one"
         let value = 1
-        memoryStorage.store(value, for: key, expiration: 0.5)
+        XCTAssertFalse(memoryStorage.isCached(for: key))
+        memoryStorage.store(value, for: key, expiration: 0.2)
         XCTAssertTrue(memoryStorage.isCached(for: key))
-        XCTAssertNotNil(memoryStorage.value(for: key, extendingExpiration: true))
+        
+        let cached = memoryStorage.value(for: key, extendingExpiration: .extend(second: 0.5))
+        XCTAssertEqual(value, cached)
         
         delay(0.5) {
-            
+            XCTAssertTrue(self.memoryStorage.isCached(for: key))
+            stillCachedExpectation.fulfill()
         }
+        
+        delay(0.8) {
+            XCTAssertFalse(self.memoryStorage.isCached(for: key))
+            extendedExpirationExpectation.fulfill()
+        }
+        
+        wait(for: [stillCachedExpectation, extendedExpirationExpectation], timeout: 2)
     }
     
     func test_removeExpired() {
