@@ -181,4 +181,41 @@ class InMemoryCacheStorageTest: XCTestCase {
         XCTAssertFalse(memoryStorage.isCached(for: key))
         XCTAssertNil(innerStorage.object(forKey: key as NSString))
     }
+    
+    func test_removeAll() {
+        memoryStorage.store(1, for: "one")
+        memoryStorage.store(2, for: "two")
+        memoryStorage.store(3, for: "three")
+        XCTAssertTrue(memoryStorage.isCached(for: "one"))
+        XCTAssertTrue(memoryStorage.isCached(for: "two"))
+        XCTAssertTrue(memoryStorage.isCached(for: "three"))
+        
+        memoryStorage.removeAll()
+        XCTAssertFalse(memoryStorage.isCached(for: "one"))
+        XCTAssertFalse(memoryStorage.isCached(for: "two"))
+        XCTAssertFalse(memoryStorage.isCached(for: "three"))
+        XCTAssertNil(innerStorage.object(forKey: "one" as NSString))
+        XCTAssertNil(innerStorage.object(forKey: "two" as NSString))
+        XCTAssertNil(innerStorage.object(forKey: "three" as NSString))
+    }
+    
+    func test_cacheObject() {
+        let expectation = expectation(description: "cacheObject Expectation")
+        
+        let expiration = Date.now.addingTimeInterval(0.5)
+        let cacheObejct = TestCacheObject(value: 3, expiration: expiration)
+        XCTAssertEqual(cacheObejct.value, 3)
+        XCTAssertEqual(cacheObejct.expiration, expiration)
+        XCTAssertFalse(cacheObejct.isExpired)
+        
+        delay(0.5) {
+            XCTAssertTrue(cacheObejct.isExpired)
+            cacheObejct.extendExpiration(.extend(second: 0.2))
+            XCTAssertFalse(cacheObejct.isExpired)
+            XCTAssertEqual(expiration.addingTimeInterval(0.2), cacheObejct.expiration)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 2)
+    }
 }
