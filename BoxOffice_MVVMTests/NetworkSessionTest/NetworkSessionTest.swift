@@ -30,7 +30,6 @@ class NetworkSessionTest: XCTestCase {
     }
     
     func test_dataTaskSuccess() {
-        // given
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
                 throw NetworkError.invalidURL
@@ -40,7 +39,6 @@ class NetworkSessionTest: XCTestCase {
             return (response, emptyData)
         }
         
-        // when
         networkSession.dataTask(with: dummyRequest) { result in
             switch result {
             case let .success(data):
@@ -51,18 +49,15 @@ class NetworkSessionTest: XCTestCase {
             self.expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 1)
     }
     
     func test_dataTaskFailure_responseNotFound() {
-        // given
         MockURLProtocol.requestHandler = { request in
             return (nil, nil)
         }
         
-        // when
         networkSession.dataTask(with: dummyRequest) { result in
-            // then
             switch result {
             case .success:
                 XCTFail("This Request Must Throw Error")
@@ -80,7 +75,6 @@ class NetworkSessionTest: XCTestCase {
     }
     
     func test_dataTaskFailure_invalidHttpStatusCode() {
-        // given
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
                 throw NetworkError.invalidURL
@@ -91,7 +85,6 @@ class NetworkSessionTest: XCTestCase {
             return (response, nil)
         }
         
-        // when
         networkSession.dataTask(with: dummyRequest) { result in
             switch result {
             case .success:
@@ -106,6 +99,30 @@ class NetworkSessionTest: XCTestCase {
             self.expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_urlDataTask() {
+        MockURLProtocol.requestHandler = { request in
+            guard let url = request.url else {
+                throw NetworkError.invalidURL
+            }
+            
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+            
+            return (response, Data())
+        }
+        
+        networkSession.dataTask(with: dummyURL) { result in
+            switch result {
+            case let .success(data):
+                XCTAssertNotNil(data)
+            case let .failure(error):
+                XCTFail("Not Expected Error: \(error)")
+            }
+            self.expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1)
     }
 }
