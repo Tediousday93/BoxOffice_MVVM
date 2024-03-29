@@ -51,19 +51,10 @@
 		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
 		ADD87BF42B7611330065B9A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF32B7611330065B9A6 /* Assets.xcassets */; };
 		ADD87BF72B7611330065B9A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */; };
-		ADD87C0C2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87C0B2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift */; };
-		ADD87C0E2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87C0D2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		ADD87BFE2B7611340065B9A6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ADD87BDF2B7611320065B9A6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = ADD87BE62B7611320065B9A6;
-			remoteInfo = BoxOffice_MVVM;
-		};
-		ADD87C082B7611340065B9A6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADD87BDF2B7611320065B9A6 /* Project object */;
 			proxyType = 1;
@@ -122,9 +113,6 @@
 		ADD87BF62B7611330065B9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADD87BF82B7611330065B9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADD87BFD2B7611340065B9A6 /* BoxOffice_MVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOffice_MVVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADD87C072B7611340065B9A6 /* BoxOffice_MVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOffice_MVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADD87C0B2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice_MVVMUITests.swift; sourceTree = "<group>"; };
-		ADD87C0D2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice_MVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,13 +124,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		ADD87BFA2B7611340065B9A6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ADD87C042B7611340065B9A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -333,7 +314,6 @@
 				AD3577782BB5DACA004FB41A /* BoxOffice_MVVM.xctestplan */,
 				ADD87BE92B7611320065B9A6 /* BoxOffice_MVVM */,
 				ADD87C002B7611340065B9A6 /* BoxOffice_MVVMTests */,
-				ADD87C0A2B7611340065B9A6 /* BoxOffice_MVVMUITests */,
 				ADD87BE82B7611320065B9A6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -343,7 +323,6 @@
 			children = (
 				ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */,
 				ADD87BFD2B7611340065B9A6 /* BoxOffice_MVVMTests.xctest */,
-				ADD87C072B7611340065B9A6 /* BoxOffice_MVVMUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -373,15 +352,6 @@
 				AD32E83F2BAAFB98002AD62C /* CacheTest */,
 			);
 			path = BoxOffice_MVVMTests;
-			sourceTree = "<group>";
-		};
-		ADD87C0A2B7611340065B9A6 /* BoxOffice_MVVMUITests */ = {
-			isa = PBXGroup;
-			children = (
-				ADD87C0B2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift */,
-				ADD87C0D2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift */,
-			);
-			path = BoxOffice_MVVMUITests;
 			sourceTree = "<group>";
 		};
 		ADD87C1A2B7B0FB10065B9A6 /* Application */ = {
@@ -472,24 +442,6 @@
 			productReference = ADD87BFD2B7611340065B9A6 /* BoxOffice_MVVMTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		ADD87C062B7611340065B9A6 /* BoxOffice_MVVMUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ADD87C172B7611340065B9A6 /* Build configuration list for PBXNativeTarget "BoxOffice_MVVMUITests" */;
-			buildPhases = (
-				ADD87C032B7611340065B9A6 /* Sources */,
-				ADD87C042B7611340065B9A6 /* Frameworks */,
-				ADD87C052B7611340065B9A6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				ADD87C092B7611340065B9A6 /* PBXTargetDependency */,
-			);
-			name = BoxOffice_MVVMUITests;
-			productName = BoxOffice_MVVMUITests;
-			productReference = ADD87C072B7611340065B9A6 /* BoxOffice_MVVMUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -504,10 +456,6 @@
 						CreatedOnToolsVersion = 14.3;
 					};
 					ADD87BFC2B7611340065B9A6 = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = ADD87BE62B7611320065B9A6;
-					};
-					ADD87C062B7611340065B9A6 = {
 						CreatedOnToolsVersion = 14.3;
 						TestTargetID = ADD87BE62B7611320065B9A6;
 					};
@@ -528,7 +476,6 @@
 			targets = (
 				ADD87BE62B7611320065B9A6 /* BoxOffice_MVVM */,
 				ADD87BFC2B7611340065B9A6 /* BoxOffice_MVVMTests */,
-				ADD87C062B7611340065B9A6 /* BoxOffice_MVVMUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -544,13 +491,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		ADD87BFB2B7611340065B9A6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ADD87C052B7611340065B9A6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -616,15 +556,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ADD87C032B7611340065B9A6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ADD87C0E2B7611340065B9A6 /* BoxOffice_MVVMUITestsLaunchTests.swift in Sources */,
-				ADD87C0C2B7611340065B9A6 /* BoxOffice_MVVMUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -632,11 +563,6 @@
 			isa = PBXTargetDependency;
 			target = ADD87BE62B7611320065B9A6 /* BoxOffice_MVVM */;
 			targetProxy = ADD87BFE2B7611340065B9A6 /* PBXContainerItemProxy */;
-		};
-		ADD87C092B7611340065B9A6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = ADD87BE62B7611320065B9A6 /* BoxOffice_MVVM */;
-			targetProxy = ADD87C082B7611340065B9A6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -869,46 +795,6 @@
 			};
 			name = Release;
 		};
-		ADD87C182B7611340065B9A6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom.BoxOffice-MVVMUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = BoxOffice_MVVM;
-			};
-			name = Debug;
-		};
-		ADD87C192B7611340065B9A6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom.BoxOffice-MVVMUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = BoxOffice_MVVM;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -935,15 +821,6 @@
 			buildConfigurations = (
 				ADD87C152B7611340065B9A6 /* Debug */,
 				ADD87C162B7611340065B9A6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		ADD87C172B7611340065B9A6 /* Build configuration list for PBXNativeTarget "BoxOffice_MVVMUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				ADD87C182B7611340065B9A6 /* Debug */,
-				ADD87C192B7611340065B9A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
