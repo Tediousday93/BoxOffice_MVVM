@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum ExpirationExtending {
-    case none
-    
-    case extend(second: TimeInterval)
-}
-
 enum CacheExpiration {
     case seconds(TimeInterval)
     
@@ -27,4 +21,10 @@ enum CacheExpiration {
             return date.addingTimeInterval(duration)
         }
     }
+}
+
+enum ExpirationExtending {
+    case none
+    
+    case extend(CacheExpiration)
 }

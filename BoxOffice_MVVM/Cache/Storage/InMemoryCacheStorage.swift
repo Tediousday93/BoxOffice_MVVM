@@ -39,19 +39,21 @@ final class InMemoryCacheStorage<T> {
         storage.countLimit = countLimit
     }
     
-    func store(_ value: T, for key: String, expiration: TimeInterval = 300) {
+    func store(_ value: T, for key: String, expiration: CacheExpiration = .seconds(300)) {
         lock.lock()
         defer { lock.unlock() }
         
-        let now = Date()
-        let estimatedExpiration = now.addingTimeInterval(expiration)
+        let estimatedExpiration = expiration.estimatedExpirationSince(.now)
         let cacheObject = CacheObject(value: value,
                                       expiration: estimatedExpiration)
         storage.setObject(cacheObject, forKey: key as NSString)
         keys.insert(key)
     }
     
-    func value(for key: String, extendingExpiration: ExpirationExtending = .extend(second: 180)) -> T? {
+    func value(
+        for key: String,
+        extendingExpiration: ExpirationExtending = .extend(.seconds(180))
+    ) -> T? {
         guard let cacheObject = storage.object(forKey: key as NSString)
         else { return nil }
         
@@ -118,8 +120,8 @@ extension InMemoryCacheStorage {
         
         func extendExpiration(_ extending: ExpirationExtending) {
             switch extending {
-            case let .extend(second):
-                self.expiration = expiration.addingTimeInterval(second)
+            case let .extend(cacheExpiration):
+                self.expiration = cacheExpiration.estimatedExpirationSince(expiration)
             case .none:
                 return
             }

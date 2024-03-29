@@ -54,8 +54,8 @@ class InMemoryCacheStorageTest: XCTestCase {
         
         let (firstKey, firstValue) = ("one", 1)
         let (secondKey, secondValue) = ("three", 3)
-        memoryStorage.store(firstValue, for: firstKey, expiration: 0.5)
-        memoryStorage.store(secondValue, for: secondKey, expiration: 3)
+        memoryStorage.store(firstValue, for: firstKey, expiration: .seconds(0.5))
+        memoryStorage.store(secondValue, for: secondKey, expiration: .seconds(3))
         
         XCTAssertTrue(memoryStorage.isCached(for: firstKey))
         XCTAssertTrue(memoryStorage.isCached(for: secondKey))
@@ -80,14 +80,14 @@ class InMemoryCacheStorageTest: XCTestCase {
         let key = "one"
         let value = 1
         XCTAssertFalse(memoryStorage.isCached(for: key))
-        memoryStorage.store(value, for: key, expiration: 0.2)
+        memoryStorage.store(value, for: key, expiration: .seconds(0.2))
         XCTAssertTrue(memoryStorage.isCached(for: key))
         
         let cacheObject = self.innerStorage.object(forKey: key as NSString)
         XCTAssertNotNil(cacheObject)
         
         let beforeDate = cacheObject!.expiration
-        _ = memoryStorage.value(for: key, extendingExpiration: .extend(second: 0.5))
+        _ = memoryStorage.value(for: key, extendingExpiration: .extend(.seconds(0.5)))
         let afterDate = cacheObject!.expiration
         XCTAssertNotEqual(beforeDate, afterDate)
         
@@ -125,8 +125,8 @@ class InMemoryCacheStorageTest: XCTestCase {
         
         let (firstKey, firstValue) = ("one", 1)
         let (secondKey, secondValue) = ("two", 2)
-        memoryStorage.store(firstValue, for: firstKey, expiration: 0.2)
-        memoryStorage.store(secondValue, for: secondKey, expiration: 5)
+        memoryStorage.store(firstValue, for: firstKey, expiration: .seconds(0.2))
+        memoryStorage.store(secondValue, for: secondKey, expiration: .seconds(5))
         XCTAssertTrue(memoryStorage.isCached(for: firstKey))
         XCTAssertTrue(memoryStorage.isCached(for: secondKey))
         
@@ -151,8 +151,8 @@ class InMemoryCacheStorageTest: XCTestCase {
         
         let (firstKey, firstValue) = ("one", 1)
         let (secondKey, secondValue) = ("ten", 10)
-        memoryStorage.store(firstValue, for: firstKey, expiration: 1)
-        memoryStorage.store(secondValue, for: secondKey, expiration: 10)
+        memoryStorage.store(firstValue, for: firstKey, expiration: .seconds(1))
+        memoryStorage.store(secondValue, for: secondKey, expiration: .seconds(10))
         XCTAssertTrue(memoryStorage.isCached(for: firstKey))
         XCTAssertTrue(memoryStorage.isCached(for: secondKey))
         
@@ -210,7 +210,7 @@ class InMemoryCacheStorageTest: XCTestCase {
         
         delay(0.5) {
             XCTAssertTrue(cacheObejct.isExpired)
-            cacheObejct.extendExpiration(.extend(second: 0.2))
+            cacheObejct.extendExpiration(.extend(.seconds(0.2)))
             XCTAssertFalse(cacheObejct.isExpired)
             XCTAssertEqual(expiration.addingTimeInterval(0.2), cacheObejct.expiration)
             expectation.fulfill()
