@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CacheExpiration {
+enum CacheExpiration: Equatable {
     case seconds(TimeInterval)
     
     case days(Int)
@@ -26,5 +26,7 @@ enum CacheExpiration {
 enum ExpirationExtending {
     case none
     
-    case extend(CacheExpiration)
+    case cacheTime
+    
+    case newExpiration(CacheExpiration)
 }
