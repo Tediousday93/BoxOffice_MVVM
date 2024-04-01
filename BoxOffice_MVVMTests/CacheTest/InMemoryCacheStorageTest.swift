@@ -27,8 +27,7 @@ class InMemoryCacheStorageTest: XCTestCase {
     }
     
     func test_storeAndGetValue() {
-        let key = "one"
-        let value = 1
+        let (key, value) = ("one", 1)
         XCTAssertFalse(memoryStorage.isCached(for: key))
         XCTAssertNil(memoryStorage.value(for: key))
         
@@ -39,8 +38,7 @@ class InMemoryCacheStorageTest: XCTestCase {
     }
     
     func test_storeValueOverwrite() {
-        let key = "one"
-        let value = 1
+        let (key, value) = ("one", 1)
         let overwriteValue = 2
         memoryStorage.store(value, for: key)
         XCTAssertEqual(memoryStorage.value(for: key), value)
@@ -77,8 +75,7 @@ class InMemoryCacheStorageTest: XCTestCase {
         let stillCachedExpectation = expectation(description: "getValueWithExtendingExpiration Still Cached Expectation")
         let extendedExpirationExpectation = expectation(description: "getValueWithExtendingExpiration Extended Expiration Expectation")
         
-        let key = "one"
-        let value = 1
+        let (key, value) = ("one", 1)
         XCTAssertFalse(memoryStorage.isCached(for: key))
         memoryStorage.store(value, for: key, expiration: .seconds(0.2))
         XCTAssertTrue(memoryStorage.isCached(for: key))
@@ -207,7 +204,6 @@ class InMemoryCacheStorageTest: XCTestCase {
     
     func test_cacheObject() {
         let expectation = expectation(description: "cacheObject Expectation")
-        
         
         let cacheObject = TestCacheObject(value: 3, expiration: .seconds(0.5))
         XCTAssertEqual(cacheObject.value, 3)
