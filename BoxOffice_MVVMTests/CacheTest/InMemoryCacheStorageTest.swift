@@ -73,7 +73,7 @@ class InMemoryCacheStorageTest: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_getValueWithExtendingExpiration() {
+    func test_getValueWithExtendingNewExpiration() {
         let stillCachedExpectation = expectation(description: "getValueWithExtendingExpiration Still Cached Expectation")
         let extendedExpirationExpectation = expectation(description: "getValueWithExtendingExpiration Extended Expiration Expectation")
         
@@ -83,12 +83,15 @@ class InMemoryCacheStorageTest: XCTestCase {
         memoryStorage.store(value, for: key, expiration: .seconds(0.2))
         XCTAssertTrue(memoryStorage.isCached(for: key))
         
-        let cacheObject = self.innerStorage.object(forKey: key as NSString)
-        XCTAssertNotNil(cacheObject)
+        guard let cacheObject = self.innerStorage.object(forKey: key as NSString)
+        else {
+            XCTFail("CacheObject must not be nil")
+            return
+        }
         
-        let beforeDate = cacheObject!.expiration
-        _ = memoryStorage.value(for: key, extendingExpiration: .extend(.seconds(0.5)))
-        let afterDate = cacheObject!.expiration
+        let beforeDate = cacheObject.estimatedExpiration
+        _ = memoryStorage.value(for: key, extendingExpiration: .newExpiration(.seconds(0.7)))
+        let afterDate = cacheObject.estimatedExpiration
         XCTAssertNotEqual(beforeDate, afterDate)
         
         delay(0.5) {
@@ -110,12 +113,15 @@ class InMemoryCacheStorageTest: XCTestCase {
         memoryStorage.store(value, for: key)
         XCTAssertTrue(memoryStorage.isCached(for: key))
         
-        let cacheObject = innerStorage.object(forKey: key as NSString)
-        XCTAssertNotNil(cacheObject)
+        guard let cacheObject = innerStorage.object(forKey: key as NSString)
+        else {
+            XCTFail("CacheObject must not be nil")
+            return
+        }
         
-        let beforeDate = cacheObject!.expiration
+        let beforeDate = cacheObject.estimatedExpiration
         _ = memoryStorage.value(for: key, extendingExpiration: .none)
-        let afterDate = cacheObject!.expiration
+        let afterDate = cacheObject.estimatedExpiration
         
         XCTAssertEqual(beforeDate, afterDate)
     }
@@ -202,17 +208,37 @@ class InMemoryCacheStorageTest: XCTestCase {
     func test_cacheObject() {
         let expectation = expectation(description: "cacheObject Expectation")
         
-        let expiration = Date.now.addingTimeInterval(0.5)
-        let cacheObejct = TestCacheObject(value: 3, expiration: expiration)
-        XCTAssertEqual(cacheObejct.value, 3)
-        XCTAssertEqual(cacheObejct.expiration, expiration)
-        XCTAssertFalse(cacheObejct.isExpired)
+        
+        let cacheObject = TestCacheObject(value: 3, expiration: .seconds(0.5))
+        XCTAssertEqual(cacheObject.value, 3)
+        XCTAssertEqual(cacheObject.expiration, .seconds(0.5))
+        XCTAssertFalse(cacheObject.isExpired)
         
         delay(0.5) {
-            XCTAssertTrue(cacheObejct.isExpired)
-            cacheObejct.extendExpiration(.extend(.seconds(0.2)))
-            XCTAssertFalse(cacheObejct.isExpired)
-            XCTAssertEqual(expiration.addingTimeInterval(0.2), cacheObejct.expiration)
+            XCTAssertTrue(cacheObject.isExpired)
+            
+            let originalExpiration = cacheObject.expiration
+            let expectedExpiration = cacheObject.expiration
+                .estimatedExpirationSince(.now)
+                .formatted(date: .complete, time: .omitted)
+            
+            cacheObject.extendExpiration(.cacheTime)
+            
+            XCTAssertFalse(cacheObject.isExpired)
+            // 만료기간을 cacheTime으로 연장할 경우 초기 설정된 expiration 값만큼 연장된다.
+            XCTAssertEqual(originalExpiration, .seconds(0.5))
+            XCTAssertEqual(expectedExpiration, cacheObject.estimatedExpiration.formatted(date: .complete, time: .omitted))
+            
+            let newExpiration = CacheExpiration.seconds(0.2)
+                .estimatedExpirationSince(.now)
+                .formatted(date: .complete, time: .omitted)
+            cacheObject.extendExpiration(.newExpiration(.seconds(0.2)))
+            
+            XCTAssertFalse(cacheObject.isExpired)
+            // 만료기간을 직접 설정할 때는 초기에 설정된 expiration은 변경되지 않는다.
+            XCTAssertEqual(cacheObject.expiration, .seconds(0.5))
+            XCTAssertEqual(newExpiration, cacheObject.estimatedExpiration.formatted(date: .complete, time: .omitted))
+            
             expectation.fulfill()
         }
         
