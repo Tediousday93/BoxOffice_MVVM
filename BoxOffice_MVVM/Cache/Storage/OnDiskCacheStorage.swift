@@ -104,7 +104,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         return fileURLs
     }
     
-    func store(value: T, for key: String) throws {
+    func store(value: T, for key: String, expiration: CacheExpiration = .days(7)) throws {
         guard isStorageReady else {
             throw OnDiskCacheError.storageNotReady
         }
@@ -124,12 +124,11 @@ final class OnDiskCacheStorage<T: DataConvertible> {
             throw OnDiskCacheError.cannotCreateFile(url: fileURL, error: error)
         }
         
-        let now = Date()
-        let estimatedExpiration = TimeInterval(3600 * 24) * TimeInterval(7)
-        let expirationDate = now.addingTimeInterval(estimatedExpiration)
+        let now = Date.now
+        let estimatedExpiration = expiration.estimatedExpirationSince(now)
         let attributes: [FileAttributeKey: Any] = [
             .creationDate: now as NSDate,
-            .modificationDate: expirationDate as NSDate
+            .modificationDate: estimatedExpiration as NSDate
         ]
         
         do {
@@ -187,12 +186,13 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     }
     
     func value(for key: String) throws -> T? {
-        return try data(for: key, actuallyLoad: true)
+        return try data(for: key, actuallyLoad: true, extendingExpiration: .none)
     }
     
     private func data(
         for key: String,
-        actuallyLoad: Bool
+        actuallyLoad: Bool,
+        extendingExpiration: ExpirationExtending
     ) throws -> T? {
         guard isStorageReady else {
             throw OnDiskCacheError.storageNotReady
@@ -217,7 +217,8 @@ final class OnDiskCacheStorage<T: DataConvertible> {
             extendExpiration(
                 filePath: fileURL.path,
                 lastAccessDate: urlResourceValues.creationDate,
-                lastEstimatedExpirationDate: urlResourceValues.contentModificationDate
+                lastEstimatedExpirationDate: urlResourceValues.contentModificationDate,
+                extendingExpiration: extendingExpiration
             )
             return try T.fromData(data)
         } catch {
@@ -228,15 +229,28 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     private func extendExpiration(
         filePath: String,
         lastAccessDate: Date?,
-        lastEstimatedExpirationDate: Date?
+        lastEstimatedExpirationDate: Date?,
+        extendingExpiration: ExpirationExtending
     ) {
         guard let lastAccessDate, let lastEstimatedExpirationDate else {
             return
         }
         
         let accessDate = Date()
-        let originalExpiration = lastEstimatedExpirationDate.timeIntervalSince(lastAccessDate)
-        let expirationDate = accessDate.addingTimeInterval(originalExpiration)
+        let expirationDate: Date
+        
+        switch extendingExpiration {
+        case .cacheTime:
+            let origianlExpiration: CacheExpiration = .seconds(
+                lastEstimatedExpirationDate.timeIntervalSince(lastAccessDate)
+            )
+            expirationDate = origianlExpiration.estimatedExpirationSince(accessDate)
+        case let .newExpiration(expiration):
+            expirationDate = expiration.estimatedExpirationSince(accessDate)
+        case .none:
+            return
+        }
+        
         let attributes: [FileAttributeKey: Any] = [
             .creationDate: accessDate as NSDate,
             .modificationDate: expirationDate as NSDate
@@ -264,7 +278,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     }
     
     func isCached(for key: String) throws -> Bool {
-        let result = try data(for: key, actuallyLoad: false)
+        let result = try data(for: key, actuallyLoad: false, extendingExpiration: .none)
         return result != nil
     }
 }
