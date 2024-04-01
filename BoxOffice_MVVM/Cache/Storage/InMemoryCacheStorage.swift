@@ -43,16 +43,15 @@ final class InMemoryCacheStorage<T> {
         lock.lock()
         defer { lock.unlock() }
         
-        let estimatedExpiration = expiration.estimatedExpirationSince(.now)
         let cacheObject = CacheObject(value: value,
-                                      expiration: estimatedExpiration)
+                                      expiration: expiration)
         storage.setObject(cacheObject, forKey: key as NSString)
         keys.insert(key)
     }
     
     func value(
         for key: String,
-        extendingExpiration: ExpirationExtending = .extend(.seconds(180))
+        extendingExpiration: ExpirationExtending = .cacheTime
     ) -> T? {
         guard let cacheObject = storage.object(forKey: key as NSString)
         else { return nil }
@@ -107,21 +106,26 @@ final class InMemoryCacheStorage<T> {
 extension InMemoryCacheStorage {
     final class CacheObject<T> {
         let value: T
-        var expiration: Date
+        let expiration: CacheExpiration
         
-        init(value: T, expiration: Date) {
+        private(set) var estimatedExpiration: Date
+        
+        init(value: T, expiration: CacheExpiration) {
             self.value = value
             self.expiration = expiration
+            self.estimatedExpiration = expiration.estimatedExpirationSince(.now)
         }
         
         var isExpired: Bool {
-            expiration.isPast(referenceDate: Date())
+            estimatedExpiration.isPast(referenceDate: .now)
         }
         
         func extendExpiration(_ extending: ExpirationExtending) {
             switch extending {
-            case let .extend(cacheExpiration):
-                self.expiration = cacheExpiration.estimatedExpirationSince(expiration)
+            case .cacheTime:
+                self.estimatedExpiration = expiration.estimatedExpirationSince(estimatedExpiration)
+            case let .newExpiration(cacheExpiration):
+                self.estimatedExpiration = cacheExpiration.estimatedExpirationSince(.now)
             case .none:
                 return
             }
