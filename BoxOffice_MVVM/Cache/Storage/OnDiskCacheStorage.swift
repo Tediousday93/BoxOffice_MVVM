@@ -188,8 +188,15 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         return urlResourceValues
     }
     
-    func value(for key: String) throws -> T? {
-        return try data(for: key, actuallyLoad: true, extendingExpiration: .none)
+    func value(
+        for key: String,
+        extendingExpiration: ExpirationExtending = .cacheTime
+    ) throws -> T? {
+        return try data(
+            for: key,
+            actuallyLoad: true,
+            extendingExpiration: extendingExpiration
+        )
     }
     
     private func data(
@@ -302,8 +309,8 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         }
     }
     
-    func isCached(for key: String) throws -> Bool {
-        let result = try data(for: key, actuallyLoad: false, extendingExpiration: .none)
+    func isCached(for key: String) -> Bool {
+        let result = try? data(for: key, actuallyLoad: false, extendingExpiration: .none)
         return result != nil
     }
 }
