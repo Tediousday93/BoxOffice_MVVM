@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum OnDiskCacheError: Error {
+enum OnDiskCacheError: Error, Equatable {
     case cannotCreateDirectory(path: String, error: Error)
     
     case storageNotReady
@@ -27,6 +27,23 @@ enum OnDiskCacheError: Error {
     case directoryEnumeratorCreationFail(url: URL)
     
     case invalidURLContained(url: URL)
+    
+    static func == (lhs: OnDiskCacheError, rhs: OnDiskCacheError) -> Bool {
+        switch (lhs, rhs) {
+        case (.cannotCreateDirectory, .cannotCreateDirectory),
+            (.storageNotReady, .storageNotReady),
+            (.cannotCreateFile, .cannotCreateFile),
+            (.cannotSetFileAttributes, .cannotSetFileAttributes),
+            (.invalidURLResource, .invalidURLResource),
+            (.expirationNotContained, .expirationNotContained),
+            (.cannotFindValue, .cannotFindValue),
+            (.directoryEnumeratorCreationFail, .directoryEnumeratorCreationFail),
+            (.invalidURLContained, .invalidURLContained):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 final class OnDiskCacheStorage<T: DataConvertible> {
