@@ -40,13 +40,21 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     
     init(
         fileManager: FileManager = .default,
-        countLimit: Int
+        countLimit: Int,
+        creatingDirectory: Bool
     ) {
         self.fileManager = fileManager
         self.directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         self.countLimit = countLimit
-        try? prepareDirectory()
-        try? removeExpired()
+        
+        if creatingDirectory {
+            try? prepareDirectory()
+        }
+    }
+    
+    convenience init(countLimit: Int) throws {
+        self.init(fileManager: .default, countLimit: countLimit, creatingDirectory: false)
+        try prepareDirectory()
     }
     
     private func prepareDirectory() throws {
@@ -63,45 +71,6 @@ final class OnDiskCacheStorage<T: DataConvertible> {
             isStorageReady = false
             throw OnDiskCacheError.cannotCreateDirectory(path: path, error: error)
         }
-    }
-    
-    func removeExpired() throws {
-        let fileURLs = try allFileURLs(for: [.creationDateKey, .contentModificationDateKey])
-        
-        guard fileURLs.count > 0 else { return }
-        
-        let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
-        let expiredFileURLs = fileURLs.filter { fileURL in
-            let resourceValues: URLResourceValues
-            do {
-                resourceValues = try fileURL.resourceValues(forKeys: resourceKeys)
-            } catch {
-                return true
-            }
-            
-            return resourceValues.contentModificationDate?.isPast(referenceDate: Date()) ?? true
-        }
-        
-        try expiredFileURLs.forEach { fileURL in
-            try removeData(at: fileURL)
-        }
-    }
-    
-    private func allFileURLs(for resourceKeys: [URLResourceKey]) throws -> [URL] {
-        guard let directoryEnumerator = fileManager.enumerator(
-            at: directoryURL,
-            includingPropertiesForKeys: resourceKeys,
-            options: .skipsHiddenFiles
-        ) else {
-            throw OnDiskCacheError.directoryEnumeratorCreationFail(url: directoryURL)
-        }
-        
-        guard let fileURLs = directoryEnumerator.allObjects as? [URL]
-        else {
-            throw OnDiskCacheError.invalidURLContained(url: directoryURL)
-        }
-        
-        return fileURLs
     }
     
     func store(value: T, for key: String, expiration: CacheExpiration = .days(7)) throws {
@@ -166,6 +135,23 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         }
         
         return exceedingFileURLs
+    }
+    
+    private func allFileURLs(for resourceKeys: [URLResourceKey]) throws -> [URL] {
+        guard let directoryEnumerator = fileManager.enumerator(
+            at: directoryURL,
+            includingPropertiesForKeys: resourceKeys,
+            options: .skipsHiddenFiles
+        ) else {
+            throw OnDiskCacheError.directoryEnumeratorCreationFail(url: directoryURL)
+        }
+        
+        guard let fileURLs = directoryEnumerator.allObjects as? [URL]
+        else {
+            throw OnDiskCacheError.invalidURLContained(url: directoryURL)
+        }
+        
+        return fileURLs
     }
     
     private func resourceValues(
@@ -267,6 +253,28 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     func removeAll() throws {
         try removeData(at: directoryURL)
         try prepareDirectory()
+    }
+    
+    func removeExpired() throws {
+        let fileURLs = try allFileURLs(for: [.creationDateKey, .contentModificationDateKey])
+        
+        guard fileURLs.count > 0 else { return }
+        
+        let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
+        let expiredFileURLs = fileURLs.filter { fileURL in
+            let resourceValues: URLResourceValues
+            do {
+                resourceValues = try fileURL.resourceValues(forKeys: resourceKeys)
+            } catch {
+                return true
+            }
+            
+            return resourceValues.contentModificationDate?.isPast(referenceDate: Date()) ?? true
+        }
+        
+        try expiredFileURLs.forEach { fileURL in
+            try removeData(at: fileURL)
+        }
     }
     
     private func removeData(at url: URL) throws {
