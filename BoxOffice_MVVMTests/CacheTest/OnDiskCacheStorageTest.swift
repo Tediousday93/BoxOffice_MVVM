@@ -49,4 +49,19 @@ class OnDiskCacheStorageTest: XCTestCase {
             XCTFail("Not Expected Error: \(error)")
         }
     }
+    
+    func test_storeValueOverwrite() {
+        let (key, value) = ("1", "1")
+        let overwriteValue = "one"
+        
+        do {
+            try diskStorage.store(value: value, for: key)
+            XCTAssertEqual(try diskStorage.value(for: key), "1")
+            
+            try diskStorage.store(value: overwriteValue, for: key)
+            XCTAssertEqual(try diskStorage.value(for: key), overwriteValue)
+        } catch {
+            XCTFail("Not Expected Error: \(error)")
+        }
+    }
 }
