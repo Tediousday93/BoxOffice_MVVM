@@ -37,31 +37,53 @@ class OnDiskCacheStorageTest: XCTestCase {
     
     func test_storeAndGetValue() {
         let (key, value) = ("1", "1")
-        do {
-            XCTAssertFalse(diskStorage.isCached(for: key))
-            XCTAssertNil(try diskStorage.value(for: key))
-            
-            try diskStorage.store(value: value, for: key)
-            
-            XCTAssertTrue(diskStorage.isCached(for: key))
-            XCTAssertEqual(try diskStorage.value(for: key), value)
-        } catch {
-            XCTFail("Not Expected Error: \(error)")
-        }
+        
+        XCTAssertFalse(diskStorage.isCached(for: key))
+        var cached = try! diskStorage.value(for: key)
+        XCTAssertNil(cached)
+        
+        try! diskStorage.store(value: value, for: key)
+        XCTAssertTrue(diskStorage.isCached(for: key))
+        
+        cached = try! diskStorage.value(for: key)
+        XCTAssertEqual(cached, value)
     }
     
     func test_storeValueOverwrite() {
         let (key, value) = ("1", "1")
         let overwriteValue = "one"
         
-        do {
-            try diskStorage.store(value: value, for: key)
-            XCTAssertEqual(try diskStorage.value(for: key), "1")
+        try! diskStorage.store(value: value, for: key)
+        var cached = try! diskStorage.value(for: key)
+        XCTAssertEqual(cached, "1")
+        
+        try! diskStorage.store(value: overwriteValue, for: key)
+        cached = try! diskStorage.value(for: key)
+        XCTAssertEqual(cached, overwriteValue)
+    }
+    
+    func test_storeWithExpiration() {
+        let expectation = expectation(description: "storeWithExpiration Expectation")
+        let (firstKey, firstValue) = ("1", "1")
+        let (secondKey, secondValue) = ("2", "2")
+        
+        try! diskStorage.store(value: firstValue, for: firstKey, expiration: .seconds(0.5))
+        try! diskStorage.store(value: secondValue, for: secondKey, expiration: .seconds(1))
+        XCTAssertTrue(diskStorage.isCached(for: firstKey))
+        XCTAssertTrue(diskStorage.isCached(for: secondKey))
+        
+        delay(0.5) {
+            XCTAssertFalse(self.diskStorage.isCached(for: firstKey))
+            let firstCached = try! self.diskStorage.value(for: firstKey)
+            XCTAssertNil(firstCached)
             
-            try diskStorage.store(value: overwriteValue, for: key)
-            XCTAssertEqual(try diskStorage.value(for: key), overwriteValue)
-        } catch {
-            XCTFail("Not Expected Error: \(error)")
+            XCTAssertTrue(self.diskStorage.isCached(for: secondKey))
+            let secondCached = try! self.diskStorage.value(for: secondKey)
+            XCTAssertEqual(secondCached, secondValue)
+            
+            expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 1)
     }
 }
