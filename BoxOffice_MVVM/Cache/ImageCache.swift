@@ -26,35 +26,13 @@ extension Image: DataConvertible {
 }
 
 final class ImageCache: ImageCacheType {
-    static let `default`: ImageCache = .init(noThrowMemoryCacheLimit: 30, diskCacheLimit: 100, option: .all)
+    static let `default`: ImageCache = .init(memoryCacheLimit: 30, diskCacheLimit: 100, option: .all)
     
     private let memoryStorage: InMemoryCacheStorage<Image>
     
     private let diskStorage: OnDiskCacheStorage<Image>
     
     private let cacheOption: CacheOption
-    
-    convenience init(
-        memoryCacheLimit: Int,
-        diskCacheLimit: Int,
-        option: CacheOption
-    ) throws {
-        self.init(
-            memoryStorage: .init(countLimit: memoryCacheLimit),
-            diskStorage: try .init(countLimit: diskCacheLimit),
-            option: option
-        )
-    }
-    
-    convenience init(
-        noThrowMemoryCacheLimit: Int,
-        diskCacheLimit: Int,
-        option: CacheOption
-    ) {
-        let memoryStorage = InMemoryCacheStorage<Image>.init(countLimit: noThrowMemoryCacheLimit)
-        let diskStorage = OnDiskCacheStorage<Image>.init(countLimit: diskCacheLimit, creatingDirectory: true)
-        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
-    }
     
     init(
         memoryStorage: InMemoryCacheStorage<Image>,
@@ -64,6 +42,16 @@ final class ImageCache: ImageCacheType {
         self.memoryStorage = memoryStorage
         self.diskStorage = diskStorage
         self.cacheOption = option
+    }
+    
+    convenience init(
+        memoryCacheLimit: Int,
+        diskCacheLimit: Int,
+        option: CacheOption
+    ) {
+        let memoryStorage = InMemoryCacheStorage<Image>.init(countLimit: memoryCacheLimit)
+        let diskStorage = OnDiskCacheStorage<Image>.init(countLimit: diskCacheLimit, creatingDirectory: true)
+        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
     }
     
     func store(_ image: Image, for key: String) throws {
