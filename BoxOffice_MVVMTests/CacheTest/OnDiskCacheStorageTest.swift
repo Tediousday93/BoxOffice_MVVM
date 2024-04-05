@@ -161,4 +161,22 @@ class OnDiskCacheStorageTest: XCTestCase {
         XCTAssertFalse(diskStorage.isCached(for: key))
         XCTAssertNil(try! diskStorage.value(for: key))
     }
+    
+    func test_removeAll() {
+        try! diskStorage.store(value: "1", for: "1")
+        try! diskStorage.store(value: "2", for: "2")
+        try! diskStorage.store(value: "3", for: "3")
+        XCTAssertTrue(diskStorage.isCached(for: "1"))
+        XCTAssertTrue(diskStorage.isCached(for: "2"))
+        XCTAssertTrue(diskStorage.isCached(for: "3"))
+        
+        try! diskStorage.removeAll()
+        
+        XCTAssertFalse(diskStorage.isCached(for: "1"))
+        XCTAssertFalse(diskStorage.isCached(for: "2"))
+        XCTAssertFalse(diskStorage.isCached(for: "3"))
+        XCTAssertNil(try! diskStorage.value(for: "1"))
+        XCTAssertNil(try! diskStorage.value(for: "2"))
+        XCTAssertNil(try! diskStorage.value(for: "3"))
+    }
 }
