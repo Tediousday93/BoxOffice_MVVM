@@ -314,3 +314,74 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         return result != nil
     }
 }
+
+extension OnDiskCacheStorage {
+    struct FileMeta {
+        let url: URL
+        let lastAccessDate: Date?
+        let estimatedExpirationDate: Date?
+        
+        init(at url: URL, resourceKeys: Set<URLResourceKey>) throws {
+            let resourceValues: URLResourceValues
+            
+            do {
+                resourceValues = try url.resourceValues(forKeys: resourceKeys)
+            } catch {
+                throw OnDiskCacheError.invalidURLResource(
+                    keys: resourceKeys, url: url, error: error
+                )
+            }
+            
+            self.init(
+                url: url,
+                lastAccessDate: resourceValues.creationDate,
+                estimatedExpirationDate: resourceValues.contentModificationDate
+            )
+        }
+        
+        init(
+            url: URL,
+            lastAccessDate: Date?,
+            estimatedExpirationDate: Date?
+        ) {
+            self.url = url
+            self.lastAccessDate = lastAccessDate
+            self.estimatedExpirationDate = estimatedExpirationDate
+        }
+        
+        var isExpired: Bool {
+            estimatedExpirationDate?.isPast(referenceDate: .now) ?? true
+        }
+        
+        func extendExpiration(
+            with fileManager: FileManager,
+            extendingExpiration: ExpirationExtending
+        ) {
+            guard let lastAccessDate, let estimatedExpirationDate else {
+                return
+            }
+            
+            let accessDate = Date.now
+            let expirationDate: Date
+            
+            switch extendingExpiration {
+            case .cacheTime:
+                let origianlExpiration: CacheExpiration = .seconds(
+                    estimatedExpirationDate.timeIntervalSince(lastAccessDate)
+                )
+                expirationDate = origianlExpiration.estimatedExpirationSince(accessDate)
+            case let .newExpiration(expiration):
+                expirationDate = expiration.estimatedExpirationSince(accessDate)
+            case .none:
+                return
+            }
+            
+            let attributes: [FileAttributeKey: Any] = [
+                .creationDate: accessDate as NSDate,
+                .modificationDate: expirationDate as NSDate
+            ]
+            
+            try? fileManager.setAttributes(attributes, ofItemAtPath: url.path())
+        }
+    }
+}
