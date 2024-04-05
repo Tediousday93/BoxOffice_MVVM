@@ -179,4 +179,24 @@ class OnDiskCacheStorageTest: XCTestCase {
         XCTAssertNil(try! diskStorage.value(for: "2"))
         XCTAssertNil(try! diskStorage.value(for: "3"))
     }
+    
+    func test_removeExpired() {
+        let expectation = expectation(description: "removeExpired Expectation")
+        
+        try! diskStorage.store(value: "1", for: "1", expiration: .seconds(0.5))
+        try! diskStorage.store(value: "2", for: "2", expiration: .seconds(1))
+        
+        XCTAssertTrue(diskStorage.isCached(for: "1"))
+        XCTAssertTrue(diskStorage.isCached(for: "2"))
+        
+        delay(0.7) {
+            try! self.diskStorage.removeExpired()
+            
+            XCTAssertFalse(self.diskStorage.isCached(for: "1"))
+            XCTAssertTrue(self.diskStorage.isCached(for: "2"))
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
 }
