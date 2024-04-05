@@ -23,7 +23,11 @@ extension String: DataConvertible {
 }
 
 class OnDiskCacheStorageTest: XCTestCase {
+    typealias FileMeta = OnDiskCacheStorage<String>.FileMeta
+    
     let innerStorage = FileManager.default
+    let directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+    
     var diskStorage: OnDiskCacheStorage<String>!
     
     override func setUpWithError() throws {
@@ -85,5 +89,41 @@ class OnDiskCacheStorageTest: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_getValueWithExtendingCacheTime() {
+        let cachedAndExtendingExpectation = expectation(description: "getValueWithExtendingCacheTime cached and extending Expectation")
+        let extendedExpectation = expectation(description: "getValueWithExtendingCacheTime extended Expectation")
+        let expiredExpectation = expectation(description: "getValueWithExtendingCacheTime expired Expectation")
+        
+        let (key, value) = ("1", "1")
+        XCTAssertFalse(diskStorage.isCached(for: key))
+        try! diskStorage.store(value: value, for: key, expiration: .seconds(1))
+        XCTAssertTrue(diskStorage.isCached(for: key))
+        
+        delay(0.5) {
+            XCTAssertTrue(self.diskStorage.isCached(for: key))
+            // 만료기간이 1초로 저장되었으므로 0.5초 후 cacheTime으로 연장하면 그 차이인 0.5 만큼 늘어날 것.
+            _ = try! self.diskStorage.value(for: key, extendingExpiration: .cacheTime)
+            cachedAndExtendingExpectation.fulfill()
+        }
+        
+        delay(1) {
+            // 기존 만료기간 1초가 지났어도 정상적으로 연장되었으면 true
+            XCTAssertTrue(self.diskStorage.isCached(for: key))
+            extendedExpectation.fulfill()
+        }
+        
+        delay(1.5) {
+            // 늘어난 만료시간 만큼 시간이 경과했으므로 false
+            XCTAssertFalse(self.diskStorage.isCached(for: key))
+            expiredExpectation.fulfill()
+        }
+        
+        let expectations = [
+            cachedAndExtendingExpectation,
+            extendedExpectation, expiredExpectation
+        ]
+        wait(for: expectations, timeout: 2)
     }
 }
