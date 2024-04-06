@@ -16,7 +16,7 @@ class InMemoryCacheStorageTest: XCTestCase {
     
     override func setUp() {
         innerStorage = .init()
-        innerStorage.countLimit = 5
+        innerStorage.countLimit = 3
         
         memoryStorage = .init(storage: innerStorage, cleanInterval: 2)
     }
@@ -69,6 +69,18 @@ class InMemoryCacheStorageTest: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_storeExceedingCountLimit() {
+        memoryStorage.store(1, for: "1")
+        memoryStorage.store(2, for: "2")
+        memoryStorage.store(3, for: "3")
+        memoryStorage.store(4, for: "4")
+        
+        XCTAssertFalse(memoryStorage.isCached(for: "1"))
+        XCTAssertTrue(memoryStorage.isCached(for: "2"))
+        XCTAssertTrue(memoryStorage.isCached(for: "3"))
+        XCTAssertTrue(memoryStorage.isCached(for: "4"))
     }
     
     func test_getValueWithExtendingCacheTime() {
