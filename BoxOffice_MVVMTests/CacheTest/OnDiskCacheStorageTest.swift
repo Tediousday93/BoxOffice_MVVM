@@ -31,7 +31,7 @@ class OnDiskCacheStorageTest: XCTestCase {
     var diskStorage: OnDiskCacheStorage<String>!
     
     override func setUpWithError() throws {
-        diskStorage = try .init(countLimit: 5)
+        diskStorage = try .init(countLimit: 3)
     }
     
     override func tearDownWithError() throws {
@@ -89,6 +89,20 @@ class OnDiskCacheStorageTest: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_storeExceedingCountLimit() {
+        try! diskStorage.store(value: "1", for: "1", expiration: .seconds(1))
+        try! diskStorage.store(value: "2", for: "2", expiration: .seconds(5))
+        try! diskStorage.store(value: "3", for: "3", expiration: .seconds(3))
+        try! diskStorage.store(value: "4", for: "4", expiration: .seconds(4))
+        try! diskStorage.store(value: "5", for: "5", expiration: .seconds(5))
+        
+        XCTAssertFalse(diskStorage.isCached(for: "1"))
+        XCTAssertFalse(diskStorage.isCached(for: "3"))
+        XCTAssertTrue(diskStorage.isCached(for: "2"))
+        XCTAssertTrue(diskStorage.isCached(for: "4"))
+        XCTAssertTrue(diskStorage.isCached(for: "5"))
     }
     
     func test_getValueWithExtendingCacheTime() {
