@@ -16,7 +16,7 @@ enum OnDiskCacheError: Error {
     
     case cannotSetFileAttributes(filePath: String, attributes: [FileAttributeKey: Any], error: Error)
     
-    case invalidURLResource(keys: Set<URLResourceKey>, url: URL, error: Error)
+    case cannotGetResourceValues(keys: Set<URLResourceKey>, url: URL, error: Error)
     
     case expirationNotContained(url: URL)
     
@@ -101,7 +101,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         ]
         
         do {
-            try fileManager.setAttributes(attributes, ofItemAtPath: fileURL.path)
+            try fileManager.setAttributes(attributes, ofItemAtPath: fileURL.path())
         } catch {
             try? fileManager.removeItem(at: fileURL)
             throw OnDiskCacheError.cannotSetFileAttributes(
@@ -255,7 +255,7 @@ extension OnDiskCacheStorage {
             do {
                 resourceValues = try url.resourceValues(forKeys: resourceKeys)
             } catch {
-                throw OnDiskCacheError.invalidURLResource(
+                throw OnDiskCacheError.cannotGetResourceValues(
                     keys: resourceKeys, url: url, error: error
                 )
             }

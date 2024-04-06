@@ -199,4 +199,24 @@ class OnDiskCacheStorageTest: XCTestCase {
         
         wait(for: [expectation], timeout: 1)
     }
+    
+    func test_FileMetaInit() {
+        let cacheKey = "1"
+        let value = "1"
+        let expectedExpiration = CacheExpiration.seconds(1).estimatedExpirationSince(.now)
+        let attributes: [FileAttributeKey: Any] = [
+            .creationDate: Date.now,
+            .modificationDate: expectedExpiration
+        ]
+        
+        let fileURL = directoryURL.appending(path: cacheKey)
+        let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
+        
+        XCTAssertThrowsError(try FileMeta(at: fileURL, resourceKeys: resourceKeys))
+        
+        try! value.toData().write(to: fileURL)
+        try! innerStorage.setAttributes(attributes, ofItemAtPath: fileURL.path())
+        
+        XCTAssertNoThrow(try FileMeta(at: fileURL, resourceKeys: resourceKeys))
+    }
 }
