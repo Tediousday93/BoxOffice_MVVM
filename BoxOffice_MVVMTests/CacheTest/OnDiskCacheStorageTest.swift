@@ -31,7 +31,7 @@ class OnDiskCacheStorageTest: XCTestCase {
     var diskStorage: OnDiskCacheStorage<String>!
     
     override func setUpWithError() throws {
-        diskStorage = try .init(countLimit: 3)
+        diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(5))
     }
     
     override func tearDownWithError() throws {

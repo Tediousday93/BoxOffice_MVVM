@@ -38,22 +38,41 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     
     private let countLimit: Int
     
+    private let cacheExpiration: CacheExpiration
+    
     init(
-        fileManager: FileManager = .default,
+        fileManager: FileManager,
         countLimit: Int,
-        creatingDirectory: Bool
+        cacheExpiration: CacheExpiration,
+        creatingDirectory: Bool,
+        directoryURL: URL? = nil
     ) {
         self.fileManager = fileManager
-        self.directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        self.directoryURL = directoryURL ?? fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         self.countLimit = countLimit
+        self.cacheExpiration = cacheExpiration
         
         if creatingDirectory {
             try? prepareDirectory()
         }
     }
     
-    convenience init(countLimit: Int) throws {
-        self.init(fileManager: .default, countLimit: countLimit, creatingDirectory: false)
+    convenience init(
+        countLimit: Int,
+        cacheExpiration: CacheExpiration = .days(7),
+        directoryPath: String? = nil
+    ) throws {
+        var directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        if let directoryPath {
+            directoryURL = directoryURL.appending(path: directoryPath, directoryHint: .isDirectory)
+        }
+        
+        self.init(fileManager: .default,
+                  countLimit: countLimit,
+                  cacheExpiration: cacheExpiration,
+                  creatingDirectory: false,
+                  directoryURL: directoryURL)
+        
         try prepareDirectory()
     }
     
@@ -73,7 +92,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         }
     }
     
-    func store(value: T, for key: String, expiration: CacheExpiration = .days(7)) throws {
+    func store(value: T, for key: String, expiration: CacheExpiration? = nil) throws {
         guard isStorageReady else {
             throw OnDiskCacheError.storageNotReady
         }
@@ -93,6 +112,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
             throw OnDiskCacheError.cannotCreateFile(url: fileURL, error: error)
         }
         
+        let expiration = expiration ?? cacheExpiration
         let now = Date.now
         let estimatedExpiration = expiration.estimatedExpirationSince(now)
         let attributes: [FileAttributeKey: Any] = [

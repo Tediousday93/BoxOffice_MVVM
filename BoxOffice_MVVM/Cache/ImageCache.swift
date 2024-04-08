@@ -26,7 +26,7 @@ extension Image: DataConvertible {
 }
 
 final class ImageCache: ImageCacheType {
-    static let `default`: ImageCache = .init(memoryCacheLimit: 30, diskCacheLimit: 100, option: .all)
+    static let `default`: ImageCache = .init(memoryCountLimit: 30, diskCountLimit: 100, option: .all)
     
     private let memoryStorage: InMemoryCacheStorage<Image>
     
@@ -45,12 +45,39 @@ final class ImageCache: ImageCacheType {
     }
     
     convenience init(
-        memoryCacheLimit: Int,
-        diskCacheLimit: Int,
+        memoryCountLimit: Int,
+        diskCountLimit: Int,
         option: CacheOption
     ) {
-        let memoryStorage = InMemoryCacheStorage<Image>.init(countLimit: memoryCacheLimit)
-        let diskStorage = OnDiskCacheStorage<Image>.init(countLimit: diskCacheLimit, creatingDirectory: true)
+        let memoryStorage = InMemoryCacheStorage<Image>(countLimit: memoryCountLimit)
+        let diskStorage = OnDiskCacheStorage<Image>(
+            fileManager: .default,
+            countLimit: diskCountLimit,
+            cacheExpiration: .days(7),
+            creatingDirectory: true
+        )
+        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
+    }
+    
+    convenience init(
+        memoryCountLimit: Int,
+        memoryCacheExpiration: CacheExpiration,
+        memoryCleanInterval: TimeInterval,
+        cacheDirectoryPath: String,
+        diskCountLimit: Int,
+        diskCacheExpiration: CacheExpiration,
+        option: CacheOption
+    ) throws {
+        let memoryStorage = InMemoryCacheStorage<Image>(
+            countLimit: memoryCountLimit,
+            cacheExpiration: memoryCacheExpiration,
+            cleanInterval: memoryCleanInterval
+        )
+        let diskStorage = try OnDiskCacheStorage<Image>(
+            countLimit: diskCountLimit,
+            cacheExpiration: diskCacheExpiration,
+            directoryPath: cacheDirectoryPath
+        )
         self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
     }
     

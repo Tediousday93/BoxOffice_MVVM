@@ -10,17 +10,21 @@ import Foundation
 final class InMemoryCacheStorage<T> {
     private let storage: NSCache<NSString, CacheObject<T>>
     
-    private let lock: NSLock = .init()
-    
     private var cleanTimer: Timer? = nil
+    
+    private let cacheExpiration: CacheExpiration
+    
+    private let lock: NSLock = .init()
     
     private var keys: Set<String> = []
     
     init(
         storage: NSCache<NSString, CacheObject<T>>,
-        cleanInterval: TimeInterval = 180
+        cacheExpiration: CacheExpiration,
+        cleanInterval: TimeInterval
     ) {
         self.storage = storage
+        self.cacheExpiration = cacheExpiration
         cleanTimer = .scheduledTimer(
             withTimeInterval: cleanInterval,
             repeats: true,
@@ -33,16 +37,20 @@ final class InMemoryCacheStorage<T> {
     
     convenience init(
         countLimit: Int,
+        cacheExpiration: CacheExpiration = .seconds(300),
         cleanInterval: TimeInterval = 180
     ) {
-        self.init(storage: .init(), cleanInterval: cleanInterval)
+        self.init(storage: .init(),
+                  cacheExpiration: cacheExpiration,
+                  cleanInterval: cleanInterval)
         storage.countLimit = countLimit
     }
     
-    func store(_ value: T, for key: String, expiration: CacheExpiration = .seconds(300)) {
+    func store(_ value: T, for key: String, expiration: CacheExpiration? = nil) {
         lock.lock()
         defer { lock.unlock() }
         
+        let expiration = expiration ?? cacheExpiration
         let cacheObject = CacheObject(value: value,
                                       expiration: expiration)
         storage.setObject(cacheObject, forKey: key as NSString)
