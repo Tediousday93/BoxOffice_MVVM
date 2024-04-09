@@ -277,14 +277,14 @@
 			path = ImageProvider;
 			sourceTree = "<group>";
 		};
-		AD32E8092B9EE02F002AD62C /* APITests */ = {
+		AD32E8092B9EE02F002AD62C /* APITest */ = {
 			isa = PBXGroup;
 			children = (
 				AD32E8202BA46598002AD62C /* DailyBoxOfficeAPITest.swift */,
 				AD32E8372BA9A861002AD62C /* MovieDetailsAPITest.swift */,
 				AD32E8392BA9B3DB002AD62C /* DaumImageSearchAPITest.swift */,
 			);
-			path = APITests;
+			path = APITest;
 			sourceTree = "<group>";
 		};
 		AD32E80A2B9EE412002AD62C /* Mock */ = {
@@ -365,7 +365,7 @@
 				AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */,
 				AD32E80A2B9EE412002AD62C /* Mock */,
 				AD32E8292BA85419002AD62C /* NetworkSessionTest */,
-				AD32E8092B9EE02F002AD62C /* APITests */,
+				AD32E8092B9EE02F002AD62C /* APITest */,
 				AD32E83F2BAAFB98002AD62C /* CacheTest */,
 			);
 			path = BoxOffice_MVVMTests;
