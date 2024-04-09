@@ -12,11 +12,11 @@ final class InMemoryCacheStorage<T> {
     
     private var cleanTimer: Timer? = nil
     
-    private let cacheExpiration: CacheExpiration
-    
     private let lock: NSLock = .init()
     
-    private var keys: Set<String> = []
+    let cacheExpiration: CacheExpiration
+    
+    private(set) var keys: Set<String> = []
     
     init(
         storage: NSCache<NSString, CacheObject<T>>,
