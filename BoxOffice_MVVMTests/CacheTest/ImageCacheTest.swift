@@ -17,10 +17,10 @@ class ImageCacheTest: XCTestCase {
     
     override func setUpWithError() throws {
         memoryStorage = .init(countLimit: 3,
-                              cacheExpiration: .seconds(5),
-                              cleanInterval: 2)
+                              cacheExpiration: .seconds(2),
+                              cleanInterval: 1.5)
         
-        diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(5))
+        diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(3))
         
         imageCache = .init(memoryStorage: memoryStorage,
                            diskStorage: diskStorage,
@@ -103,7 +103,7 @@ class ImageCacheTest: XCTestCase {
         
         XCTAssertFalse(imageCache.isCached(for: key))
         try! imageCache.store(sampleImage, for: key, option: .all)
-        try! imageCache.removeImage(for: key, option: .all)
+        try! imageCache.removeImage(for: key)
         XCTAssertFalse(memoryStorage.isCached(for: key))
         XCTAssertFalse(diskStorage.isCached(for: key))
     }
@@ -128,10 +128,61 @@ class ImageCacheTest: XCTestCase {
         keys.forEach {
             try! imageCache.store(sampleImage, for: $0, option: .all)
         }
-        try! imageCache.removeAll(option: .all)
+        try! imageCache.removeAll()
         keys.forEach {
             XCTAssertFalse(memoryStorage.isCached(for: $0))
             XCTAssertFalse(diskStorage.isCached(for: $0))
         }
+    }
+    
+    func test_removeExpired() {
+        let memoryExpectation = expectation(description: "removeExpired memory Expectation")
+        let diskExpectation = expectation(description: "removeExpired disk Expectation")
+        
+        // memory expiration == 2, disk expiration == 3
+        let key = "sample"
+        try! imageCache.store(sampleImage, for: key)
+        XCTAssertTrue(imageCache.isCached(for: key))
+        
+        delay(2) {
+            try! self.imageCache.removeExpired()
+            XCTAssertTrue(self.imageCache.isCached(for: key))
+            XCTAssertFalse(self.memoryStorage.isCached(for: key))
+            XCTAssertTrue(self.diskStorage.isCached(for: key))
+            memoryExpectation.fulfill()
+        }
+        
+        delay(4) {
+            try! self.imageCache.removeExpired()
+            XCTAssertFalse(self.imageCache.isCached(for: key))
+            diskExpectation.fulfill()
+        }
+        
+        wait(for: [memoryExpectation, diskExpectation], timeout: 6)
+    }
+    
+    func test_removeExpiredWithCacheOption() {
+        let memoryExpectation = expectation(description: "removeExpired memory Expectation")
+        let diskExpectation = expectation(description: "removeExpired disk Expectation")
+        
+        let key = "sample"
+        try! imageCache.store(sampleImage, for: key)
+        XCTAssertTrue(imageCache.isCached(for: key))
+        
+        delay(2) {
+            try! self.imageCache.removeExpired(option: .memory)
+            XCTAssertTrue(self.imageCache.isCached(for: key))
+            XCTAssertFalse(self.memoryStorage.isCached(for: key))
+            XCTAssertTrue(self.diskStorage.isCached(for: key))
+            memoryExpectation.fulfill()
+        }
+        
+        delay(4) {
+            try! self.imageCache.removeExpired(option: .disk)
+            XCTAssertFalse(self.imageCache.isCached(for: key))
+            diskExpectation.fulfill()
+        }
+        
+        wait(for: [memoryExpectation, diskExpectation], timeout: 6)
     }
 }
