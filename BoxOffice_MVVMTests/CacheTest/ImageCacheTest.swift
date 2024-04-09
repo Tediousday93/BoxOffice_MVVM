@@ -88,4 +88,50 @@ class ImageCacheTest: XCTestCase {
     func test_retrieveImageWithNotCachedKey() {
         XCTAssertNil(try! imageCache.retrieveImage(for: "sample"))
     }
+    
+    func test_removeImage() {
+        let key = "sample"
+        XCTAssertFalse(imageCache.isCached(for: key))
+        try! imageCache.store(sampleImage, for: key, option: .all)
+        
+        try! imageCache.removeImage(for: key, option: .memory)
+        XCTAssertFalse(memoryStorage.isCached(for: key))
+        XCTAssertTrue(diskStorage.isCached(for: key))
+        
+        try! imageCache.removeImage(for: key, option: .disk)
+        XCTAssertFalse(diskStorage.isCached(for: key))
+        
+        XCTAssertFalse(imageCache.isCached(for: key))
+        try! imageCache.store(sampleImage, for: key, option: .all)
+        try! imageCache.removeImage(for: key, option: .all)
+        XCTAssertFalse(memoryStorage.isCached(for: key))
+        XCTAssertFalse(diskStorage.isCached(for: key))
+    }
+    
+    func test_removeAll() {
+        let keys = ["sample1", "sample2", "sample3"]
+        keys.forEach {
+            try! imageCache.store(sampleImage, for: $0, option: .all)
+        }
+        
+        try! imageCache.removeAll(option: .memory)
+        keys.forEach {
+            XCTAssertFalse(memoryStorage.isCached(for: $0))
+            XCTAssertTrue(diskStorage.isCached(for: $0))
+        }
+        
+        try! imageCache.removeAll(option: .disk)
+        keys.forEach {
+            XCTAssertFalse(diskStorage.isCached(for: $0))
+        }
+        
+        keys.forEach {
+            try! imageCache.store(sampleImage, for: $0, option: .all)
+        }
+        try! imageCache.removeAll(option: .all)
+        keys.forEach {
+            XCTAssertFalse(memoryStorage.isCached(for: $0))
+            XCTAssertFalse(diskStorage.isCached(for: $0))
+        }
+    }
 }
