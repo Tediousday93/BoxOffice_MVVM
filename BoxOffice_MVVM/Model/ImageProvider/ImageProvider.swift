@@ -29,7 +29,7 @@ final class ImageProvider {
         completion: @escaping (Result<UIImage, Error>) -> Void
     ) {
         do {
-            if try cache.isCached(for: url.cacheKey),
+            if cache.isCached(for: url.cacheKey),
                let cachedImage = try cache.retrieveImage(for: url.cacheKey) {
                 completion(.success(cachedImage))
                 return

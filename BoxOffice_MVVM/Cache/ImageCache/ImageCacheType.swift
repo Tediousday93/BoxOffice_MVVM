@@ -18,5 +18,23 @@ protocol ImageCacheType {
     
     func removeExpired(option: CacheOption?) throws
     
-    func isCached(for key: String) throws -> Bool
+    func isCached(for key: String) -> Bool
+}
+
+extension ImageCacheType {
+    func store(_ image: Image, for key: String, option: CacheOption? = nil) throws {
+        try store(image, for: key, option: option)
+    }
+    
+    func removeImage(for key: String, option: CacheOption? = nil) throws {
+        try removeImage(for: key, option: option)
+    }
+    
+    func removeAll(option: CacheOption? = nil) throws {
+        try removeAll(option: option)
+    }
+    
+    func removeExpired(option: CacheOption? = nil) throws {
+        try removeExpired(option: option)
+    }
 }

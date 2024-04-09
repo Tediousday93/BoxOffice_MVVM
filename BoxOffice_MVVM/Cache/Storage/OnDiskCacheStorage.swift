@@ -32,13 +32,13 @@ enum OnDiskCacheError: Error {
 final class OnDiskCacheStorage<T: DataConvertible> {
     private let fileManager: FileManager
     
-    private let directoryURL: URL
+    let directoryURL: URL
     
-    private var isStorageReady: Bool = true
+    let countLimit: Int
     
-    private let countLimit: Int
+    let cacheExpiration: CacheExpiration
     
-    private let cacheExpiration: CacheExpiration
+    private(set) var isStorageReady: Bool = true
     
     init(
         fileManager: FileManager,

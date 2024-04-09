@@ -47,7 +47,20 @@ final class ImageCache: ImageCacheType {
         self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
     }
     
-    func store(_ image: Image, for key: String, option: CacheOption? = nil) throws {
+    convenience init(
+        memoryCountLimit: Int,
+        diskCountLimit: Int,
+        directoryPath: String
+    ) throws {
+        let memoryStorage = InMemoryCacheStorage<Image>(countLimit: memoryCountLimit)
+        let diskStorage = try OnDiskCacheStorage<Image>(
+            countLimit: diskCountLimit,
+            directoryPath: directoryPath
+        )
+        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: .all)
+    }
+    
+    func store(_ image: Image, for key: String, option: CacheOption?) throws {
         let option = option ?? cacheOption
         
         switch option {
@@ -90,7 +103,7 @@ final class ImageCache: ImageCacheType {
         return try diskStorage.value(for: key)
     }
     
-    func removeImage(for key: String, option: CacheOption? = nil) throws {
+    func removeImage(for key: String, option: CacheOption?) throws {
         let option = option ?? cacheOption
         
         switch option {
@@ -112,7 +125,7 @@ final class ImageCache: ImageCacheType {
         try diskStorage.removeValue(for: key)
     }
     
-    func removeAll(option: CacheOption? = nil) throws {
+    func removeAll(option: CacheOption?) throws {
         let option = option ?? cacheOption
         
         switch option {
@@ -134,7 +147,7 @@ final class ImageCache: ImageCacheType {
         try diskStorage.removeAll()
     }
     
-    func removeExpired(option: CacheOption? = nil) throws {
+    func removeExpired(option: CacheOption?) throws {
         let option = option ?? cacheOption
         
         switch option {
@@ -156,7 +169,7 @@ final class ImageCache: ImageCacheType {
         try diskStorage.removeExpired()
     }
     
-    func isCached(for key: String) throws -> Bool {
+    func isCached(for key: String) -> Bool {
         let isCachedInMemory = memoryStorage.isCached(for: key)
         let isCachedOnDisk = diskStorage.isCached(for: key)
         return isCachedInMemory || isCachedOnDisk
