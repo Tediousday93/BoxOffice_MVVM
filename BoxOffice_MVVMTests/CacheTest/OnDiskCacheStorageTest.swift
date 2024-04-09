@@ -46,6 +46,10 @@ class OnDiskCacheStorageTest: XCTestCase {
         diskStorage = try! .init(countLimit: 3, directoryPath: "temp")
         
         XCTAssertEqual(diskStorage.directoryURL, customDirectoryURL)
+        addTeardownBlock {
+            try FileManager.default.removeItem(at: customDirectoryURL)
+            self.diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(5))
+        }
     }
     
     func test_storeAndGetValue() {
