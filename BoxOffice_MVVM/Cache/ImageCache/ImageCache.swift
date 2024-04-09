@@ -6,23 +6,11 @@
 //
 
 import Foundation
-import UIKit.UIImage
 
-typealias Image = UIImage
-extension Image: DataConvertible {
-    func toData() throws -> Data {
-        guard let data = jpegData(compressionQuality: 1.0)
-        else { throw DataConvertError.cannotConvertToData }
-        return data
-    }
-    
-    static func fromData(_ data: Data) throws -> Self {
-        guard let image = Image(data: data) as? Self
-        else { throw DataConvertError.cannotConvertFromData }
-        return image
-    }
-    
-    static var empty: Self { Self() }
+enum CacheOption {
+    case all
+    case memory
+    case disk
 }
 
 final class ImageCache: ImageCacheType {
@@ -59,30 +47,10 @@ final class ImageCache: ImageCacheType {
         self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
     }
     
-    convenience init(
-        memoryCountLimit: Int,
-        memoryCacheExpiration: CacheExpiration,
-        memoryCleanInterval: TimeInterval,
-        cacheDirectoryPath: String,
-        diskCountLimit: Int,
-        diskCacheExpiration: CacheExpiration,
-        option: CacheOption
-    ) throws {
-        let memoryStorage = InMemoryCacheStorage<Image>(
-            countLimit: memoryCountLimit,
-            cacheExpiration: memoryCacheExpiration,
-            cleanInterval: memoryCleanInterval
-        )
-        let diskStorage = try OnDiskCacheStorage<Image>(
-            countLimit: diskCountLimit,
-            cacheExpiration: diskCacheExpiration,
-            directoryPath: cacheDirectoryPath
-        )
-        self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: option)
-    }
-    
-    func store(_ image: Image, for key: String) throws {
-        switch cacheOption {
+    func store(_ image: Image, for key: String, option: CacheOption? = nil) throws {
+        let option = option ?? cacheOption
+        
+        switch option {
         case .all:
             storeToMemory(image, for: key)
             try storeToDisk(image, for: key)
@@ -90,8 +58,6 @@ final class ImageCache: ImageCacheType {
             storeToMemory(image, for: key)
         case .disk:
             try storeToDisk(image, for: key)
-        case .none:
-            return
         }
     }
     
@@ -108,7 +74,7 @@ final class ImageCache: ImageCacheType {
             return image
         }
         
-        if let image = try retrieveImageInDisk(for: key) {
+        if let image = try retrieveImageOnDisk(for: key) {
             storeToMemory(image, for: key)
             return image
         }
@@ -120,22 +86,79 @@ final class ImageCache: ImageCacheType {
         return memoryStorage.value(for: key)
     }
     
-    private func retrieveImageInDisk(for key: String) throws -> Image? {
+    private func retrieveImageOnDisk(for key: String) throws -> Image? {
         return try diskStorage.value(for: key)
+    }
+    
+    func removeImage(for key: String, option: CacheOption? = nil) throws {
+        let option = option ?? cacheOption
+        
+        switch option {
+        case .all:
+            removeImageInMemory(for: key)
+            try removeImageOnDisk(for: key)
+        case .memory:
+            removeImageInMemory(for: key)
+        case .disk:
+            try removeImageOnDisk(for: key)
+        }
+    }
+    
+    private func removeImageInMemory(for key: String) {
+        memoryStorage.removeValue(for: key)
+    }
+    
+    private func removeImageOnDisk(for key: String) throws {
+        try diskStorage.removeValue(for: key)
+    }
+    
+    func removeAll(option: CacheOption? = nil) throws {
+        let option = option ?? cacheOption
+        
+        switch option {
+        case .all:
+            removeAllInMemory()
+            try removeAllOnDisk()
+        case .memory:
+            removeAllInMemory()
+        case .disk:
+            try removeAllOnDisk()
+        }
+    }
+    
+    private func removeAllInMemory() {
+        memoryStorage.removeAll()
+    }
+    
+    private func removeAllOnDisk() throws {
+        try diskStorage.removeAll()
+    }
+    
+    func removeExpired(option: CacheOption? = nil) throws {
+        let option = option ?? cacheOption
+        
+        switch option {
+        case .all:
+            removeExpiredInMemory()
+            try removeExpiredOnDisk()
+        case .memory:
+            removeExpiredInMemory()
+        case .disk:
+            try removeExpiredOnDisk()
+        }
+    }
+    
+    private func removeExpiredInMemory() {
+        memoryStorage.removeExpired()
+    }
+    
+    private func removeExpiredOnDisk() throws {
+        try diskStorage.removeExpired()
     }
     
     func isCached(for key: String) throws -> Bool {
         let isCachedInMemory = memoryStorage.isCached(for: key)
         let isCachedOnDisk = diskStorage.isCached(for: key)
         return isCachedInMemory || isCachedOnDisk
-    }
-}
-
-extension ImageCache {
-    enum CacheOption {
-        case all
-        case memory
-        case disk
-        case none
     }
 }
