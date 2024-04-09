@@ -39,6 +39,15 @@ class OnDiskCacheStorageTest: XCTestCase {
         diskStorage = nil
     }
     
+    func test_customDirectoryPath() {
+        let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let customDirectoryURL = cachesDirectory.appending(path: "temp", directoryHint: .isDirectory)
+        
+        diskStorage = try! .init(countLimit: 3, directoryPath: "temp")
+        
+        XCTAssertEqual(diskStorage.directoryURL, customDirectoryURL)
+    }
+    
     func test_storeAndGetValue() {
         let (key, value) = ("1", "1")
         
