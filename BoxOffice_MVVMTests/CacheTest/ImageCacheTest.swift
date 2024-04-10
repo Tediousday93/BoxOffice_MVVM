@@ -111,7 +111,11 @@ class ImageCacheTest: XCTestCase {
     func test_removeAll() {
         let keys = ["sample1", "sample2", "sample3"]
         keys.forEach {
-            try! imageCache.store(sampleImage, for: $0, option: .all)
+            do {
+                try imageCache.store(sampleImage, for: $0, option: .all)
+            } catch {
+                XCTFail("imageCache failed to store sampleImage")
+            }
         }
         
         try! imageCache.removeAll(option: .memory)
