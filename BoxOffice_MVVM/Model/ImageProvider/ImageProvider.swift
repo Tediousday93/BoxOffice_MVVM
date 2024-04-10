@@ -22,6 +22,8 @@ final class ImageProvider {
     ) {
         self.cache = cache
         self.loader = loader
+        
+        try? cache.removeExpired(option: .disk)
     }
     
     func fetchImage(
