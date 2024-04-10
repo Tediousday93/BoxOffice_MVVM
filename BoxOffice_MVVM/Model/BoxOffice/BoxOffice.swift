@@ -36,7 +36,7 @@ final class BoxOffice: BoxOfficeType {
         }
     }
     
-    func getDetail(
+    func getMovieDetails(
         movieCode: String,
         completion: @escaping (Result<MovieDetails, Error>) -> Void
     ) {

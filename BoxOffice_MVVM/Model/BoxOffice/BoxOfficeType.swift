@@ -11,7 +11,7 @@ protocol BoxOfficeType {
         completion: @escaping (Result<DailyBoxOffice, Error>) -> Void
     )
     
-    func getDetail(
+    func getMovieDetails(
         movieCode: String,
         completion: @escaping (Result<MovieDetails, Error>) -> Void
     )
