@@ -130,7 +130,11 @@ class ImageCacheTest: XCTestCase {
         }
         
         keys.forEach {
-            try! imageCache.store(sampleImage, for: $0, option: .all)
+            do {
+                try imageCache.store(sampleImage, for: $0, option: .all)
+            } catch {
+                XCTFail("imageCache failed to store sampleImage")
+            }
         }
         try! imageCache.removeAll()
         keys.forEach {
