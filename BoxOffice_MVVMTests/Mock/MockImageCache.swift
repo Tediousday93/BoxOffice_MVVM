@@ -24,6 +24,7 @@ final class MockImageCache: ImageCacheType {
     func removeExpired(option: CacheOption?) throws {
         if isCacheExpired {
             storage.removeAll()
+            isCacheExpired = false
         }
     }
     

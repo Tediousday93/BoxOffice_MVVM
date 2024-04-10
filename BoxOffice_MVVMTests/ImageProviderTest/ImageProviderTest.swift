@@ -38,6 +38,43 @@ class ImageProviderTest: XCTestCase {
         expectation = nil
     }
     
+    func test_initRemoveExpired() {
+        MockURLProtocol.requestHandler = { request in
+            guard let url = request.url else {
+                throw NetworkError.invalidURL
+            }
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+            return (response, MockData.sampleImageData)
+        }
+        
+        try! mockCache.store(sampleImage, for: dummyURL.cacheKey)
+        mockCache.isCacheExpired = true
+        XCTAssertFalse(mockCache.isCached(for: dummyURL.cacheKey))
+        
+        imageProvider = .init(cache: mockCache, loader: networkSession)
+        
+        XCTAssertFalse(mockCache.isCacheExpired)
+        XCTAssertFalse(mockCache.isCached(for: dummyURL.cacheKey))
+        
+        imageProvider.fetchImage(from: dummyURL) { result in
+            switch result {
+            case let .success(image):
+                XCTAssertFalse(self.mockCache.isCacheHit)
+                XCTAssertTrue(self.mockCache.isCached(for: self.dummyURL.cacheKey))
+                XCTAssertEqual(
+                    image.jpegData(compressionQuality: 1.0),
+                    self.sampleImage.jpegData(compressionQuality: 1.0)
+                )
+                
+                self.expectation.fulfill()
+            case let .failure(error):
+                XCTFail("Unexpected Error: \(error)")
+            }
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
     func test_fetchImageWithDownload() {
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
@@ -52,7 +89,10 @@ class ImageProviderTest: XCTestCase {
         imageProvider.fetchImage(from: dummyURL) { result in
             switch result {
             case let .success(image):
-                XCTAssertEqual(image.jpegData(compressionQuality: 1.0), self.sampleImage.jpegData(compressionQuality: 1.0))
+                XCTAssertEqual(
+                    image.jpegData(compressionQuality: 1.0),
+                    self.sampleImage.jpegData(compressionQuality: 1.0)
+                )
                 XCTAssertTrue(self.mockCache.isCached(for: cacheKey))
                 
                 self.expectation.fulfill()
@@ -73,7 +113,10 @@ class ImageProviderTest: XCTestCase {
             case let .success(image):
                 XCTAssertTrue(self.mockCache.isCacheHit)
                 XCTAssertTrue(self.mockCache.isCached(for: cacheKey))
-                XCTAssertEqual(image.jpegData(compressionQuality: 1.0), self.sampleImage.jpegData(compressionQuality: 1.0))
+                XCTAssertEqual(
+                    image.jpegData(compressionQuality: 1.0),
+                    self.sampleImage.jpegData(compressionQuality: 1.0)
+                )
                 
                 self.expectation.fulfill()
             case let .failure(error):
