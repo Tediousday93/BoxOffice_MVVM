@@ -8,7 +8,7 @@
 import Foundation
 import UIKit.UIImage
 
-enum ImageProviderError: Error {
+enum ImageProviderError: Error, Equatable {
     case imageConvertingFail(imageURL: URL)
 }
 
