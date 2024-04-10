@@ -56,6 +56,7 @@
 		ADD87BF72B7611330065B9A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */; };
 		ADFC799D2BC55D5D0051F183 /* ImageProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */; };
 		ADFC799F2BC672D60051F183 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC799E2BC672D60051F183 /* MockImageCache.swift */; };
+		ADFC79A22BC6AC330051F183 /* BoxOfficeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79A12BC6AC330051F183 /* BoxOfficeTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		ADD87BFD2B7611340065B9A6 /* BoxOffice_MVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOffice_MVVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProviderTest.swift; sourceTree = "<group>"; };
 		ADFC799E2BC672D60051F183 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
+		ADFC79A12BC6AC330051F183 /* BoxOfficeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +375,7 @@
 				AD32E8092B9EE02F002AD62C /* APITest */,
 				AD32E83F2BAAFB98002AD62C /* CacheTest */,
 				ADFC799B2BC55D310051F183 /* ImageProviderTest */,
+				ADFC79A02BC6AC0B0051F183 /* BoxOfficeTest */,
 			);
 			path = BoxOffice_MVVMTests;
 			sourceTree = "<group>";
@@ -433,6 +436,14 @@
 				ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */,
 			);
 			path = ImageProviderTest;
+			sourceTree = "<group>";
+		};
+		ADFC79A02BC6AC0B0051F183 /* BoxOfficeTest */ = {
+			isa = PBXGroup;
+			children = (
+				ADFC79A12BC6AC330051F183 /* BoxOfficeTest.swift */,
+			);
+			path = BoxOfficeTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,6 +592,7 @@
 				AD32E8452BAC435F002AD62C /* Image+DataConvertibleTest.swift in Sources */,
 				AD32E80F2B9EE958002AD62C /* MockData.swift in Sources */,
 				AD6E88D82BAC517100F28458 /* InMemoryCacheStorageTest.swift in Sources */,
+				ADFC79A22BC6AC330051F183 /* BoxOfficeTest.swift in Sources */,
 				AD32E80C2B9EE431002AD62C /* MockURLProtocol.swift in Sources */,
 				AD32E82B2BA8542C002AD62C /* NetworkSessionTest.swift in Sources */,
 				AD32E83A2BA9B3DB002AD62C /* DaumImageSearchAPITest.swift in Sources */,
