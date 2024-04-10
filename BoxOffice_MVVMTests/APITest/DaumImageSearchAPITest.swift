@@ -41,11 +41,11 @@ class DaumImageSearchAPITest: XCTestCase {
         let queryKeyword = "광해, 왕이 된 남자 영화 포스터"
         
         // when
-        
         let api = DaumImageSearchAPI(
             queryParameters: .query(keyword: queryKeyword), .size(documentsCount)
         )
         apiProvider.request(api) { result in
+            // then
             switch result {
             case let .success(daumImageSearchResult):
                 XCTAssertEqual(daumImageSearchResult.documents.count, documentsCount)

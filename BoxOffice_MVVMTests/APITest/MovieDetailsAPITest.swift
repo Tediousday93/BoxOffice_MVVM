@@ -41,6 +41,7 @@ class MovieDetailsAPITest: XCTestCase {
         
         // when
         apiProvider.request(.init(movieCode: "20124079")) { result in
+            // then
             switch result {
             case let .success(movieDetails):
                 let movieInfo = movieDetails.movieInfoResult.movieInfo
