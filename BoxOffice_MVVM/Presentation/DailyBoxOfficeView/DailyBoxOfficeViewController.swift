@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DailyBoxOfficeViewController.swift
 //  BoxOffice_MVVM
 //
 //  Created by Rowan on 2024/02/09.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class DailyBoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

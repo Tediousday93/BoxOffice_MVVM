@@ -51,12 +51,14 @@
 		ADC5C08E2BC5016700B56406 /* Image+DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */; };
 		ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */; };
 		ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */; };
-		ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* ViewController.swift */; };
+		ADD87BEF2B7611320065B9A6 /* DailyBoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD87BEE2B7611320065B9A6 /* DailyBoxOfficeViewController.swift */; };
 		ADD87BF42B7611330065B9A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF32B7611330065B9A6 /* Assets.xcassets */; };
 		ADD87BF72B7611330065B9A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD87BF52B7611330065B9A6 /* LaunchScreen.storyboard */; };
 		ADFC799D2BC55D5D0051F183 /* ImageProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */; };
 		ADFC799F2BC672D60051F183 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC799E2BC672D60051F183 /* MockImageCache.swift */; };
 		ADFC79A62BC7F58D0051F183 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79A52BC7F58D0051F183 /* Coordinator.swift */; };
+		ADFC79AA2BC7FB980051F183 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79A92BC7FB980051F183 /* AppCoordinator.swift */; };
+		ADFC79AD2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +119,7 @@
 		ADD87BE72B7611320065B9A6 /* BoxOffice_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ADD87BEE2B7611320065B9A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ADD87BEE2B7611320065B9A6 /* DailyBoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeViewController.swift; sourceTree = "<group>"; };
 		ADD87BF32B7611330065B9A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADD87BF62B7611330065B9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADD87BF82B7611330065B9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +127,8 @@
 		ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProviderTest.swift; sourceTree = "<group>"; };
 		ADFC799E2BC672D60051F183 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
 		ADFC79A52BC7F58D0051F183 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		ADFC79A92BC7FB980051F183 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +388,7 @@
 			children = (
 				ADD87BEA2B7611320065B9A6 /* AppDelegate.swift */,
 				ADD87BEC2B7611320065B9A6 /* SceneDelegate.swift */,
+				ADFC79A92BC7FB980051F183 /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -404,7 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				ADFC79A42BC7F5800051F183 /* Common */,
-				ADD87BEE2B7611320065B9A6 /* ViewController.swift */,
+				ADFC79AB2BC7FCE00051F183 /* DailyBoxOfficeView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -444,6 +449,15 @@
 				ADFC79A52BC7F58D0051F183 /* Coordinator.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		ADFC79AB2BC7FCE00051F183 /* DailyBoxOfficeView */ = {
+			isa = PBXGroup;
+			children = (
+				ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */,
+				ADD87BEE2B7611320065B9A6 /* DailyBoxOfficeViewController.swift */,
+			);
+			path = DailyBoxOfficeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -546,7 +560,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADD87BEF2B7611320065B9A6 /* ViewController.swift in Sources */,
+				ADFC79AD2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift in Sources */,
+				ADD87BEF2B7611320065B9A6 /* DailyBoxOfficeViewController.swift in Sources */,
 				AD1C436F2B85C9FE00D856EC /* DailyBoxOffice.swift in Sources */,
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
 				AD6E89272BB58AA200F28458 /* Expiration.swift in Sources */,
@@ -570,6 +585,7 @@
 				AD1C436A2B85C78B00D856EC /* NetworkSession.swift in Sources */,
 				AD1C43832B87471B00D856EC /* HTTPMethod.swift in Sources */,
 				AD1C43DA2B8F224F00D856EC /* InMemoryCacheStorage.swift in Sources */,
+				ADFC79AA2BC7FB980051F183 /* AppCoordinator.swift in Sources */,
 				AD32E7F82B970B70002AD62C /* ImageCache.swift in Sources */,
 				AD1C438D2B885A7E00D856EC /* NetworkJSONDecodable.swift in Sources */,
 				AD1C43972B888EC000D856EC /* NetworkJSONSerializer.swift in Sources */,
