@@ -417,9 +417,9 @@
 		ADD87C1D2B7B0FD80065B9A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AD32E8002B9B24F3002AD62C /* ImageProvider */,
 				AD1C43CE2B8E375C00D856EC /* API */,
 				AD1C43A62B8C829000D856EC /* BoxOffice */,
+				AD32E8002B9B24F3002AD62C /* ImageProvider */,
 				AD1C43C42B8DC76200D856EC /* ImageURLSearcher */,
 				AD1C436D2B85C98300D856EC /* Data */,
 			);
