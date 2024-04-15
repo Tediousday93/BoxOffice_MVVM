@@ -21,16 +21,16 @@ final class DailyBoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSubviews()
-        setConstraints()
-        setNavigationBar()
+        setUpSubviews()
+        setUpConstraints()
+        configureNavigationBar()
     }
 
-    private func setSubviews() {
+    private func setUpSubviews() {
         view.addSubview(collectionView)
     }
     
-    private func setConstraints() {
+    private func setUpConstraints() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -39,7 +39,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         ])
     }
     
-    private func setNavigationBar() {
+    private func configureNavigationBar() {
         let yesterday = Date(timeInterval: Constants.secondsOfOneDay, since: .now)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constants.dateFormat
