@@ -24,6 +24,7 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     
     func start() {
         let viewController = DailyBoxOfficeViewController()
+        viewController.coordinator = self
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
