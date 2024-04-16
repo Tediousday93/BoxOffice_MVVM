@@ -15,7 +15,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
         return label
     }()
     
-    private let rankStateLabel: UILabel = {
+    private let rankDifferenceLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
         
@@ -70,9 +70,9 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setSubviews()
-        setConstraints()
-        setAccessoryView()
+        setUpSubviews()
+        setUpConstraints()
+        configureAccessoryView()
     }
     
     required init?(coder: NSCoder) {
@@ -81,13 +81,13 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     
     override func prepareForReuse() {
         rankLabel.text = nil
-        rankStateLabel.text = nil
+        rankDifferenceLabel.text = nil
         titleLabel.text = nil
         audienceCountLabel.text = nil
     }
     
-    private func setSubviews() {
-        [rankLabel, rankStateLabel].forEach {
+    private func setUpSubviews() {
+        [rankLabel, rankDifferenceLabel].forEach {
             rankStackView.addArrangedSubview($0)
         }
         
@@ -102,7 +102,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
         contentView.addSubview(outterStackView)
     }
     
-    private func setConstraints() {
+    private func setUpConstraints() {
         NSLayoutConstraint.activate([
             rankStackView.widthAnchor.constraint(equalTo: outterStackView.widthAnchor, multiplier: 0.15),
             
@@ -113,7 +113,21 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
         ])
     }
     
-    private func setAccessoryView() {
+    private func configureAccessoryView() {
         self.accessories = [.disclosureIndicator()]
+    }
+    
+    func bind(_ item: DailyBoxOfficeListCellItem) {
+        rankLabel.text = item.rank
+        rankDifferenceLabel.text = item.rankDifference
+        titleLabel.text = item.movieTitle
+        audienceCountLabel.text = item.audienceCount
+        
+        switch item.rankOldAndNew {
+        case .new:
+            rankDifferenceLabel.textColor = .systemRed
+        case .old:
+            rankDifferenceLabel.textColor = .black
+        }
     }
 }
