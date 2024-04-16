@@ -60,6 +60,7 @@
 		ADFC79AA2BC7FB980051F183 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79A92BC7FB980051F183 /* AppCoordinator.swift */; };
 		ADFC79AD2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */; };
 		ADFC79BB2BCD409B0051F183 /* DailyBoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */; };
+		ADFC79BD2BCD4B620051F183 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79BC2BCD4B620051F183 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		ADFC79A92BC7FB980051F183 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeCoordinator.swift; sourceTree = "<group>"; };
 		ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeListCell.swift; sourceTree = "<group>"; };
+		ADFC79BC2BCD4B620051F183 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				ADFC79A52BC7F58D0051F183 /* Coordinator.swift */,
+				ADFC79BC2BCD4B620051F183 /* Observable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				AD32E8412BAB07FF002AD62C /* DataConvertible.swift in Sources */,
 				ADD87BED2B7611320065B9A6 /* SceneDelegate.swift in Sources */,
 				AD1C43C12B8DB85400D856EC /* DaumImageSearchAPI.swift in Sources */,
+				ADFC79BD2BCD4B620051F183 /* Observable.swift in Sources */,
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
 				AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */,
