@@ -62,6 +62,7 @@
 		ADFC79BB2BCD409B0051F183 /* DailyBoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */; };
 		ADFC79BD2BCD4B620051F183 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79BC2BCD4B620051F183 /* Observable.swift */; };
 		ADFC79C72BCE61AC0051F183 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79C62BCE61AC0051F183 /* Reusable.swift */; };
+		ADFC79C92BCE659C0051F183 /* DailyBoxOfficeListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79C82BCE659C0051F183 /* DailyBoxOfficeListItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeListCell.swift; sourceTree = "<group>"; };
 		ADFC79BC2BCD4B620051F183 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		ADFC79C62BCE61AC0051F183 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		ADFC79C82BCE659C0051F183 /* DailyBoxOfficeListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeListItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +467,7 @@
 				ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */,
 				ADD87BEE2B7611320065B9A6 /* DailyBoxOfficeViewController.swift */,
 				ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */,
+				ADFC79C82BCE659C0051F183 /* DailyBoxOfficeListItem.swift */,
 			);
 			path = DailyBoxOfficeView;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				AD32E8042B9B2515002AD62C /* ImageProvider.swift in Sources */,
 				AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */,
 				AD32E8062B9C4F20002AD62C /* ImageCacheType.swift in Sources */,
+				ADFC79C92BCE659C0051F183 /* DailyBoxOfficeListItem.swift in Sources */,
 				AD32E8242BA46635002AD62C /* BoxOfficeType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
