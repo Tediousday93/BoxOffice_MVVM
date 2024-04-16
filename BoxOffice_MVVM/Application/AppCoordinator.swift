@@ -14,6 +14,12 @@ final class AppCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
+    private let boxOffice: BoxOffice = .init(dailyBoxOfficeProvider: .init(), movieDetailsProvider: .init())
+    
+    private let imageProvider: ImageProvider = .init()
+    
+    private let imageURLSearcher: DaumImageSearcher = .init(provider: .init())
+    
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
