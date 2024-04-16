@@ -61,6 +61,7 @@
 		ADFC79AD2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */; };
 		ADFC79BB2BCD409B0051F183 /* DailyBoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */; };
 		ADFC79BD2BCD4B620051F183 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79BC2BCD4B620051F183 /* Observable.swift */; };
+		ADFC79C72BCE61AC0051F183 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79C62BCE61AC0051F183 /* Reusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		ADFC79AC2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeCoordinator.swift; sourceTree = "<group>"; };
 		ADFC79BA2BCD409B0051F183 /* DailyBoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeListCell.swift; sourceTree = "<group>"; };
 		ADFC79BC2BCD4B620051F183 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		ADFC79C62BCE61AC0051F183 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +454,7 @@
 			children = (
 				ADFC79A52BC7F58D0051F183 /* Coordinator.swift */,
 				ADFC79BC2BCD4B620051F183 /* Observable.swift */,
+				ADFC79C62BCE61AC0051F183 /* Reusable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				ADD87BEF2B7611320065B9A6 /* DailyBoxOfficeViewController.swift in Sources */,
 				AD1C436F2B85C9FE00D856EC /* DailyBoxOffice.swift in Sources */,
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
+				ADFC79C72BCE61AC0051F183 /* Reusable.swift in Sources */,
 				AD6E89272BB58AA200F28458 /* Expiration.swift in Sources */,
 				ADFC79BB2BCD409B0051F183 /* DailyBoxOfficeListCell.swift in Sources */,
 				AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */,
