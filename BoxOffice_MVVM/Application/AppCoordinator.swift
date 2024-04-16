@@ -19,6 +19,10 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
+        toDailyBoxOffice()
+    }
+    
+    private func toDailyBoxOffice() {
         let dailyBoxOfficeCoordinator = DailyBoxOfficeCoordinator(
             navigationController: navigationController,
             parent: self
