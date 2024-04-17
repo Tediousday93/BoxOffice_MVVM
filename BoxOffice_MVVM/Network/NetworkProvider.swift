@@ -72,7 +72,10 @@ extension NetworkProvider {
         }
         
         request.httpMethod = api.method.rawValue
-        request.httpBody = try jsonSerializer.serialize(api.bodyParameters)
+        
+        if let bodyParameters = api.bodyParameters {
+            request.httpBody = try jsonSerializer.serialize(bodyParameters)
+        }
         
         return request
     }

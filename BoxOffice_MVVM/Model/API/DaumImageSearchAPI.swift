@@ -27,7 +27,7 @@ struct DaumImageSearchAPI: APIConfigurationType {
     
     var queryParameters: [String : Any]
     
-    var bodyParameters: [String : Any] { [:] }
+    var bodyParameters: [String : Any]? = nil
     
     init(queryParameters: QueryParameter...) {
         var queries: [String: Any] = [:]

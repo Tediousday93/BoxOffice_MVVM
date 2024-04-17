@@ -20,5 +20,5 @@ protocol APIConfigurationType {
     
     var queryParameters: [String: Any] { get }
     
-    var bodyParameters: [String: Any] { get }
+    var bodyParameters: [String: Any]? { get }
 }

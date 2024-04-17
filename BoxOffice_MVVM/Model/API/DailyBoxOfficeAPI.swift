@@ -34,5 +34,5 @@ struct DailyBoxOfficeAPI: APIConfigurationType {
         ]
     }
     
-    var bodyParameters: [String : Any] { [:] }
+    var bodyParameters: [String : Any]? = nil
 }
