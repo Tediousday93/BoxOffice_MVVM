@@ -16,20 +16,22 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     
     private let boxOffice: BoxOfficeType
     
-    private let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
+    private let numberFormatter: NumberFormatter
+    
+    private let dateFormatter: DateFormatter
     
     init(
         navigationController: UINavigationController?,
         parent: Coordinator,
-        boxOffice: BoxOfficeType
+        boxOffice: BoxOfficeType,
+        numberFormatter: NumberFormatter,
+        dateFormatter: DateFormatter
     ) {
         self.navigationController = navigationController
         self.parent = parent
         self.boxOffice = boxOffice
+        self.numberFormatter = numberFormatter
+        self.dateFormatter = dateFormatter
     }
     
     deinit {
@@ -37,7 +39,11 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = DailyBoxOfficeViewModel(boxOffice: boxOffice, numberFormatter: numberFormatter)
+        let viewModel = DailyBoxOfficeViewModel(
+            boxOffice: boxOffice,
+            numberFormatter: numberFormatter,
+            dateFormatter: dateFormatter
+        )
         let viewController = DailyBoxOfficeViewController(viewModel: viewModel, coordinator: self)
         navigationController?.pushViewController(viewController, animated: true)
     }

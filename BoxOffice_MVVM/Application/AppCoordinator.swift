@@ -20,6 +20,18 @@ final class AppCoordinator: Coordinator {
     
     private let imageURLSearcher: DaumImageSearcher = .init(provider: .init())
     
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
@@ -32,7 +44,9 @@ final class AppCoordinator: Coordinator {
         let dailyBoxOfficeCoordinator = DailyBoxOfficeCoordinator(
             navigationController: navigationController,
             parent: self,
-            boxOffice: boxOffice
+            boxOffice: boxOffice,
+            numberFormatter: numberFormatter,
+            dateFormatter: dateFormatter
         )
         children.append(dailyBoxOfficeCoordinator)
         dailyBoxOfficeCoordinator.start()
