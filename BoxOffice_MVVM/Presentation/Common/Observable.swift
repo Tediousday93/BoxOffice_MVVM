@@ -12,7 +12,7 @@ final class Observable<T> {
         didSet { self.listener?(value) }
     }
     
-    var listener: ((T) -> Void)?
+    private var listener: ((T) -> Void)?
     
     init(_ value: T) {
         self.value = value
