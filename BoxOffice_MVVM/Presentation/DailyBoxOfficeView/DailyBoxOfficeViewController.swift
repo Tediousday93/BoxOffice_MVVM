@@ -43,11 +43,10 @@ final class DailyBoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         setUpSubviews()
         setUpConstraints()
+        configureRootView()
         configureDataSource()
-        configureNavigationBar()
         setUpBindings()
     }
     
@@ -73,6 +72,10 @@ final class DailyBoxOfficeViewController: UIViewController {
         ])
     }
     
+    private func configureRootView() {
+        view.backgroundColor = .systemBackground
+    }
+    
     private func configureDataSource() {
         let cellRegistration = ListCellRegistration { cell, indexPath, item in
             cell.bind(item)
@@ -91,14 +94,6 @@ final class DailyBoxOfficeViewController: UIViewController {
         }
     }
     
-    private func configureNavigationBar() {
-        let yesterday = Date(timeInterval: -Constants.secondsOfOneDay, since: .now)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constants.dateFormat
-        
-        self.title = dateFormatter.string(from: yesterday)
-    }
-    
     private func setUpBindings() {
         viewModel.dailyBoxOfficeMovies
             .subscribe { [weak self] items in
@@ -106,6 +101,15 @@ final class DailyBoxOfficeViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.applySnapshot(items: items)
+                }
+            }
+        
+        viewModel.currentDate
+            .subscribe { [weak self] date in
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    self.navigationItem.title = date
                 }
             }
     }
@@ -121,10 +125,5 @@ final class DailyBoxOfficeViewController: UIViewController {
 extension DailyBoxOfficeViewController {
     private enum Section {
         case main
-    }
-    
-    private enum Constants {
-        static let secondsOfOneDay: TimeInterval = 3600 * 24
-        static let dateFormat: String = "yyyy-MM-dd"
     }
 }
