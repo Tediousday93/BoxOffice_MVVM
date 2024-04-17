@@ -14,17 +14,31 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
+    private let boxOffice: BoxOfficeType
+    
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
     init(
         navigationController: UINavigationController?,
-        parent: Coordinator
+        parent: Coordinator,
+        boxOffice: BoxOfficeType
     ) {
         self.navigationController = navigationController
         self.parent = parent
+        self.boxOffice = boxOffice
+    }
+    
+    deinit {
+        print("DailyBoxOfficeCoordinator deinitialized")
     }
     
     func start() {
-        let viewController = DailyBoxOfficeViewController()
-        viewController.coordinator = self
+        let viewModel = DailyBoxOfficeViewModel(boxOffice: boxOffice, numberFormatter: numberFormatter)
+        let viewController = DailyBoxOfficeViewController(viewModel: viewModel, coordinator: self)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
