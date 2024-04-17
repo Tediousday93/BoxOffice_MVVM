@@ -10,14 +10,14 @@ import UIKit
 final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     private let rankLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         
         return label
     }()
     
     private let rankDifferenceLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .caption1)
+        label.font = .preferredFont(forTextStyle: .body)
         
         return label
     }()
@@ -27,14 +27,13 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
-        stackView.spacing = 8
         
         return stackView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.lineBreakMode = .byCharWrapping
         label.numberOfLines = 0
         
@@ -43,7 +42,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     
     private let audienceCountLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .callout)
+        label.font = .preferredFont(forTextStyle: .body)
         
         return label
     }()
@@ -119,15 +118,34 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     
     func bind(_ item: DailyBoxOfficeListCellItem) {
         rankLabel.text = item.rank
-        rankDifferenceLabel.text = item.rankDifference
         titleLabel.text = item.movieTitle
         audienceCountLabel.text = item.audienceCount
         
         switch item.rankOldAndNew {
         case .new:
             rankDifferenceLabel.textColor = .systemRed
+            rankDifferenceLabel.text = item.rankDifference
         case .old:
             rankDifferenceLabel.textColor = .black
+            
+            let prefix = item.rankDifference.prefix(1)
+            if prefix == "⏷" {
+                rankDifferenceLabel.attributedText = addPrefixColorAttribute(to: item.rankDifference, color: .systemBlue)
+            } else if prefix == "⏶" {
+                rankDifferenceLabel.attributedText = addPrefixColorAttribute(to: item.rankDifference, color: .systemRed)
+            } else {
+                rankDifferenceLabel.text = item.rankDifference
+            }
         }
+    }
+    
+    private func addPrefixColorAttribute(to text: String, color: UIColor) -> NSMutableAttributedString {
+        let mutableText = NSMutableAttributedString(string: text)
+        let prefix = String(text.prefix(1))
+        let range = NSString(string: text).range(of: prefix)
+        
+        mutableText.addAttribute(.foregroundColor, value: color, range: range)
+        
+        return mutableText
     }
 }

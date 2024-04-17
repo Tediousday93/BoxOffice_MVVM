@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import UIKit.UIColor
 
 final class DailyBoxOfficeListCellItem: Identifiable {
-    let id: UUID = .init()
+    let id: String
     
     let movie: DailyBoxOfficeMovie
     
-    let numberFormatter: NumberFormatter
+    private let numberFormatter: NumberFormatter
     
     init(movie: DailyBoxOfficeMovie, numberFormatter: NumberFormatter) {
+        self.id = movie.movieCode
         self.movie = movie
         self.numberFormatter = numberFormatter
     }
@@ -46,29 +46,17 @@ final class DailyBoxOfficeListCellItem: Identifiable {
         case .old:
             if movie.rankDifference.contains(Sign.minus) {
                 let difference = movie.rankDifference.trimmingPrefix(Sign.minus)
-                let text = Sign.down + difference
-                return addPrefixColorAttribute(to: text, color: .systemBlue)
+                return Sign.down + difference
             } else if movie.rankDifference == Sign.zero {
                 return Sign.minus
             } else {
-                let text = Sign.up + movie.rankDifference
-                return addPrefixColorAttribute(to: text, color: .systemRed)
+                return Sign.up + movie.rankDifference
             }
         }
     }
 }
 
 extension DailyBoxOfficeListCellItem {
-    private func addPrefixColorAttribute(to text: String, color: UIColor) -> String {
-        let mutableText = NSMutableAttributedString(string: text)
-        let prefix = String(text.prefix(1))
-        let range = NSString(string: text).range(of: prefix)
-        
-        mutableText.addAttribute(.foregroundColor, value: color, range: range)
-        
-        return mutableText.string
-    }
-    
     private enum Sign {
         static let newMovie = "신작"
         static let minus = "-"
