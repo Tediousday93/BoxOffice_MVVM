@@ -27,7 +27,15 @@ final class DailyBoxOfficeViewModel {
         self.numberFormatter = numberFormatter
         self.dateFormatter = dateFormatter
         
+        setUpBindings()
         setCurrentDate()
+    }
+    
+    private func setUpBindings() {
+        currentDate.subscribe { [weak self] date in
+            let targetDate = date.replacingOccurrences(of: "-", with: "")
+            self?.fetchDailyBoxOffice(targetDate: targetDate)
+        }
     }
     
     private func setCurrentDate() {
