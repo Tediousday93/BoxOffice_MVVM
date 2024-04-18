@@ -46,17 +46,8 @@ final class DailyBoxOfficeViewController: UIViewController {
         setUpSubviews()
         setUpConstraints()
         configureRootView()
-        configureDataSource()
+        configureCollectionView()
         setUpBindings()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchDailyBoxOffice()
-    }
-    
-    private func fetchDailyBoxOffice() {
-        viewModel.fetchDailyBoxOffice(targetDate: "20240415")
     }
 
     private func setUpSubviews() {
@@ -74,6 +65,24 @@ final class DailyBoxOfficeViewController: UIViewController {
     
     private func configureRootView() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func configureCollectionView() {
+        configureRefreshControl()
+        configureDataSource()
+    }
+    
+    private func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(updateCurrentDate), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc
+    private func updateCurrentDate() {
+        if let date = self.navigationItem.title {
+            viewModel.setCurrentDate(date)
+        }
     }
     
     private func configureDataSource() {
@@ -119,11 +128,16 @@ final class DailyBoxOfficeViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(items.map { $0.id })
         dataSource?.apply(snapshot)
+        collectionView.refreshControl?.endRefreshing()
     }
 }
 
-extension DailyBoxOfficeViewController {
+extension DailyBoxOfficeViewController: UICollectionViewDelegate {
     private enum Section {
         case main
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }
