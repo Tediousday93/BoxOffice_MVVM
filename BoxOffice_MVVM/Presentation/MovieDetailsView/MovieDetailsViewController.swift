@@ -52,7 +52,24 @@ final class MovieDetailsViewController: UIViewController {
     
     private weak var coordinator: MovieDetailsCoordinator?
     
+    private let imageProvider: ImageProviderType
     
+    private let viewModel: MovieDetailsViewModel
+    
+    init(
+        coordinator: MovieDetailsCoordinator,
+        imageProvider: ImageProviderType,
+        viewModel: MovieDetailsViewModel
+    ) {
+        self.coordinator = coordinator
+        self.imageProvider = imageProvider
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

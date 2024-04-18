@@ -67,6 +67,7 @@
 		ADFC79D02BD0FA230051F183 /* MovieDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79CF2BD0FA230051F183 /* MovieDetailsCoordinator.swift */; };
 		ADFC79D22BD10BA40051F183 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D12BD10BA40051F183 /* MovieDetailsViewController.swift */; };
 		ADFC79D42BD10D020051F183 /* SingleMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */; };
+		ADFC79D62BD1346A0051F183 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		ADFC79CF2BD0FA230051F183 /* MovieDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCoordinator.swift; sourceTree = "<group>"; };
 		ADFC79D12BD10BA40051F183 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMovieInfoView.swift; sourceTree = "<group>"; };
+		ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +489,7 @@
 			children = (
 				ADFC79CF2BD0FA230051F183 /* MovieDetailsCoordinator.swift */,
 				ADFC79D12BD10BA40051F183 /* MovieDetailsViewController.swift */,
+				ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */,
 				ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */,
 			);
 			path = MovieDetailsView;
@@ -598,6 +601,7 @@
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
 				ADFC79C72BCE61AC0051F183 /* Reusable.swift in Sources */,
 				AD6E89272BB58AA200F28458 /* Expiration.swift in Sources */,
+				ADFC79D62BD1346A0051F183 /* MovieDetailsViewModel.swift in Sources */,
 				ADFC79CD2BCE980C0051F183 /* DailyBoxOfficeViewModel.swift in Sources */,
 				ADFC79BB2BCD409B0051F183 /* DailyBoxOfficeListCell.swift in Sources */,
 				AD1C43992B888F1F00D856EC /* NetworkJSONSerializable.swift in Sources */,
