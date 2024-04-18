@@ -8,18 +8,29 @@
 import Foundation
 
 final class Observable<T> {
-    var value: T {
-        didSet { self.listener?(value) }
+    private typealias Listener = (T) -> Void
+    
+    private var observers: [Listener]
+    
+    var value: T? {
+        didSet {
+            if value != nil { notifyObservers() }
+        }
     }
     
-    private var listener: ((T) -> Void)?
-    
-    init(_ value: T) {
+    init(_ value: T? = nil) {
         self.value = value
+        self.observers = []
     }
     
     func subscribe(listener: @escaping (T) -> Void) {
-        listener(value)
-        self.listener = listener
+        observers.append(listener)
+        if let value = value { listener(value) }
+    }
+    
+    private func notifyObservers() {
+        observers.forEach { listener in
+            if let value = value { listener(value) }
+        }
     }
 }

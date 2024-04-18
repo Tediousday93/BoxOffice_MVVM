@@ -82,7 +82,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         }
         
         dataSource = .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            let item = self.viewModel.dailyBoxOfficeMovies.value.first { movie in
+            let item = self.viewModel.dailyBoxOfficeItems.value?.first { movie in
                 movie.id == itemIdentifier
             }
             
@@ -95,7 +95,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
     
     private func setUpBindings() {
-        viewModel.dailyBoxOfficeMovies
+        viewModel.dailyBoxOfficeItems
             .subscribe { [weak self] items in
                 guard let self = self else { return }
                 

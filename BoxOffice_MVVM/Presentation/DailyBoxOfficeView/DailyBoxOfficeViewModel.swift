@@ -8,10 +8,9 @@
 import Foundation
 
 final class DailyBoxOfficeViewModel {
-    let dailyBoxOfficeMovies: Observable<[DailyBoxOfficeListCellItem]> = .init([])
-    let currentDate: Observable<String> = .init("")
-    let thrownError: Observable<Error?> = .init(nil)
-    
+    let dailyBoxOfficeItems: Observable<[DailyBoxOfficeListCellItem]> = .init()
+    let currentDate: Observable<String> = .init()
+    let thrownError: Observable<Error> = .init()
     
     private let boxOffice: BoxOfficeType
     
@@ -46,7 +45,7 @@ final class DailyBoxOfficeViewModel {
                         DailyBoxOfficeListCellItem(movie: $0, numberFormatter: self.numberFormatter)
                     }
                 
-                self.dailyBoxOfficeMovies.value = items
+                self.dailyBoxOfficeItems.value = items
             case let .failure(error):
                 self.thrownError.value = error
             }
