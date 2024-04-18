@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import UIKit.UIImage
+
+protocol ImageProviderType {
+    func fetchImage(
+        from url: URL,
+        completion: @escaping (Result<UIImage, Error>) -> Void
+    )
+}
