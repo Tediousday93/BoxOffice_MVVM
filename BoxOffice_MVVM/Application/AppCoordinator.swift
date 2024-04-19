@@ -37,12 +37,9 @@ final class AppCoordinator: Coordinator {
     }
     
     private func toDailyBoxOffice() {
-        let boxOffice = BoxOffice(dailyBoxOfficeProvider: .init(), movieDetailsProvider: .init())
-        
         let childCoordinator = DailyBoxOfficeCoordinator(
             navigationController: navigationController,
             parent: self,
-            boxOffice: boxOffice,
             numberFormatter: numberFormatter,
             dateFormatter: dateFormatter
         )

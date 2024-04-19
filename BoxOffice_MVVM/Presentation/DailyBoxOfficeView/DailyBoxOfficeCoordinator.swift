@@ -14,8 +14,6 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
-    private let boxOffice: BoxOfficeType
-    
     private let numberFormatter: NumberFormatter
     
     private let dateFormatter: DateFormatter
@@ -23,13 +21,11 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     init(
         navigationController: UINavigationController?,
         parent: Coordinator,
-        boxOffice: BoxOfficeType,
         numberFormatter: NumberFormatter,
         dateFormatter: DateFormatter
     ) {
         self.navigationController = navigationController
         self.parent = parent
-        self.boxOffice = boxOffice
         self.numberFormatter = numberFormatter
         self.dateFormatter = dateFormatter
     }
@@ -39,6 +35,7 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     }
     
     func start() {
+        let boxOffice = BoxOffice(dailyBoxOfficeProvider: .init(), movieDetailsProvider: .init())
         let viewModel = DailyBoxOfficeViewModel(
             boxOffice: boxOffice,
             numberFormatter: numberFormatter,
@@ -48,15 +45,13 @@ final class DailyBoxOfficeCoordinator: Coordinator {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func toMovieDetails(item: DailyBoxOfficeListCellItem) {
+    func toMovieDetails(movieCode: String, movieTitle: String) {
         let childCoordinator = MovieDetailsCoordinator(
             navigationController: navigationController,
             parent: self,
-            boxOffice: boxOffice,
-            imageProvider: ImageProvider(),
-            imageURLSearcher: DaumImageSearcher(provider: .init()),
-            movieCode: item.id,
-            movieTitle: item.movieTitle
+            dateFormattter: dateFormatter,
+            movieCode: movieCode,
+            movieTitle: movieTitle
         )
         children.append(childCoordinator)
         childCoordinator.start()

@@ -14,11 +14,7 @@ final class MovieDetailsCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
-    private let boxOffice: MovieDetailsProvidable
-    
-    private let imageProvider: ImageProviderType
-    
-    private let imageURLSearcher: ImageURLSearchable
+    private let dateFormattter: DateFormatter
     
     private let movieCode: String
     private let movieTitle: String
@@ -26,17 +22,13 @@ final class MovieDetailsCoordinator: Coordinator {
     init(
         navigationController: UINavigationController?,
         parent: Coordinator,
-        boxOffice: MovieDetailsProvidable,
-        imageProvider: ImageProviderType,
-        imageURLSearcher: ImageURLSearchable,
+        dateFormattter: DateFormatter,
         movieCode: String,
         movieTitle: String
     ) {
         self.navigationController = navigationController
         self.parent = parent
-        self.boxOffice = boxOffice
-        self.imageProvider = imageProvider
-        self.imageURLSearcher = imageURLSearcher
+        self.dateFormattter = dateFormattter
         self.movieCode = movieCode
         self.movieTitle = movieTitle
     }
@@ -49,12 +41,13 @@ final class MovieDetailsCoordinator: Coordinator {
         let viewModel = MovieDetailsViewModel(
             movieCode: movieCode,
             movieTitle: movieTitle,
-            boxOffice: boxOffice,
-            imageURLSearcher: imageURLSearcher
+            boxOffice: BoxOffice(dailyBoxOfficeProvider: .init(), movieDetailsProvider: .init()),
+            imageURLSearcher: DaumImageSearcher(provider: .init()),
+            dateFormatter: dateFormattter
         )
         let viewController = MovieDetailsViewController(
             coordinator: self,
-            imageProvider: imageProvider,
+            imageProvider: ImageProvider(),
             viewModel: viewModel
         )
         navigationController?.pushViewController(viewController, animated: true)
