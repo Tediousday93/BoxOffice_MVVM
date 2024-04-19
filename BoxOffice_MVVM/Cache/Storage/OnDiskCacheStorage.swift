@@ -48,7 +48,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         directoryURL: URL? = nil
     ) {
         self.fileManager = fileManager
-        self.directoryURL = directoryURL ?? fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        self.directoryURL = directoryURL ?? fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "BoxOffice-MVVM", directoryHint: .isDirectory)
         self.countLimit = countLimit
         self.cacheExpiration = cacheExpiration
         
@@ -62,7 +62,8 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         cacheExpiration: CacheExpiration = .days(7),
         directoryPath: String? = nil
     ) throws {
-        var directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        var directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "BoxOffice-MVVM", directoryHint: .isDirectory)
+        
         if let directoryPath {
             directoryURL = directoryURL.appending(path: directoryPath, directoryHint: .isDirectory)
         }
@@ -103,7 +104,7 @@ final class OnDiskCacheStorage<T: DataConvertible> {
             }
         }
         
-        let fileURL = directoryURL.appending(path: key)
+        let fileURL = directoryURL.appending(path: key, directoryHint: .notDirectory)
         let data = try value.toData()
         
         do {
