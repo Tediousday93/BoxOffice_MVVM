@@ -14,21 +14,17 @@ final class AppCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
-    private let boxOffice: BoxOffice = .init(dailyBoxOfficeProvider: .init(), movieDetailsProvider: .init())
-    
-    private let imageProvider: ImageProvider = .init()
-    
-    private let imageURLSearcher: DaumImageSearcher = .init(provider: .init())
-    
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        
         return formatter
     }()
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        
         return formatter
     }()
     
@@ -41,14 +37,16 @@ final class AppCoordinator: Coordinator {
     }
     
     private func toDailyBoxOffice() {
-        let dailyBoxOfficeCoordinator = DailyBoxOfficeCoordinator(
+        let boxOffice = BoxOffice(dailyBoxOfficeProvider: .init(), movieDetailsProvider: .init())
+        
+        let childCoordinator = DailyBoxOfficeCoordinator(
             navigationController: navigationController,
             parent: self,
             boxOffice: boxOffice,
             numberFormatter: numberFormatter,
             dateFormatter: dateFormatter
         )
-        children.append(dailyBoxOfficeCoordinator)
-        dailyBoxOfficeCoordinator.start()
+        children.append(childCoordinator)
+        childCoordinator.start()
     }
 }
