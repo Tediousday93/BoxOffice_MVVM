@@ -68,6 +68,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
     
     private func configureCollectionView() {
+        collectionView.delegate = self
         configureRefreshControl()
         configureDataSource()
     }
@@ -140,6 +141,9 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let items = viewModel.dailyBoxOfficeItems.value else { return }
         
+        coordinator?.toMovieDetails(item: items[indexPath.row])
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

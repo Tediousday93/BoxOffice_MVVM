@@ -14,6 +14,7 @@ final class SingleMovieInfoView: UIView {
             label.font = UIFont(descriptor: titleDescriptor, size: 0.0)
         }
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -30,7 +31,7 @@ final class SingleMovieInfoView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
