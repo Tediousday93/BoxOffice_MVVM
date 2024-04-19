@@ -76,6 +76,6 @@ final class ImageProvider: ImageProviderType {
 
 extension URL {
     var cacheKey: String {
-        return self.absoluteString
+        return self.path().replacingOccurrences(of: "/", with: "-")
     }
 }
