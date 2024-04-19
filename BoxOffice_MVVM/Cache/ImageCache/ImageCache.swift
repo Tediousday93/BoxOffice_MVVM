@@ -49,14 +49,10 @@ final class ImageCache: ImageCacheType {
     
     convenience init(
         memoryCountLimit: Int,
-        diskCountLimit: Int,
-        directoryPath: String
+        diskCountLimit: Int
     ) throws {
         let memoryStorage = InMemoryCacheStorage<Image>(countLimit: memoryCountLimit)
-        let diskStorage = try OnDiskCacheStorage<Image>(
-            countLimit: diskCountLimit,
-            directoryPath: directoryPath
-        )
+        let diskStorage = try OnDiskCacheStorage<Image>(countLimit: diskCountLimit)
         self.init(memoryStorage: memoryStorage, diskStorage: diskStorage, option: .all)
     }
     

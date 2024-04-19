@@ -44,11 +44,10 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         fileManager: FileManager,
         countLimit: Int,
         cacheExpiration: CacheExpiration,
-        creatingDirectory: Bool,
-        directoryURL: URL? = nil
+        creatingDirectory: Bool
     ) {
         self.fileManager = fileManager
-        self.directoryURL = directoryURL ?? fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "BoxOffice-MVVM", directoryHint: .isDirectory)
+        self.directoryURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "BoxOffice-MVVM", directoryHint: .isDirectory)
         self.countLimit = countLimit
         self.cacheExpiration = cacheExpiration
         
@@ -59,20 +58,14 @@ final class OnDiskCacheStorage<T: DataConvertible> {
     
     convenience init(
         countLimit: Int,
-        cacheExpiration: CacheExpiration = .days(7),
-        directoryPath: String? = nil
+        cacheExpiration: CacheExpiration = .days(7)
     ) throws {
         var directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "BoxOffice-MVVM", directoryHint: .isDirectory)
-        
-        if let directoryPath {
-            directoryURL = directoryURL.appending(path: directoryPath, directoryHint: .isDirectory)
-        }
         
         self.init(fileManager: .default,
                   countLimit: countLimit,
                   cacheExpiration: cacheExpiration,
-                  creatingDirectory: false,
-                  directoryURL: directoryURL)
+                  creatingDirectory: false)
         
         try prepareDirectory()
     }
