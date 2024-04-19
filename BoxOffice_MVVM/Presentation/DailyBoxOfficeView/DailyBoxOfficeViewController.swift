@@ -90,7 +90,9 @@ final class DailyBoxOfficeViewController: UIViewController {
             cell.bind(item)
         }
         
-        dataSource = .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        dataSource = .init(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
+            guard let self = self else { return nil }
+            
             let item = self.viewModel.dailyBoxOfficeItems.value?.first { movie in
                 movie.id == itemIdentifier
             }
