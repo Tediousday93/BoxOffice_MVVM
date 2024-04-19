@@ -12,14 +12,14 @@ final class DailyBoxOfficeViewModel {
     let currentDate: Observable<String> = .init()
     let thrownError: Observable<Error> = .init()
     
-    private let boxOffice: BoxOfficeType
+    private let boxOffice: DailyBoxOfficeProvidable
     
     private let numberFormatter: NumberFormatter
     
     private let dateFormatter: DateFormatter
     
     init(
-        boxOffice: BoxOfficeType,
+        boxOffice: DailyBoxOfficeProvidable,
         numberFormatter: NumberFormatter,
         dateFormatter: DateFormatter
     ) {

@@ -10,11 +10,11 @@ import UIKit
 final class MovieDetailsCoordinator: Coordinator {
     var navigationController: UINavigationController?
     
-    var parent: Coordinator?
+    weak var parent: Coordinator?
     
     var children: [Coordinator] = []
     
-    private let boxOffice: BoxOfficeType
+    private let boxOffice: MovieDetailsProvidable
     
     private let imageProvider: ImageProviderType
     
@@ -26,7 +26,7 @@ final class MovieDetailsCoordinator: Coordinator {
     init(
         navigationController: UINavigationController?,
         parent: Coordinator,
-        boxOffice: BoxOfficeType,
+        boxOffice: MovieDetailsProvidable,
         imageProvider: ImageProviderType,
         imageURLSearcher: ImageURLSearchable,
         movieCode: String,
@@ -39,6 +39,10 @@ final class MovieDetailsCoordinator: Coordinator {
         self.imageURLSearcher = imageURLSearcher
         self.movieCode = movieCode
         self.movieTitle = movieTitle
+    }
+    
+    deinit {
+        print("MovieDetailsCoordinator deinitialized")
     }
     
     func start() {

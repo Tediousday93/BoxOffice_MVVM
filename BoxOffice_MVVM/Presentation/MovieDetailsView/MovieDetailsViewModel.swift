@@ -15,14 +15,14 @@ final class MovieDetailsViewModel {
     
     private let movieCode: String
     
-    private let boxOffice: BoxOfficeType
+    private let boxOffice: MovieDetailsProvidable
     
     private let imageURLSearcher: ImageURLSearchable
     
     init(
         movieCode: String,
         movieTitle: String,
-        boxOffice: BoxOfficeType,
+        boxOffice: MovieDetailsProvidable,
         imageURLSearcher: ImageURLSearchable
     ) {
         self.movieCode = movieCode

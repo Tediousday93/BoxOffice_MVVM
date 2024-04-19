@@ -47,4 +47,18 @@ final class DailyBoxOfficeCoordinator: Coordinator {
         let viewController = DailyBoxOfficeViewController(viewModel: viewModel, coordinator: self)
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    func toMovieDetails(item: DailyBoxOfficeListCellItem) {
+        let childCoordinator = MovieDetailsCoordinator(
+            navigationController: navigationController,
+            parent: self,
+            boxOffice: boxOffice,
+            imageProvider: ImageProvider(),
+            imageURLSearcher: DaumImageSearcher(provider: .init()),
+            movieCode: item.id,
+            movieTitle: item.movieTitle
+        )
+        children.append(childCoordinator)
+        childCoordinator.start()
+    }
 }
