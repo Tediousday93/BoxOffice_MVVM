@@ -36,11 +36,11 @@ final class MovieDetailsViewModel {
     
     private func setUpBindings() {
         movieTitle.subscribe { [weak self] title in
-            self?.searchImageURL(query: title + Constant.querySuffix)
+            self?.searchImageURL(query: title + Constants.querySuffix)
         }
     }
     
-    func fetchMovieInfo() {
+    private func fetchMovieInfo() {
         boxOffice.getMovieDetails(movieCode: movieCode) { result in
             switch result {
             case let .success(movieDetails):
@@ -51,7 +51,7 @@ final class MovieDetailsViewModel {
         }
     }
     
-    func searchImageURL(query: String) {
+    private func searchImageURL(query: String) {
         imageURLSearcher.searchSingle(for: query) { result in
             switch result {
             case let .success(url):
@@ -64,7 +64,7 @@ final class MovieDetailsViewModel {
 }
 
 extension MovieDetailsViewModel {
-    private enum Constant {
+    private enum Constants {
         static let querySuffix = " 영화 포스터"
     }
 }

@@ -20,21 +20,39 @@ final class MovieDetailsCoordinator: Coordinator {
     
     private let imageURLSearcher: ImageURLSearchable
     
+    private let movieCode: String
+    private let movieTitle: String
+    
     init(
         navigationController: UINavigationController?,
         parent: Coordinator,
         boxOffice: BoxOfficeType,
         imageProvider: ImageProviderType,
-        imageURLSearcher: ImageURLSearchable
+        imageURLSearcher: ImageURLSearchable,
+        movieCode: String,
+        movieTitle: String
     ) {
         self.navigationController = navigationController
         self.parent = parent
         self.boxOffice = boxOffice
         self.imageProvider = imageProvider
         self.imageURLSearcher = imageURLSearcher
+        self.movieCode = movieCode
+        self.movieTitle = movieTitle
     }
     
     func start() {
-        
+        let viewModel = MovieDetailsViewModel(
+            movieCode: movieCode,
+            movieTitle: movieTitle,
+            boxOffice: boxOffice,
+            imageURLSearcher: imageURLSearcher
+        )
+        let viewController = MovieDetailsViewController(
+            coordinator: self,
+            imageProvider: imageProvider,
+            viewModel: viewModel
+        )
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
