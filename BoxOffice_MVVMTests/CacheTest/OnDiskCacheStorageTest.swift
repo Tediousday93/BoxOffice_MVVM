@@ -26,7 +26,6 @@ class OnDiskCacheStorageTest: XCTestCase {
     typealias FileMeta = OnDiskCacheStorage<String>.FileMeta
     
     let innerStorage = FileManager.default
-    let directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
     
     var diskStorage: OnDiskCacheStorage<String>!
     
@@ -223,7 +222,7 @@ class OnDiskCacheStorageTest: XCTestCase {
             .modificationDate: expectedExpiration
         ]
         
-        let fileURL = directoryURL.appending(path: cacheKey)
+        let fileURL = diskStorage.directoryURL.appending(path: cacheKey)
         let resourceKeys: Set<URLResourceKey> = [.creationDateKey, .contentModificationDateKey]
         
         XCTAssertThrowsError(try FileMeta(at: fileURL, resourceKeys: resourceKeys))
