@@ -12,7 +12,7 @@ enum ImageProviderError: Error, Equatable {
     case imageConvertingFail(imageURL: URL)
 }
 
-final class ImageProvider {
+final class ImageProvider: ImageProviderType {
     private let cache: ImageCacheType
     private let loader: NetworkSessionType
     
