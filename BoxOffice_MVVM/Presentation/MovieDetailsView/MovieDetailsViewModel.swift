@@ -35,7 +35,7 @@ final class MovieDetailsViewModel {
         self.imageURLSearcher = imageURLSearcher
         self.dateFormatter = dateFormatter
         
-        searchImageURL(query: movieTitle + Constants.querySuffix)
+        searchImageURL(query: movieTitle + Constant.querySuffix)
         fetchMovieInfo()
     }
     
@@ -102,7 +102,7 @@ final class MovieDetailsViewModel {
 }
 
 extension MovieDetailsViewModel {
-    private enum Constants {
+    private enum Constant {
         static let querySuffix = " 포스터"
     }
 }

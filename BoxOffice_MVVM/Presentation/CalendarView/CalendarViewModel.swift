@@ -21,7 +21,7 @@ final class CalendarViewModel {
     }
     
     var availableDateRange: DateInterval? {
-        if let startDate = DateComponents(calendar: .init(identifier: .gregorian), year: 2003, month: 11, day: 11).date {
+        if let startDate = dateFormatter.date(from: Constant.dailyBoxOfficeStartDate) {
             return DateInterval(start: startDate, end: DateConstant.yesterday)
         }
         return nil
@@ -49,5 +49,11 @@ final class CalendarViewModel {
         return DateComponents(year: dateComponents[0],
                               month: dateComponents[1],
                               day: dateComponents[2])
+    }
+}
+
+extension CalendarViewModel {
+    private enum Constant {
+        static let dailyBoxOfficeStartDate = "2003-11-11"
     }
 }
