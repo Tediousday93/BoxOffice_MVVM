@@ -56,4 +56,15 @@ final class DailyBoxOfficeCoordinator: Coordinator {
         children.append(childCoordinator)
         childCoordinator.start()
     }
+    
+    func toCalendar(currentDate: Observable<String>) {
+        let childCoordinator = CalendarCoordinator(
+            navigationController: navigationController,
+            parent: self,
+            currentDate: currentDate,
+            dateFormatter: dateFormatter
+        )
+        children.append(childCoordinator)
+        childCoordinator.start()
+    }
 }
