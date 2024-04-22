@@ -69,6 +69,7 @@
 		ADFC79D42BD10D020051F183 /* SingleMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */; };
 		ADFC79D62BD1346A0051F183 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */; };
 		ADFC79DD2BD28A540051F183 /* MovieDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */; };
+		ADFC79E22BD64BF10051F183 /* CalendarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E12BD64BF10051F183 /* CalendarCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMovieInfoView.swift; sourceTree = "<group>"; };
 		ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsItem.swift; sourceTree = "<group>"; };
+		ADFC79E12BD64BF10051F183 /* CalendarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +433,7 @@
 				ADFC79A42BC7F5800051F183 /* Common */,
 				ADFC79AB2BC7FCE00051F183 /* DailyBoxOfficeView */,
 				ADFC79CE2BD0FA080051F183 /* MovieDetailsView */,
+				ADFC79E02BD64BB30051F183 /* CalendarView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -496,6 +499,14 @@
 				ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */,
 			);
 			path = MovieDetailsView;
+			sourceTree = "<group>";
+		};
+		ADFC79E02BD64BB30051F183 /* CalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				ADFC79E12BD64BF10051F183 /* CalendarCoordinator.swift */,
+			);
+			path = CalendarView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -600,6 +611,7 @@
 			files = (
 				ADFC79AD2BC7FD740051F183 /* DailyBoxOfficeCoordinator.swift in Sources */,
 				ADD87BEF2B7611320065B9A6 /* DailyBoxOfficeViewController.swift in Sources */,
+				ADFC79E22BD64BF10051F183 /* CalendarCoordinator.swift in Sources */,
 				AD1C436F2B85C9FE00D856EC /* DailyBoxOffice.swift in Sources */,
 				ADD87BEB2B7611320065B9A6 /* AppDelegate.swift in Sources */,
 				ADFC79C72BCE61AC0051F183 /* Reusable.swift in Sources */,
