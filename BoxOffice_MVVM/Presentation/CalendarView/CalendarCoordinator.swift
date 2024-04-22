@@ -14,23 +14,35 @@ final class CalendarCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
+    private let currentDate: Observable<String>
+    
     private let dateFormatter: DateFormatter
     
     init(
         navigationController: UINavigationController?,
         parent: Coordinator,
+        currentDate: Observable<String>,
         dateFormatter: DateFormatter
     ) {
         self.navigationController = navigationController
         self.parent = parent
+        self.currentDate = currentDate
         self.dateFormatter = dateFormatter
     }
     
-    func start() {
-        
+    deinit {
+        print("CalendarCoordinator deinitialized")
     }
     
-    func finish() {
-        
+    func start() {
+        let viewModel = CalendarViewModel(currentDate: currentDate, dateFormatter: dateFormatter)
+        let viewController = CalendarViewController(viewModel: viewModel, coordinator: self)
+        viewController.modalPresentationStyle = .formSheet
+        navigationController?.present(viewController, animated: true)
+    }
+    
+    func dismiss() {
+        navigationController?.dismiss(animated: true)
+        parent?.removeFinishedChild(self)
     }
 }
