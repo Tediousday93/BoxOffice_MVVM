@@ -118,6 +118,10 @@ final class MovieDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        coordinator?.finish()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSubviews()

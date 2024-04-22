@@ -52,4 +52,8 @@ final class MovieDetailsCoordinator: Coordinator {
         )
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    func finish() {
+        parent?.removeFinishedChild(self)
+    }
 }
