@@ -43,6 +43,10 @@ final class CalendarCoordinator: Coordinator {
     
     func dismiss() {
         navigationController?.dismiss(animated: true)
+        finish()
+    }
+    
+    func finish() {
         parent?.removeFinishedChild(self)
     }
 }
