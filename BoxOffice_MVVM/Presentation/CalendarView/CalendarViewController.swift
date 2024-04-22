@@ -61,14 +61,16 @@ final class CalendarViewController: UIViewController {
     }
     
     private func configureCalendarView() {
-        calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
-        
         guard let currentDateComponents = viewModel.currentDateComponents,
               let availableDateRange = viewModel.availableDateRange
         else { return }
         
         calendarView.setVisibleDateComponents(currentDateComponents, animated: true)
         calendarView.availableDateRange = availableDateRange
+        
+        let selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
+        selectionBehavior.selectedDate = currentDateComponents
+        calendarView.selectionBehavior = selectionBehavior
     }
 }
 
@@ -79,6 +81,7 @@ extension CalendarViewController: UICalendarSelectionSingleDateDelegate {
     ) {
         if let selectedDate = dateComponents?.date {
             viewModel.setCurrentDate(selectedDate)
+            coordinator?.dismiss()
         }
     }
 }
