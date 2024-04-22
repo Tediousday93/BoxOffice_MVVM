@@ -70,6 +70,7 @@
 		ADFC79D62BD1346A0051F183 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */; };
 		ADFC79DD2BD28A540051F183 /* MovieDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */; };
 		ADFC79E22BD64BF10051F183 /* CalendarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E12BD64BF10051F183 /* CalendarCoordinator.swift */; };
+		ADFC79E42BD64E1F0051F183 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E32BD64E1F0051F183 /* CalendarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsItem.swift; sourceTree = "<group>"; };
 		ADFC79E12BD64BF10051F183 /* CalendarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCoordinator.swift; sourceTree = "<group>"; };
+		ADFC79E32BD64E1F0051F183 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				ADFC79E12BD64BF10051F183 /* CalendarCoordinator.swift */,
+				ADFC79E32BD64E1F0051F183 /* CalendarViewController.swift */,
 			);
 			path = CalendarView;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */,
 				AD32E8062B9C4F20002AD62C /* ImageCacheType.swift in Sources */,
 				ADFC79C92BCE659C0051F183 /* DailyBoxOfficeListItem.swift in Sources */,
+				ADFC79E42BD64E1F0051F183 /* CalendarViewController.swift in Sources */,
 				AD32E8242BA46635002AD62C /* BoxOfficeType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
