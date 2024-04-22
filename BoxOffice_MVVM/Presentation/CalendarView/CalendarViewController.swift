@@ -11,16 +11,23 @@ final class CalendarViewController: UIViewController {
     private let calendarView: UICalendarView = {
         let calendarView = UICalendarView()
         calendarView.translatesAutoresizingMaskIntoConstraints = false
+        calendarView.calendar = .init(identifier: .gregorian)
+        calendarView.locale = .init(identifier: "ko_KR")
         
         return calendarView
     }()
     
+    private let viewModel: CalendarViewModel
+    
     private weak var coordinator: CalendarCoordinator?
     
     init(
+        viewModel: CalendarViewModel,
         coordinator: CalendarCoordinator?
     ) {
+        self.viewModel = viewModel
         self.coordinator = coordinator
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,6 +40,7 @@ final class CalendarViewController: UIViewController {
         setUpSubviews()
         setUpConstraints()
         configureRootView()
+        configureCalendarView()
     }
     
     private func setUpSubviews() {
@@ -54,6 +62,13 @@ final class CalendarViewController: UIViewController {
     
     private func configureCalendarView() {
         calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
+        
+        guard let currentDateComponents = viewModel.currentDateComponents,
+              let availableDateRange = viewModel.availableDateRange
+        else { return }
+        
+        calendarView.setVisibleDateComponents(currentDateComponents, animated: true)
+        calendarView.availableDateRange = availableDateRange
     }
 }
 
@@ -62,6 +77,8 @@ extension CalendarViewController: UICalendarSelectionSingleDateDelegate {
         _ selection: UICalendarSelectionSingleDate,
         didSelectDate dateComponents: DateComponents?
     ) {
-        
+        if let selectedDate = dateComponents?.date {
+            viewModel.setCurrentDate(selectedDate)
+        }
     }
 }

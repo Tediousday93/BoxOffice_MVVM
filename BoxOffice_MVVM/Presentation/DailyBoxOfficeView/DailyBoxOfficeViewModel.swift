@@ -28,7 +28,7 @@ final class DailyBoxOfficeViewModel {
         self.dateFormatter = dateFormatter
         
         setUpBindings()
-        setCurrentDate(dateString(from: Constants.yesterday))
+        setCurrentDate(dateString(from: DateConstant.yesterday))
     }
     
     private func setUpBindings() {
@@ -55,17 +55,10 @@ final class DailyBoxOfficeViewModel {
     }
     
     private func dateString(from date: Date) -> String {
-        dateFormatter.string(from: Constants.yesterday)
+        dateFormatter.string(from: DateConstant.yesterday)
     }
     
     func setCurrentDate(_ date: String) {
         currentDate.value = date
-    }
-}
-
-extension DailyBoxOfficeViewModel {
-    private enum Constants {
-        static let secondsOfOneDay: TimeInterval = 3600 * 24
-        static let yesterday = Date(timeInterval: -Constants.secondsOfOneDay, since: .now)
     }
 }
