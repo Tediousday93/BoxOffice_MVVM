@@ -21,7 +21,7 @@ final class CalendarViewModel {
     }
     
     var availableDateRange: DateInterval? {
-        if let startDate = DateComponents(year: 2003, month: 11, day: 11).date {
+        if let startDate = DateComponents(calendar: .init(identifier: .gregorian), year: 2003, month: 11, day: 11).date {
             return DateInterval(start: startDate, end: DateConstant.yesterday)
         }
         return nil
