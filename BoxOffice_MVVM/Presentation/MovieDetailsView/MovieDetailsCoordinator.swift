@@ -46,9 +46,9 @@ final class MovieDetailsCoordinator: Coordinator {
             dateFormatter: dateFormattter
         )
         let viewController = MovieDetailsViewController(
-            coordinator: self,
+            viewModel: viewModel,
             imageProvider: ImageProvider(),
-            viewModel: viewModel
+            coordinator: self
         )
         navigationController?.pushViewController(viewController, animated: true)
     }
