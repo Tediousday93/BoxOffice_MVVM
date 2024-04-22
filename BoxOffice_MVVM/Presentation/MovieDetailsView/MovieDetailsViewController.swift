@@ -97,20 +97,21 @@ final class MovieDetailsViewController: UIViewController {
         return stackView
     }()
     
-    private weak var coordinator: MovieDetailsCoordinator?
+    private let viewModel: MovieDetailsViewModel
     
     private let imageProvider: ImageProviderType
     
-    private let viewModel: MovieDetailsViewModel
+    private weak var coordinator: MovieDetailsCoordinator?
     
     init(
-        coordinator: MovieDetailsCoordinator,
+        viewModel: MovieDetailsViewModel,
         imageProvider: ImageProviderType,
-        viewModel: MovieDetailsViewModel
+        coordinator: MovieDetailsCoordinator
     ) {
-        self.coordinator = coordinator
-        self.imageProvider = imageProvider
         self.viewModel = viewModel
+        self.imageProvider = imageProvider
+        self.coordinator = coordinator
+        
         super.init(nibName: nil, bundle: nil)
     }
     
