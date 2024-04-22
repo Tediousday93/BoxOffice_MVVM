@@ -51,4 +51,17 @@ final class CalendarViewController: UIViewController {
     private func configureRootView() {
         view.backgroundColor = .systemBackground
     }
+    
+    private func configureCalendarView() {
+        calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
+    }
+}
+
+extension CalendarViewController: UICalendarSelectionSingleDateDelegate {
+    func dateSelection(
+        _ selection: UICalendarSelectionSingleDate,
+        didSelectDate dateComponents: DateComponents?
+    ) {
+        
+    }
 }
