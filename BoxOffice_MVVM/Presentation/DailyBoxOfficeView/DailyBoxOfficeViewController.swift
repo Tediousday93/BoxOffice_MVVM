@@ -8,8 +8,8 @@
 import UIKit
 
 final class DailyBoxOfficeViewController: UIViewController {
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOfficeListCellItem.ID>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOfficeListCellItem.ID>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOfficeListCellItem>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOfficeListCellItem>
     private typealias ListCellRegistration = UICollectionView.CellRegistration<DailyBoxOfficeListCell, DailyBoxOfficeListCellItem>
     
     private let collectionView: UICollectionView = {
@@ -45,6 +45,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         super.viewDidLoad()
         setUpSubviews()
         setUpConstraints()
+        configureNavigationBar()
         configureRootView()
         configureCollectionView()
         setUpBindings()
@@ -63,6 +64,19 @@ final class DailyBoxOfficeViewController: UIViewController {
         ])
     }
     
+    private func configureNavigationBar() {
+        let dateChoiceButton = UIBarButtonItem(title: "날짜선택",
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(dateChoiceButtonAction))
+        navigationItem.rightBarButtonItem = dateChoiceButton
+    }
+    
+    @objc
+    private func dateChoiceButtonAction() {
+        coordinator?.toCalendar(currentDate: viewModel.currentDate)
+    }
+    
     private func configureRootView() {
         view.backgroundColor = .systemBackground
     }
@@ -75,12 +89,12 @@ final class DailyBoxOfficeViewController: UIViewController {
     
     private func configureRefreshControl() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(updateCurrentDate), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     
     @objc
-    private func updateCurrentDate() {
+    private func refreshControlAction() {
         if let date = self.navigationItem.title {
             viewModel.setCurrentDate(date)
         }
@@ -91,12 +105,8 @@ final class DailyBoxOfficeViewController: UIViewController {
             cell.bind(item)
         }
         
-        dataSource = .init(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
+        dataSource = .init(collectionView: collectionView) { [weak self] collectionView, indexPath, item in
             guard let self = self else { return nil }
-            
-            let item = self.viewModel.dailyBoxOfficeItems.value?.first { movie in
-                movie.id == itemIdentifier
-            }
             
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration,
@@ -129,7 +139,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     private func applySnapshot(items: [DailyBoxOfficeListCellItem]) {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(items.map { $0.id })
+        snapshot.appendItems(items)
         dataSource?.apply(snapshot)
         collectionView.refreshControl?.endRefreshing()
     }
@@ -145,6 +155,6 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
         guard let items = viewModel.dailyBoxOfficeItems.value else { return }
         
         let item = items[indexPath.row]
-        coordinator?.toMovieDetails(movieCode: item.id, movieTitle: item.movieTitle)
+        coordinator?.toMovieDetails(movieCode: item.movieCode, movieTitle: item.movieTitle)
     }
 }

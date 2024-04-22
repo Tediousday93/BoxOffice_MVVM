@@ -22,7 +22,7 @@ struct BoxOfficeResult: Decodable {
     }
 }
 
-struct DailyBoxOfficeMovie: Decodable {
+struct DailyBoxOfficeMovie: Decodable, Hashable {
     let rankNumber: String
     let rank: String
     let rankDifference: String

@@ -7,15 +7,15 @@
 
 import Foundation
 
-final class DailyBoxOfficeListCellItem: Identifiable {
-    let id: String
+struct DailyBoxOfficeListCellItem {
+    let movieCode: String
     
     let movie: DailyBoxOfficeMovie
     
     private let numberFormatter: NumberFormatter
     
     init(movie: DailyBoxOfficeMovie, numberFormatter: NumberFormatter) {
-        self.id = movie.movieCode
+        self.movieCode = movie.movieCode
         self.movie = movie
         self.numberFormatter = numberFormatter
     }
@@ -53,6 +53,16 @@ final class DailyBoxOfficeListCellItem: Identifiable {
                 return Sign.up + movie.rankDifference
             }
         }
+    }
+}
+
+extension DailyBoxOfficeListCellItem: Hashable {
+    static func == (lhs: DailyBoxOfficeListCellItem, rhs: DailyBoxOfficeListCellItem) -> Bool {
+        return lhs.movie == rhs.movie
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(movie)
     }
 }
 
