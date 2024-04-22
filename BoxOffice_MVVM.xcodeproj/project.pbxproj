@@ -73,6 +73,7 @@
 		ADFC79E42BD64E1F0051F183 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E32BD64E1F0051F183 /* CalendarViewController.swift */; };
 		ADFC79E62BD658E50051F183 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E52BD658E50051F183 /* CalendarViewModel.swift */; };
 		ADFC79E82BD66F460051F183 /* DateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E72BD66F460051F183 /* DateConstant.swift */; };
+		ADFC79EA2BD685B60051F183 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79E92BD685B60051F183 /* AlertBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,7 @@
 		ADFC79E32BD64E1F0051F183 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		ADFC79E52BD658E50051F183 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		ADFC79E72BD66F460051F183 /* DateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConstant.swift; sourceTree = "<group>"; };
+		ADFC79E92BD685B60051F183 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +482,7 @@
 				ADFC79BC2BCD4B620051F183 /* Observable.swift */,
 				ADFC79C62BCE61AC0051F183 /* Reusable.swift */,
 				ADFC79E72BD66F460051F183 /* DateConstant.swift */,
+				ADFC79E92BD685B60051F183 /* AlertBuilder.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				AD1C43732B85CA4A00D856EC /* DaumSearchResult.swift in Sources */,
 				AD1C435F2B8490D200D856EC /* NetworkError.swift in Sources */,
 				AD1C43682B85C75400D856EC /* NetworkSessionType.swift in Sources */,
+				ADFC79EA2BD685B60051F183 /* AlertBuilder.swift in Sources */,
 				AD32E8042B9B2515002AD62C /* ImageProvider.swift in Sources */,
 				AD32E8022B9B250D002AD62C /* ImageProviderType.swift in Sources */,
 				ADFC79E62BD658E50051F183 /* CalendarViewModel.swift in Sources */,
