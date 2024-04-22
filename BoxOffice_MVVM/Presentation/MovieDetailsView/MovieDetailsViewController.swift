@@ -126,6 +126,7 @@ final class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         setUpSubviews()
         setUpConstraints()
+        configureNavigationBar()
         configureRootView()
         setUpBindings()
     }
@@ -169,37 +170,27 @@ final class MovieDetailsViewController: UIViewController {
         ])
     }
     
+    private func configureNavigationBar() {
+        self.navigationItem.title = viewModel.movieTitle
+    }
+    
     private func configureRootView() {
         view.backgroundColor = .systemBackground
     }
     
     private func setUpBindings() {
-        viewModel.movieTitle.subscribe { [weak self] title in
+        viewModel.movieDetailsItem.subscribe { [weak self] item in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.navigationItem.title = title
-            }
-        }
-        
-        viewModel.movieInfo.subscribe { [weak self] movieInfo in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.directorView.bodyLabel.text = movieInfo.directors
-                    .map { $0.personName }
-                    .joined(separator: ", ")
-                self.productionYearView.bodyLabel.text = movieInfo.productionYear
-                self.openDateView.bodyLabel.text = movieInfo.openDate
-                self.runningTimeView.bodyLabel.text = movieInfo.runningTime
-                self.watchGradeView.bodyLabel.text = movieInfo.audits.first?.watchGradeName
-                self.nationView.bodyLabel.text = movieInfo.nations.first?.nationName
-                self.genreView.bodyLabel.text = movieInfo.genres
-                    .map { $0.genreName }
-                    .joined(separator: ", ")
-                self.actorView.bodyLabel.text = movieInfo.actors
-                    .map { $0.personName }
-                    .joined(separator: ", ")
+                self.directorView.bodyLabel.text = item.directors
+                self.productionYearView.bodyLabel.text = item.productionYear
+                self.openDateView.bodyLabel.text = item.openDate
+                self.runningTimeView.bodyLabel.text = item.runningTime
+                self.watchGradeView.bodyLabel.text = item.watchGrade
+                self.nationView.bodyLabel.text = item.nations
+                self.genreView.bodyLabel.text = item.genres
+                self.actorView.bodyLabel.text = item.actors
             }
         }
         

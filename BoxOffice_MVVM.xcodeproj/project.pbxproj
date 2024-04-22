@@ -68,6 +68,7 @@
 		ADFC79D22BD10BA40051F183 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D12BD10BA40051F183 /* MovieDetailsViewController.swift */; };
 		ADFC79D42BD10D020051F183 /* SingleMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */; };
 		ADFC79D62BD1346A0051F183 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */; };
+		ADFC79DD2BD28A540051F183 /* MovieDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		ADFC79D12BD10BA40051F183 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMovieInfoView.swift; sourceTree = "<group>"; };
 		ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
+		ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,6 +493,7 @@
 				ADFC79D12BD10BA40051F183 /* MovieDetailsViewController.swift */,
 				ADFC79D52BD1346A0051F183 /* MovieDetailsViewModel.swift */,
 				ADFC79D32BD10D020051F183 /* SingleMovieInfoView.swift */,
+				ADFC79DC2BD28A540051F183 /* MovieDetailsItem.swift */,
 			);
 			path = MovieDetailsView;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				AD1C43C32B8DC61200D856EC /* ImageURLSearchable.swift in Sources */,
 				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
 				ADFC79D02BD0FA230051F183 /* MovieDetailsCoordinator.swift in Sources */,
+				ADFC79DD2BD28A540051F183 /* MovieDetailsItem.swift in Sources */,
 				AD32E7E92B95E3D4002AD62C /* Date+.swift in Sources */,
 				AD32E8282BA4684C002AD62C /* MovieDetailsAPI.swift in Sources */,
 				AD32E8262BA4681A002AD62C /* DailyBoxOfficeAPI.swift in Sources */,

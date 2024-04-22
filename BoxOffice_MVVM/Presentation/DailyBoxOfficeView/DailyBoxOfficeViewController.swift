@@ -141,9 +141,10 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        defer { collectionView.deselectItem(at: indexPath, animated: true) }
         guard let items = viewModel.dailyBoxOfficeItems.value else { return }
         
-        coordinator?.toMovieDetails(item: items[indexPath.row])
-        collectionView.deselectItem(at: indexPath, animated: true)
+        let item = items[indexPath.row]
+        coordinator?.toMovieDetails(movieCode: item.id, movieTitle: item.movieTitle)
     }
 }
