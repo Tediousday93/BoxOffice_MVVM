@@ -182,9 +182,12 @@ final class DailyBoxOfficeViewController: UIViewController {
         viewModel.collectionViewMode
             .subscribe { [weak self] mode in
                 guard let self = self else { return }
+                guard self.viewModel.dailyBoxOfficeItems.value != nil else { return }
                 
                 DispatchQueue.main.async {
                     self.setCollectionViewLayout(mode: mode)
+                    self.collectionView.reloadData()
+                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
             }
     }
