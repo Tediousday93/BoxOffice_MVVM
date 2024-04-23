@@ -11,6 +11,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOfficeCellItem>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOfficeCellItem>
     private typealias ListCellRegistration = UICollectionView.CellRegistration<DailyBoxOfficeListCell, DailyBoxOfficeCellItem>
+    private typealias IconCellRegistration = UICollectionView.CellRegistration<DailyBoxOfficeIconCell, DailyBoxOfficeCellItem>
     
     private let collectionView: UICollectionView = {
         let collectionView = UICollectionView(
@@ -131,16 +132,31 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
     
     private func configureDataSource() {
-        let cellRegistration = ListCellRegistration { cell, indexPath, item in
+        let listCellRegistration = ListCellRegistration { cell, indexPath, item in
             cell.bind(item)
         }
         
-        dataSource = .init(collectionView: collectionView) { collectionView, indexPath, item in
-            return collectionView.dequeueConfiguredReusableCell(
-                using: cellRegistration,
-                for: indexPath,
-                item: item
-            )
+        let iconCellRegistration = IconCellRegistration { cell, indexPath, item in
+            cell.bind(item)
+        }
+        
+        dataSource = .init(collectionView: collectionView) { [viewModel] collectionView, indexPath, item in
+            switch viewModel.collectionViewMode.value {
+            case .list:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: listCellRegistration,
+                    for: indexPath,
+                    item: item
+                )
+            case .icon:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: iconCellRegistration,
+                    for: indexPath,
+                    item: item
+                )
+            default:
+                return UICollectionViewCell()
+            }
         }
     }
     
@@ -173,7 +189,7 @@ final class DailyBoxOfficeViewController: UIViewController {
             }
     }
     
-    private func applySnapshot(items: [DailyBoxOfficeListCellItem]) {
+    private func applySnapshot(items: [DailyBoxOfficeCellItem]) {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(items)
@@ -209,13 +225,14 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                     subitems: [item])
+                                               heightDimension: .fractionalHeight(0.25))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
         group.interItemSpacing = .flexible(8)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 12)
+        section.interGroupSpacing = 24
+        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
         
         return UICollectionViewCompositionalLayout(section: section)
     }()
