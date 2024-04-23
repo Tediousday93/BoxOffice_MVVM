@@ -46,6 +46,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         setUpSubviews()
         setUpConstraints()
         configureNavigationBar()
+        configureToolbar()
         configureRootView()
         configureCollectionView()
         setUpBindings()
@@ -77,6 +78,22 @@ final class DailyBoxOfficeViewController: UIViewController {
         coordinator?.toCalendar(currentDate: viewModel.currentDate)
     }
     
+    private func configureToolbar() {
+        let modeChangeButton = UIBarButtonItem(title: "화면 모드 변경",
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(modeChangeButtonAction))
+        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
+        
+        self.toolbarItems = [spacer, modeChangeButton, spacer]
+        navigationController?.isToolbarHidden = false
+    }
+    
+    @objc
+    private func modeChangeButtonAction() {
+        
+    }
+    
     private func configureRootView() {
         view.backgroundColor = .systemBackground
     }
@@ -105,9 +122,7 @@ final class DailyBoxOfficeViewController: UIViewController {
             cell.bind(item)
         }
         
-        dataSource = .init(collectionView: collectionView) { [weak self] collectionView, indexPath, item in
-            guard let self = self else { return nil }
-            
+        dataSource = .init(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration,
                 for: indexPath,
