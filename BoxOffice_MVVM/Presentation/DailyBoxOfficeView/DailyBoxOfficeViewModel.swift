@@ -32,6 +32,10 @@ final class DailyBoxOfficeViewModel {
         setCurrentDate(dateString(from: DateConstant.yesterday))
     }
     
+    deinit {
+        print("DailyBoxOfficeViewModel deinitialized")
+    }
+    
     private func setUpBindings() {
         currentDate.subscribe { [weak self] date in
             let targetDate = date.replacingOccurrences(of: "-", with: "")
@@ -80,12 +84,21 @@ extension DailyBoxOfficeViewModel {
         case list
         case icon
         
-        var modeChangeButtonTitle: String {
+        var buttonTitle: String {
             switch self {
             case .list:
                 return "리스트"
             case .icon:
                 return "아이콘"
+            }
+        }
+        
+        func toggle() -> Self {
+            switch self {
+            case .list:
+                return .icon
+            case .icon:
+                return .list
             }
         }
     }

@@ -33,9 +33,10 @@ final class AlertBuilder {
     func addAction(
         title: String,
         style: UIAlertAction.Style,
-        handler: @escaping () -> Void
+        handler: (() -> Void)?
     ) -> Self {
         let alertAction = UIAlertAction(title: title, style: style) { _ in
+            guard let handler = handler else { return }
             handler()
         }
         

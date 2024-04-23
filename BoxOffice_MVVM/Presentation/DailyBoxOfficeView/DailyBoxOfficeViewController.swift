@@ -92,7 +92,19 @@ final class DailyBoxOfficeViewController: UIViewController {
     
     @objc
     private func modeChangeButtonAction() {
+        guard let currentMode = viewModel.collectionViewMode.value else { return }
         
+        let actionTitle = currentMode.toggle().buttonTitle
+        
+        AlertBuilder(alertStyle: .actionSheet, presentingViewController: self)
+            .setTitle(Constant.modeChangeButtonTitle)
+            .addAction(title: actionTitle,
+                       style: .default,
+                       handler: viewModel.changeCollectionViewMode)
+            .addAction(title: Constant.cancelButtonTitle,
+                       style: .cancel,
+                       handler: nil)
+            .show()
     }
     
     private func configureRootView() {
@@ -225,5 +237,6 @@ extension DailyBoxOfficeViewController {
     private enum Constant {
         static let dateChoiceButtonTitle = "날짜선택"
         static let modeChangeButtonTitle = "화면 모드 변경"
+        static let cancelButtonTitle = "취소"
     }
 }
