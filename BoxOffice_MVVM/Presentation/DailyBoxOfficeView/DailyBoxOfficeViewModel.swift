@@ -10,6 +10,7 @@ import Foundation
 final class DailyBoxOfficeViewModel {
     let dailyBoxOfficeItems: Observable<[DailyBoxOfficeListCellItem]> = .init()
     let currentDate: Observable<String> = .init()
+    let collectionViewStyle: Observable<CollectionViewStyle> = .init(.list)
     let thrownError: Observable<Error> = .init()
     
     private let boxOffice: DailyBoxOfficeProvidable
@@ -60,5 +61,21 @@ final class DailyBoxOfficeViewModel {
     
     func setCurrentDate(_ date: String) {
         currentDate.value = date
+    }
+}
+
+extension DailyBoxOfficeViewModel {
+    enum CollectionViewStyle {
+        case list
+        case icon
+        
+        var modeChangeButtonTitle: String {
+            switch self {
+            case .list:
+                return "리스트"
+            case .icon:
+                return "아이콘"
+            }
+        }
     }
 }
