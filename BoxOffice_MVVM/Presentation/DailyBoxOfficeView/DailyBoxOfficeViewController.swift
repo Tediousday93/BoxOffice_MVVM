@@ -187,7 +187,9 @@ final class DailyBoxOfficeViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.setCollectionViewLayout(mode: mode)
                     self.collectionView.reloadData()
-                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                                     at: .top,
+                                                     animated: true)
                 }
             }
     }
