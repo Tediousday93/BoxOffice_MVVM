@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyBoxOfficeListCellItem {
+struct DailyBoxOfficeCellItem {
     let movieCode: String
     
     let movie: DailyBoxOfficeMovie
@@ -56,8 +56,8 @@ struct DailyBoxOfficeListCellItem {
     }
 }
 
-extension DailyBoxOfficeListCellItem: Hashable {
-    static func == (lhs: DailyBoxOfficeListCellItem, rhs: DailyBoxOfficeListCellItem) -> Bool {
+extension DailyBoxOfficeCellItem: Hashable {
+    static func == (lhs: DailyBoxOfficeCellItem, rhs: DailyBoxOfficeCellItem) -> Bool {
         return lhs.movie == rhs.movie
     }
     
@@ -66,7 +66,7 @@ extension DailyBoxOfficeListCellItem: Hashable {
     }
 }
 
-extension DailyBoxOfficeListCellItem {
+extension DailyBoxOfficeCellItem {
     private enum Sign {
         static let newMovie = "신작"
         static let minus = "-"

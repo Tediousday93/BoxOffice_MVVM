@@ -8,9 +8,9 @@
 import UIKit
 
 final class DailyBoxOfficeViewController: UIViewController {
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOfficeListCellItem>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOfficeListCellItem>
-    private typealias ListCellRegistration = UICollectionView.CellRegistration<DailyBoxOfficeListCell, DailyBoxOfficeListCellItem>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOfficeCellItem>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOfficeCellItem>
+    private typealias ListCellRegistration = UICollectionView.CellRegistration<DailyBoxOfficeListCell, DailyBoxOfficeCellItem>
     
     private let collectionView: UICollectionView = {
         let collectionView = UICollectionView(

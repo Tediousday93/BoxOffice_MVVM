@@ -34,7 +34,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title3)
-        label.lineBreakMode = .byCharWrapping
+        label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         
         return label
@@ -79,10 +79,8 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     }
     
     override func prepareForReuse() {
-        rankLabel.text = nil
-        rankDifferenceLabel.text = nil
-        titleLabel.text = nil
-        audienceCountLabel.text = nil
+        [rankLabel, rankDifferenceLabel, titleLabel, audienceCountLabel]
+            .forEach { $0.text = nil }
     }
     
     private func setUpSubviews() {
@@ -116,7 +114,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
         self.accessories = [.disclosureIndicator()]
     }
     
-    func bind(_ item: DailyBoxOfficeListCellItem) {
+    func bind(_ item: DailyBoxOfficeCellItem) {
         rankLabel.text = item.rank
         titleLabel.text = item.movieTitle
         audienceCountLabel.text = item.audienceCount

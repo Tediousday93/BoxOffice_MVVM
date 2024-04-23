@@ -8,7 +8,7 @@
 import Foundation
 
 final class DailyBoxOfficeViewModel {
-    let dailyBoxOfficeItems: Observable<[DailyBoxOfficeListCellItem]> = .init()
+    let dailyBoxOfficeItems: Observable<[DailyBoxOfficeCellItem]> = .init()
     let currentDate: Observable<String> = .init()
     let collectionViewMode: Observable<CollectionViewMode> = .init(.list)
     let thrownError: Observable<Error> = .init()
@@ -32,10 +32,6 @@ final class DailyBoxOfficeViewModel {
         setCurrentDate(dateString(from: DateConstant.yesterday))
     }
     
-    deinit {
-        print("DailyBoxOfficeViewModel deinitialized")
-    }
-    
     private func setUpBindings() {
         currentDate.subscribe { [weak self] date in
             let targetDate = date.replacingOccurrences(of: "-", with: "")
@@ -49,7 +45,7 @@ final class DailyBoxOfficeViewModel {
             case let .success(dailyBoxOffice):
                 let items = dailyBoxOffice.boxOfficeResult.dailyBoxOfficeList
                     .map {
-                        DailyBoxOfficeListCellItem(movie: $0, numberFormatter: self.numberFormatter)
+                        DailyBoxOfficeCellItem(movie: $0, numberFormatter: self.numberFormatter)
                     }
                 
                 self.dailyBoxOfficeItems.value = items
