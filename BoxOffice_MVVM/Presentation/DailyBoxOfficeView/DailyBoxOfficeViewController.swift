@@ -13,9 +13,10 @@ final class DailyBoxOfficeViewController: UIViewController {
     private typealias ListCellRegistration = UICollectionView.CellRegistration<DailyBoxOfficeListCell, DailyBoxOfficeListCellItem>
     
     private let collectionView: UICollectionView = {
-        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        let collectionViewLayout = UICollectionViewCompositionalLayout.list(using: configuration)
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: DailyBoxOfficeViewController.collectionViewListLayout
+        )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
@@ -66,7 +67,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let dateChoiceButton = UIBarButtonItem(title: "날짜선택",
+        let dateChoiceButton = UIBarButtonItem(title: Constant.dateChoiceButtonTitle,
                                                style: .plain,
                                                target: self,
                                                action: #selector(dateChoiceButtonAction))
@@ -79,7 +80,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
     
     private func configureToolbar() {
-        let modeChangeButton = UIBarButtonItem(title: "화면 모드 변경",
+        let modeChangeButton = UIBarButtonItem(title: Constant.modeChangeButtonTitle,
                                                style: .plain,
                                                target: self,
                                                action: #selector(modeChangeButtonAction))
@@ -149,6 +150,15 @@ final class DailyBoxOfficeViewController: UIViewController {
                     self.navigationItem.title = date
                 }
             }
+        
+        viewModel.collectionViewMode
+            .subscribe { [weak self] mode in
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    self.setCollectionViewLayout(mode: mode)
+                }
+            }
     }
     
     private func applySnapshot(items: [DailyBoxOfficeListCellItem]) {
@@ -158,9 +168,46 @@ final class DailyBoxOfficeViewController: UIViewController {
         dataSource?.apply(snapshot)
         collectionView.refreshControl?.endRefreshing()
     }
+    
+    private func setCollectionViewLayout(mode: DailyBoxOfficeViewModel.CollectionViewMode) {
+        switch mode {
+        case .icon:
+            collectionView.setCollectionViewLayout(
+                DailyBoxOfficeViewController.collectionViewIconLayout,
+                animated: true
+            )
+        case .list:
+            collectionView.setCollectionViewLayout(
+                DailyBoxOfficeViewController.collectionViewListLayout,
+                animated: true
+            )
+        }
+    }
 }
 
 extension DailyBoxOfficeViewController: UICollectionViewDelegate {
+    static let collectionViewListLayout: UICollectionViewLayout = {
+        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        return UICollectionViewCompositionalLayout.list(using: configuration)
+    }()
+    
+    static let collectionViewIconLayout: UICollectionViewLayout = {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.48),
+                                              heightDimension: .fractionalWidth(0.48))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                     subitems: [item])
+        group.interItemSpacing = .flexible(8)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 12)
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }()
+    
     private enum Section {
         case main
     }
@@ -171,5 +218,12 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
         
         let item = items[indexPath.row]
         coordinator?.toMovieDetails(movieCode: item.movieCode, movieTitle: item.movieTitle)
+    }
+}
+
+extension DailyBoxOfficeViewController {
+    private enum Constant {
+        static let dateChoiceButtonTitle = "날짜선택"
+        static let modeChangeButtonTitle = "화면 모드 변경"
     }
 }
