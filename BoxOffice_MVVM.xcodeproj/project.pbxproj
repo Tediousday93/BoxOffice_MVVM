@@ -199,13 +199,13 @@
 			path = Session;
 			sourceTree = "<group>";
 		};
-		AD1C436D2B85C98300D856EC /* Data */ = {
+		AD1C436D2B85C98300D856EC /* DTO */ = {
 			isa = PBXGroup;
 			children = (
 				AD1C436E2B85C9FE00D856EC /* DailyBoxOffice.swift */,
 				AD1C43702B85CA2800D856EC /* MovieDetails.swift */,
 			);
-			path = Data;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		AD1C43742B85DED200D856EC /* APIConfiguration */ = {
@@ -441,6 +441,8 @@
 			isa = PBXGroup;
 			children = (
 				ADFC79A42BC7F5800051F183 /* Common */,
+				ADFC79EE2BD7D9290051F183 /* AlertBuilder */,
+				AD32E8002B9B24F3002AD62C /* ImageProvider */,
 				ADFC79AB2BC7FCE00051F183 /* DailyBoxOfficeView */,
 				ADFC79CE2BD0FA080051F183 /* MovieDetailsView */,
 				ADFC79E02BD64BB30051F183 /* CalendarView */,
@@ -453,9 +455,8 @@
 			children = (
 				AD1C43CE2B8E375C00D856EC /* API */,
 				AD1C43A62B8C829000D856EC /* BoxOffice */,
-				AD32E8002B9B24F3002AD62C /* ImageProvider */,
 				AD1C43C42B8DC76200D856EC /* ImageURLSearcher */,
-				AD1C436D2B85C98300D856EC /* Data */,
+				AD1C436D2B85C98300D856EC /* DTO */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,7 +485,6 @@
 				ADFC79BC2BCD4B620051F183 /* Observable.swift */,
 				ADFC79C62BCE61AC0051F183 /* Reusable.swift */,
 				ADFC79E72BD66F460051F183 /* DateConstant.swift */,
-				ADFC79E92BD685B60051F183 /* AlertBuilder.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -530,6 +530,14 @@
 				ADFC79C82BCE659C0051F183 /* DailyBoxOfficeCellItem.swift */,
 			);
 			path = DailyBoxOfficeCell;
+			sourceTree = "<group>";
+		};
+		ADFC79EE2BD7D9290051F183 /* AlertBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				ADFC79E92BD685B60051F183 /* AlertBuilder.swift */,
+			);
+			path = AlertBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
