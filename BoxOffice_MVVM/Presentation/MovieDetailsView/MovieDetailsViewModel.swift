@@ -103,6 +103,6 @@ final class MovieDetailsViewModel {
 
 extension MovieDetailsViewModel {
     private enum Constant {
-        static let querySuffix = " 포스터"
+        static let querySuffix = " 영화 포스터"
     }
 }
