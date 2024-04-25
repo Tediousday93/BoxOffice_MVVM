@@ -38,7 +38,7 @@ class ImageProviderTest: XCTestCase {
         expectation = nil
     }
     
-    func test_initRemoveExpired() {
+    func test_initRemoveExpiredCall() {
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
                 throw NetworkError.invalidURL

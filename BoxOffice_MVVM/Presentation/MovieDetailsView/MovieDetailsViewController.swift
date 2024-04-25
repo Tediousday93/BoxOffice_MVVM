@@ -133,11 +133,9 @@ final class MovieDetailsViewController: UIViewController {
     }
     
     private func setUpSubviews() {
-        [
-            directorView, productionYearView, openDateView,
-            runningTimeView, watchGradeView, nationView,
-            genreView, actorView
-        ].forEach { stackView.addArrangedSubview($0) }
+        [directorView, productionYearView, openDateView, runningTimeView,
+         watchGradeView, nationView, genreView, actorView]
+            .forEach { stackView.addArrangedSubview($0) }
         
         [posterView, stackView].forEach { contentView.addSubview($0) }
         
