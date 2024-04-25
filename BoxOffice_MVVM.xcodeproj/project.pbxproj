@@ -204,6 +204,7 @@
 			children = (
 				AD1C436E2B85C9FE00D856EC /* DailyBoxOffice.swift */,
 				AD1C43702B85CA2800D856EC /* MovieDetails.swift */,
+				AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -252,21 +253,12 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
-		AD1C43BD2B8DB81800D856EC /* DaumImageSearcher */ = {
-			isa = PBXGroup;
-			children = (
-				AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */,
-				AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */,
-			);
-			path = DaumImageSearcher;
-			sourceTree = "<group>";
-		};
 		AD1C43C42B8DC76200D856EC /* ImageURLSearcher */ = {
 			isa = PBXGroup;
 			children = (
 				AD1C43C22B8DC61200D856EC /* ImageURLSearchable.swift */,
 				AD1C43CB2B8E2EBD00D856EC /* ImageURLSearchError.swift */,
-				AD1C43BD2B8DB81800D856EC /* DaumImageSearcher */,
+				AD1C43C52B8DCDB500D856EC /* DaumImageSearcher.swift */,
 			);
 			path = ImageURLSearcher;
 			sourceTree = "<group>";
@@ -442,7 +434,6 @@
 			children = (
 				ADFC79A42BC7F5800051F183 /* Common */,
 				ADFC79EE2BD7D9290051F183 /* AlertBuilder */,
-				AD32E8002B9B24F3002AD62C /* ImageProvider */,
 				ADFC79AB2BC7FCE00051F183 /* DailyBoxOfficeView */,
 				ADFC79CE2BD0FA080051F183 /* MovieDetailsView */,
 				ADFC79E02BD64BB30051F183 /* CalendarView */,
@@ -456,6 +447,7 @@
 				AD1C43CE2B8E375C00D856EC /* API */,
 				AD1C43A62B8C829000D856EC /* BoxOffice */,
 				AD1C43C42B8DC76200D856EC /* ImageURLSearcher */,
+				AD32E8002B9B24F3002AD62C /* ImageProvider */,
 				AD1C436D2B85C98300D856EC /* DTO */,
 			);
 			path = Model;

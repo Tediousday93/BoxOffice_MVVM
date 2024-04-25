@@ -44,8 +44,8 @@ final class ImageProvider: ImageProviderType {
             switch result {
             case let .success(image):
                 do {
-                    completion(.success(image))
                     try self.cache.store(image, for: url.cacheKey)
+                    completion(.success(image))
                 } catch {
                     completion(.failure(error))
                 }
