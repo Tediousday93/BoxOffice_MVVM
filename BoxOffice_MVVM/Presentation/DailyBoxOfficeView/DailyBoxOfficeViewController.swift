@@ -53,6 +53,16 @@ final class DailyBoxOfficeViewController: UIViewController {
         configureCollectionView()
         setUpBindings()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isToolbarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isToolbarHidden = true
+    }
 
     private func setUpSubviews() {
         view.addSubview(collectionView)
@@ -72,7 +82,7 @@ final class DailyBoxOfficeViewController: UIViewController {
                                                style: .plain,
                                                target: self,
                                                action: #selector(dateChoiceButtonAction))
-        navigationItem.rightBarButtonItem = dateChoiceButton
+        self.navigationItem.rightBarButtonItem = dateChoiceButton
     }
     
     @objc
@@ -88,7 +98,6 @@ final class DailyBoxOfficeViewController: UIViewController {
         let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
         
         self.toolbarItems = [spacer, modeChangeButton, spacer]
-        navigationController?.isToolbarHidden = false
     }
     
     @objc
