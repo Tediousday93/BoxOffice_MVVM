@@ -21,7 +21,7 @@ BoxOffice 리팩토링 프로젝트.
 
 ## 📝 목차
 1. [타임라인](#-타임라인)
-2. [프로젝트 구조](https://github.com/Tediousday93/BoxOffice_MVVM/edit/main/README.md#%EF%B8%8F-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0)
+2. [프로젝트 구조](#-프로젝트-구조)
 3. [실행화면](#-실행화면)
 4. [트러블 슈팅](#-트러블-슈팅)
 5. [고민했던 점](#-고민했던-점)
