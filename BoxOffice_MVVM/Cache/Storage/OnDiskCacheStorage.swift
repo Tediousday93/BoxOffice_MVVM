@@ -60,8 +60,6 @@ final class OnDiskCacheStorage<T: DataConvertible> {
         countLimit: Int,
         cacheExpiration: CacheExpiration = .days(7)
     ) throws {
-        var directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "BoxOffice-MVVM", directoryHint: .isDirectory)
-        
         self.init(fileManager: .default,
                   countLimit: countLimit,
                   cacheExpiration: cacheExpiration,
