@@ -31,8 +31,8 @@ BoxOffice 리팩토링 프로젝트.
 
 # 📆 타임라인
 
-| 날짜 | 내용 |
-| :--------: | :--------: |
+| <center>날짜</center> | <center>내용</center> |
+| :--------: | -------- |
 | 2024.02.13 ~ 2024.02.26 | NetworkLayer 구현 |
 | 2024.02.27 ~ 2024.02.28 | OpenAPI Configuration, BoxOffice / ImageURLSearcher 구현 |
 | 2024.03.01 ~ 2024.03.08 | ImageCache, CacheStorage 구현 |
@@ -51,7 +51,7 @@ BoxOffice 리팩토링 프로젝트.
 
 ## 💭 기존 프로젝트에서 해결하고 싶었던 문제
 
-* Swift가 다중 패러다임 언어라는 장점을 잘 살리지 못했음(프로토콜 지향, 객체지향 적인 설계가 부족함)
+* Swift가 다중 패러다임 언어라는 장점을 잘 살리지 못했음(프로토콜 지향, 객체 지향적인 설계가 부족함)
 * Model과 Contoroller의 분리가 명확하지 않고 Controller의 역할이 많음
     * ViewController에 Network 요청을 구성하는 로직이 있음
     * View에 전달할 데이터를 정제하는 로직이 포함되어 있음
@@ -242,6 +242,7 @@ final class OnDiskCacheStorage {
 
 * test case 작성 시, 빠른 테스트를 위해 만료기간을 짧게 설정할 수 있어야 함(추후 캐시 정책이 변경되어 만료기간을 재설정하기에도 좋음)
 * 메모리 캐시와 디스크 캐시의 만료 기간 설정 방법에 차이가 있어 만료 기간을 설정하는 방법을 파라미터에 전달할 때 구분이 필요함
+* DiskStorage가 Data 타입을 저장하는 것이 아니라 MemoryStorage처럼 다양한 타입을 저장할 수 있어야 함
 
 </br>
 
@@ -389,7 +390,7 @@ enum KobisAPI<Response: Decodable>: APIConfigurationType {
 디코딩 타입을 강제하는 만큼 이러한 문제가 발생하는 것은 사용할 때 편의성에 좋지 않다고 생각했다.
 
 ### ⚒️ 해결방안
-enum을 사용하지 않고 요청에 맞는 APIConfiguration을 구조체로 각각 정의하기로 결정했다.
+enum을 사용하지 않고 요청에 맞는 APIConfiguration을 struct로 각각 정의하기로 결정했다.
 
 enum을 통해 baseURL이 같고 path가 다른 API를 case로 관리하는 것이 유용할 것 같다. 추후 Moya를 참고해보고 좋은 방법을 찾아보도록 하자.
 
