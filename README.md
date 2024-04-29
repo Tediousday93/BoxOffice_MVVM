@@ -43,7 +43,7 @@ BoxOffice 리팩토링 프로젝트.
 | 2024.04.11 ~ 2024.04.18 | DailyBoxOfficeView 구현 |
 | 2024.04.18 ~ 2024.04.22 | MovieDetailsView, CalendarView 구현 |
 | 2024.04.22 ~ 2024.04.23 | CollectionView Mode 변경 기능 구현 |
-| 2024.04.23 ~ | 네트워크 통신 중 ActivityView 추가 |
+
 
 </br>
 
@@ -65,7 +65,7 @@ BoxOffice 리팩토링 프로젝트.
 ### Protocol을 적극적으로 활용해 프로토콜 지향, 객체 지향적으로 설계
 * Protocol을 적극 활용함으로서 자연스럽게 객체지향의 SOLID 원칙을 더 잘 지킬 수 있게 되었음
 * 특히 의존성 역전 원칙을 지키며 Testable한 코드를 작성할 수 있었음
-
+* Core 기능들(Network, Cache)을 완전히 분리시킬 수 있었음
 
 ### ViewController 내부 코드의 가독성을 높이기 위해 MVVM 아키텍처와 Coordinator 패턴을 적용
 
@@ -114,7 +114,7 @@ final class Observable<T> {
 ## ✧ Network Layer
 ![BoxOffice_MVVM_NetworkLayer_UML](https://hackmd.io/_uploads/S1OxKuPZC.png)
 
-* Network Layer는 외부에서 `APIConfigurationType` protocol을 채택한 데이터 타입을 통해 endpoint를 구성하고 `NetworkProvider` 타입으로 네트워크 요청을 보낼 수 있도록 설계
+* Network Layer는 외부에서 `APIConfigurationType` protocol을 채택한 타입을 통해 endpoint를 구성하고 `NetworkProvider`로 네트워크 요청을 보낼 수 있도록 설계
 
 * `APIConfigurationType` 프로토콜 + 제네릭을 통한 값 타입 다형성 제공
 
@@ -145,15 +145,15 @@ final class Observable<T> {
 
 ### Network
 * 실제 네트워크 연결 여부에 관계 없이 빠른 테스트를 위해 test double 활용 (Mock URLProtocol)
-* 따로 정의한 APIConfigurationType 프로토콜을 채택한 타입과 NetworkProvider가 함께 동작하는 것을 테스트
+* 별도로 정의한 APIConfigurationType 프로토콜을 채택한 타입과 NetworkProvider가 함께 동작하는 것을 테스트
 
 ### Cache
-* DiskStorage에 저장할 타입의 제네릭 제약인 DataConvertible 프로토콜 테스트
+* DiskStorage에 저장할 타입의 제네릭 제약인 `DataConvertible` 프로토콜 테스트
 * 각 Storage 타입의 제네릭 파라미터를 테스트하기 적절한 타입(Int, String)으로 설정하여 테스트 진행
-* Mocking 없이 실제 NSCache와 FileManager를 통한 캐시 저장이 잘 이루어지는가를 테스트
+* Mocking 없이 실제 `NSCache`와 `FileManager`를 통한 캐시 저장이 잘 이루어지는가를 테스트
 
 ### ImageProvider
-* Cache / Loader가 잘 동작하는지 테스트하기 위해 test double 활용 (MockImageCache, MockURLProtocol)
+* Cache / Loader 프로퍼티에 test double 활용 (MockImageCache, MockURLProtocol)
 
 </br>
 
@@ -395,63 +395,8 @@ enum을 사용하지 않고 요청에 맞는 APIConfiguration을 struct로 각�
 enum을 통해 baseURL이 같고 path가 다른 API를 case로 관리하는 것이 유용할 것 같다. 추후 Moya를 참고해보고 좋은 방법을 찾아보도록 하자.
 
 </br>
-    
-## 3️⃣ Unit test - Singleton 참조를 갖는 인스턴스의 setUp, tearDown
-### 🔍 문제점
-`OnDiskCacheStorage` 테스트 코드 작성 중 `setUp`, `tearDown`을 override 할 때 의문이 생겼다.
-`FileManager.default` 싱글톤 인스턴스를 참조하는 프로퍼티를 갖는 `OnDiskCacheStorage`는 이니셜라이저에서 fileManager에 대한 의존성을 주입받는다.
-따라서 테스트를 위해 innerStorage에 FileManager.default에 대한 참조를 할당하고 tearDown에서 nil을 할당하려고 했다.
-```swift
-class OnDiskCacheStorageTest: XCTestCase {
-    var innerStorage: FileManager!
-    var diskStorage: OnDiskCacheStorage<String>!
-    
-    override func setUpWithError() throws {
-        innerStorage = .default
-        diskStorage = .init(fileManager: innerStorage)
-        try diskStorage.prepareDirectory()
-        try diskStorage.removeExpired()
-    }
-    
-    override func tearDownWithError() throws {
-        try diskStorage.removeAll()
-        diskStorage = nil
-        innerStorage = nil
-    }
-}
-```
 
-이 때, 뭔가 어색함을 느꼈다. `FileManager.default`는 `FileManager`의 타입 프로퍼티 싱글톤 인스턴스로 lazy하게 생성되며 런타임에 생성 이후 할당이 해제되지 않는다. 따라서, tearDwon에서 innerStorage에 nil을 할당한다 해도 인스턴스가 해제되지 않을 것이다.
-
-그렇다면 innerStorage를 tearDown해야할 필요가 있을까 라는 고민이 생겼다.
-
-### ⚒️ 해결방안
-diskStorage를 초기화하면 이니셜라이저 파라미터의 기본값으로 설정된 FileManager.default에 접근하여 1회 생성되므로 테스트가 끝나기 전까지는 default 인스턴스가 유지될 것이라고 생각했다. 왜냐하면 타입 프로퍼티로 생성된 싱글톤 인스턴스의 경우 프로그램이 종료되기 전까지는 메모리에서 해제할 방법이 없기 때문이다.
-
-따라서 setUp, tearDown에서 참조 변수에 nil을 할당할 필요가 없다고 생각해 조금 더 간단히 작성할 수 있도록 수정했다.
-
-innerStorage는 모든 테스트에 공통적으로 필요한 조건으로 생각해 XCTestCase의 타입 메서드인 setUp과 tearDown을 활용해볼 수도 있지만 어차피 tearDown에서 할당 해제할 수 없으므로 한 번 생성해주기만 하기로 결정했다.
-
-```swift
-class OnDiskCacheStorageTest: XCTestCase {
-    let innerStorage = FileManager.default
-    var diskStorage: OnDiskCacheStorage<String>!
-    
-    override func setUpWithError() throws {
-        diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(5))
-    }
-    
-    override func tearDownWithError() throws {
-        try diskStorage.removeAll()
-        diskStorage = nil
-    }
-}
-
-```
-
-</br>
-
-## 4️⃣ Coordinator 메모리 누수
+## 3️⃣ Coordinator 메모리 누수
 ### 🔍 문제점
 화면전환 로직을 전부 `Coordinator`에게 맡겨두었다.
 `Coordinator`에는 parent - child 관계가 있고, child에 대한 참조를 parent에서 배열로 갖는다. 이 때, 새로운 화면을 띄운 다음 해당 화면을 `pop`/`dismiss` 하게 되면 Coordinator의 `deinit`이 호출되지 않았고, 인스턴스가 메모리에 그대로 남아있는 것을 확인했다.
@@ -620,6 +565,60 @@ final class Observable<T> {
 }
 ```
 
+</br>
+
+## ✧ Unit test - Singleton 참조를 갖는 인스턴스의 setUp, tearDown
+### 🔍 문제점
+`OnDiskCacheStorage` 테스트 코드 작성 중 `setUp`, `tearDown`을 override 할 때 의문이 생겼다.
+`FileManager.default` 싱글톤 인스턴스를 참조하는 프로퍼티를 갖는 `OnDiskCacheStorage`는 이니셜라이저에서 fileManager에 대한 의존성을 주입받는다.
+따라서 테스트를 위해 innerStorage에 FileManager.default에 대한 참조를 할당하고 tearDown에서 nil을 할당하려고 했다.
+```swift
+class OnDiskCacheStorageTest: XCTestCase {
+    var innerStorage: FileManager!
+    var diskStorage: OnDiskCacheStorage<String>!
+    
+    override func setUpWithError() throws {
+        innerStorage = .default
+        diskStorage = .init(fileManager: innerStorage)
+        try diskStorage.prepareDirectory()
+        try diskStorage.removeExpired()
+    }
+    
+    override func tearDownWithError() throws {
+        try diskStorage.removeAll()
+        diskStorage = nil
+        innerStorage = nil
+    }
+}
+```
+
+이 때, 뭔가 어색함을 느꼈다. `FileManager.default`는 `FileManager`의 타입 프로퍼티 싱글톤 인스턴스로 lazy하게 생성되며 런타임에 생성 이후 할당이 해제되지 않는다. 따라서, tearDwon에서 innerStorage에 nil을 할당한다 해도 인스턴스가 해제되지 않을 것이다.
+
+그렇다면 innerStorage를 tearDown해야할 필요가 있을까 라는 고민이 생겼다.
+
+### ⚒️ 해결방안
+diskStorage를 초기화하면 이니셜라이저 파라미터의 기본값으로 설정된 FileManager.default에 접근하여 1회 생성되므로 테스트가 끝나기 전까지는 default 인스턴스가 유지될 것이라고 생각했다. 왜냐하면 타입 프로퍼티로 생성된 싱글톤 인스턴스의 경우 프로그램이 종료되기 전까지는 메모리에서 해제할 방법이 없기 때문이다.
+
+따라서 setUp, tearDown에서 참조 변수에 nil을 할당할 필요가 없다고 생각해 조금 더 간단히 작성할 수 있도록 수정했다.
+
+innerStorage는 모든 테스트에 공통적으로 필요한 조건으로 생각해 XCTestCase의 타입 메서드인 setUp과 tearDown을 활용해볼 수도 있지만 어차피 tearDown에서 할당 해제할 수 없으므로 한 번 생성해주기만 하기로 결정했다.
+
+```swift
+class OnDiskCacheStorageTest: XCTestCase {
+    let innerStorage = FileManager.default
+    var diskStorage: OnDiskCacheStorage<String>!
+    
+    override func setUpWithError() throws {
+        diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(5))
+    }
+    
+    override func tearDownWithError() throws {
+        try diskStorage.removeAll()
+        diskStorage = nil
+    }
+}
+
+```
 
 
 </br>
