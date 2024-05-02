@@ -451,7 +451,7 @@ struct AlertBuilder {
 ```
 
 Builder 패턴의 특성상 메서드에서 자기 자신을 반환해야 한다.
-`Self`를 반환하면 AlertBuilder가 struct이므로 메모리 영역 중 stack 영역에 인스턴스가 할당된다. 이 때, Builder의 프로퍼티가는 모두 class이기 때문에 heap 영역에 인스턴스가 할당된 상태이며 Builder의 인스턴스가 메모리에 할당될 때마다 참조 overhead가 발생하게 된다.
+`Self`를 반환하면 AlertBuilder가 struct이므로 메모리 영역 중 stack 영역에 인스턴스가 할당된다. 이 때, Builder의 프로퍼티는 모두 class이기 때문에 heap 영역에 인스턴스가 할당된 상태이며 Builder의 인스턴스가 메모리에 할당될 때마다 참조 overhead가 발생하게 된다.
 
 <img src="https://github.com/Tediousday93/BoxOffice_MVVM/blob/main/ScreenShot/AlertBuilder%EB%A9%94%EB%AA%A8%EB%A6%AC.001.jpeg?raw=true" width="550">
 
