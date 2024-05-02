@@ -692,3 +692,6 @@ class OnDiskCacheStorageTest: XCTestCase {
 * [Mocking requests using URLProtocol](https://www.theinkedengineer.com/articles/mocking-requests-using-url-protocol)
 * [서버없이 Networking Test 하기 with URLProtocol - 포프리](https://seob-p.tistory.com/18)
 * [Testing network calls using URLProtocol - Artur Gruchata](https://arturgruchala.com/testing-network-calls-using/)
+* [RxSwift - Observable](https://reactivex.io/documentation/observable.html)
+* [RIP Tutorial - MVVM Without Reactive Programming](https://riptutorial.com/ios/example/27354/mvvm-without-reactive-programming)
+* [stevencurtis(GitHub) Swift Coding - Two Way Binding](https://github.com/stevencurtis/SwiftCoding/tree/master/TwoWayBinding)
