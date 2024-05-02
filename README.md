@@ -424,6 +424,64 @@ final class MovieDetailsViewController: UIViewController {
 
 
 # 💭 고민했던 점
+
+## ✧ 성능 최적화
+
+### static dispatch
+상속 기능이 있는 class의 경우, 상속을 통한 overriding이 가능할 때 프로퍼티, 메서드 dispatch에 static dispatch 보다 성능상 손해가 있는 dynamic dispatch를 이용한다. 이를 최적화하기 위해 상속을 활용하지 않는 class에 대해 `final` 키워드, `private` 접근제어를 적극적으로 활용했다.
+
+### AlertBuilder - struct vs class
+`AlertBuilder` 를 정의할 때 struct와 class 중 어떤 것을 선택할지 고민했다.
+AlertController를 선언적으로 설정하고 화면에 보여주기 위해 AlertBuilder에는 2개의 프로퍼티가 필요하다. 이를 Struct로 정의하면 아래와 같다.
+
+```swift
+struct AlertBuilder {
+    private let alertController: UIAlertController
+    
+    private let presentingViewController: UIViewController
+    
+    init(
+        alertStyle: UIAlertController.Style,
+        presentingViewController: UIViewController
+    ) {
+        self.alertController = .init(title: nil, message: nil, preferredStyle: alertStyle)
+        self.presentingViewController = presentingViewController
+    }
+}
+```
+
+Builder 패턴의 특성상 메서드에서 자기 자신을 반환해야 한다.
+`Self`를 반환하면 AlertBuilder가 struct이므로 메모리 영역 중 stack 영역에 인스턴스가 할당된다. 이 때, Builder의 프로퍼티가는 모두 class이기 때문에 heap 영역에 인스턴스가 할당된 상태이며 Builder의 인스턴스가 메모리에 할당될 때마다 참조 overhead가 발생하게 된다.
+
+<img src="https://github.com/Tediousday93/BoxOffice_MVVM/blob/main/ScreenShot/AlertBuilder%EB%A9%94%EB%AA%A8%EB%A6%AC.001.jpeg?raw=true" width="550">
+
+이러한 overhead를 줄이기 위해 Builder를 class로 정의하고 인스턴스를 하나로 유지하며 Self 반환 시 참조를 반환하도록 했다.
+
+```swift
+final class AlertBuilder {
+    private let alertController: UIAlertController
+    
+    private let presentingViewController: UIViewController
+    
+    init(
+        alertStyle: UIAlertController.Style,
+        presentingViewController: UIViewController
+    ) {
+        self.alertController = .init(title: nil, message: nil, preferredStyle: alertStyle)
+        self.presentingViewController = presentingViewController
+    }
+    
+    func setTitle(_ title: String ) -> Self {
+        alertController.title = title
+        return self
+    }
+    
+    // implementations...
+}
+```
+
+</br>
+
 ## ✧ 중복 코드 줄이기
 `OnDiskCacheStorage`는 `FileManager`를 활용해 샌드박스 내부 Caches 폴더에 캐시할 데이터를 저장한다.
 캐시 만료기간은 생성된 파일의 `attributes`를 통해 관리하고 있다. 이를 활용하기 위해서는 URL 인스턴스에서 제공하는 메서드 `resourceValues(forKeys:)`를 이용해야 했다.
