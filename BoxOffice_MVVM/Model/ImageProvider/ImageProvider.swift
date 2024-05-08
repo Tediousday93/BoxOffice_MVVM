@@ -43,12 +43,8 @@ final class ImageProvider: ImageProviderType {
         downloadImage(from: url) { result in
             switch result {
             case let .success(image):
-                do {
-                    try self.cache.store(image, for: url.cacheKey)
-                    completion(.success(image))
-                } catch {
-                    completion(.failure(error))
-                }
+                try? self.cache.store(image, for: url.cacheKey)
+                completion(.success(image))
             case let .failure(error):
                 completion(.failure(error))
             }
@@ -78,5 +74,6 @@ extension URL {
     var cacheKey: String {
         return self.deletingPathExtension().path()
             .replacingOccurrences(of: "/", with: "")
+            .replacingOccurrences(of: ".", with: "_")
     }
 }
