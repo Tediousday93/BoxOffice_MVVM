@@ -164,7 +164,7 @@ final class DailyBoxOfficeViewController: UIViewController {
                     item: item
                 )
             default:
-                return UICollectionViewCell()
+                fatalError("DailyBoxOfficeView - collection view can not dequeue cell(mode is nil)")
             }
         }
     }
