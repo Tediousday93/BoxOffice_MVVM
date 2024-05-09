@@ -46,6 +46,7 @@
 		AD6E88D82BAC517100F28458 /* InMemoryCacheStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */; };
 		AD6E88E02BAD9B3800F28458 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */; };
 		AD6E89272BB58AA200F28458 /* Expiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E89262BB58AA200F28458 /* Expiration.swift */; };
+		ADA1C7072BECAF4400E2EBC5 /* ObservableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA1C7062BECAF4400E2EBC5 /* ObservableTest.swift */; };
 		ADC5C0772BBA93DF00B56406 /* OnDiskCacheStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C0762BBA93DF00B56406 /* OnDiskCacheStorageTest.swift */; };
 		ADC5C0852BC40C7D00B56406 /* ImageCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C0842BC40C7D00B56406 /* ImageCacheTest.swift */; };
 		ADC5C08E2BC5016700B56406 /* Image+DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */; };
@@ -129,6 +130,7 @@
 		AD6E88D72BAC517100F28458 /* InMemoryCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheStorageTest.swift; sourceTree = "<group>"; };
 		AD6E88DF2BAD9B3800F28458 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		AD6E89262BB58AA200F28458 /* Expiration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expiration.swift; sourceTree = "<group>"; };
+		ADA1C7062BECAF4400E2EBC5 /* ObservableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTest.swift; sourceTree = "<group>"; };
 		ADC5C0762BBA93DF00B56406 /* OnDiskCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDiskCacheStorageTest.swift; sourceTree = "<group>"; };
 		ADC5C0842BC40C7D00B56406 /* ImageCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTest.swift; sourceTree = "<group>"; };
 		ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+DataConvertible.swift"; sourceTree = "<group>"; };
@@ -350,6 +352,14 @@
 			path = CacheTest;
 			sourceTree = "<group>";
 		};
+		ADA1C7052BECAF1500E2EBC5 /* ObservableTest */ = {
+			isa = PBXGroup;
+			children = (
+				ADA1C7062BECAF4400E2EBC5 /* ObservableTest.swift */,
+			);
+			path = ObservableTest;
+			sourceTree = "<group>";
+		};
 		ADC5C08F2BC5018C00B56406 /* ImageCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +413,7 @@
 				AD32E8092B9EE02F002AD62C /* APITest */,
 				AD32E83F2BAAFB98002AD62C /* CacheTest */,
 				ADFC799B2BC55D310051F183 /* ImageProviderTest */,
+				ADA1C7052BECAF1500E2EBC5 /* ObservableTest */,
 			);
 			path = BoxOffice_MVVMTests;
 			sourceTree = "<group>";
@@ -704,6 +715,7 @@
 				AD6E88E02BAD9B3800F28458 /* TestHelper.swift in Sources */,
 				AD32E8382BA9A861002AD62C /* MovieDetailsAPITest.swift in Sources */,
 				ADC5C0852BC40C7D00B56406 /* ImageCacheTest.swift in Sources */,
+				ADA1C7072BECAF4400E2EBC5 /* ObservableTest.swift in Sources */,
 				AD32E8212BA46598002AD62C /* DailyBoxOfficeAPITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -852,6 +864,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3Z52WD5MD8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice_MVVM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -881,6 +894,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3Z52WD5MD8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice_MVVM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -910,6 +924,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3Z52WD5MD8;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
@@ -932,6 +947,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3Z52WD5MD8;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
