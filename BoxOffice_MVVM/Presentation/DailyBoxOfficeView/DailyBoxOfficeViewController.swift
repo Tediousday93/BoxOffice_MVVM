@@ -135,7 +135,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     
     @objc
     private func refreshControlAction() {
-        if let date = self.navigationItem.title {
+        if let date = viewModel.currentDate.value {
             viewModel.setCurrentDate(date)
         }
     }
