@@ -24,6 +24,7 @@ final class CalendarViewModel {
         if let startDate = dateFormatter.date(from: Constant.dailyBoxOfficeStartDate) {
             return DateInterval(start: startDate, end: DateConstant.yesterday)
         }
+        
         return nil
     }
     
