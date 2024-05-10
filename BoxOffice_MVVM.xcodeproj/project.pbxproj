@@ -52,6 +52,7 @@
 		ADA45BB82BEE058C006645B5 /* MovieDetailsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BB72BEE058C006645B5 /* MovieDetailsViewModelTest.swift */; };
 		ADA45BBA2BEE0603006645B5 /* MockMovieDetailsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BB92BEE0603006645B5 /* MockMovieDetailsProvider.swift */; };
 		ADA45BBC2BEE096A006645B5 /* MockImageURLSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BBB2BEE096A006645B5 /* MockImageURLSearcher.swift */; };
+		ADA45BBE2BEE1EC8006645B5 /* CalendarViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BBD2BEE1EC8006645B5 /* CalendarViewModelTest.swift */; };
 		ADC5C0772BBA93DF00B56406 /* OnDiskCacheStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C0762BBA93DF00B56406 /* OnDiskCacheStorageTest.swift */; };
 		ADC5C0852BC40C7D00B56406 /* ImageCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C0842BC40C7D00B56406 /* ImageCacheTest.swift */; };
 		ADC5C08E2BC5016700B56406 /* Image+DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */; };
@@ -141,6 +142,7 @@
 		ADA45BB72BEE058C006645B5 /* MovieDetailsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModelTest.swift; sourceTree = "<group>"; };
 		ADA45BB92BEE0603006645B5 /* MockMovieDetailsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieDetailsProvider.swift; sourceTree = "<group>"; };
 		ADA45BBB2BEE096A006645B5 /* MockImageURLSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageURLSearcher.swift; sourceTree = "<group>"; };
+		ADA45BBD2BEE1EC8006645B5 /* CalendarViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTest.swift; sourceTree = "<group>"; };
 		ADC5C0762BBA93DF00B56406 /* OnDiskCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDiskCacheStorageTest.swift; sourceTree = "<group>"; };
 		ADC5C0842BC40C7D00B56406 /* ImageCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTest.swift; sourceTree = "<group>"; };
 		ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+DataConvertible.swift"; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			children = (
 				ADA1C7092BECE1AE00E2EBC5 /* DailyBoxOfficeViewModelTest.swift */,
 				ADA45BB72BEE058C006645B5 /* MovieDetailsViewModelTest.swift */,
+				ADA45BBD2BEE1EC8006645B5 /* CalendarViewModelTest.swift */,
 			);
 			path = ViewModelTest;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				ADC5C0772BBA93DF00B56406 /* OnDiskCacheStorageTest.swift in Sources */,
 				AD6E88E02BAD9B3800F28458 /* TestHelper.swift in Sources */,
 				AD32E8382BA9A861002AD62C /* MovieDetailsAPITest.swift in Sources */,
+				ADA45BBE2BEE1EC8006645B5 /* CalendarViewModelTest.swift in Sources */,
 				ADC5C0852BC40C7D00B56406 /* ImageCacheTest.swift in Sources */,
 				ADA1C7072BECAF4400E2EBC5 /* ObservableTest.swift in Sources */,
 				AD32E8212BA46598002AD62C /* DailyBoxOfficeAPITest.swift in Sources */,
