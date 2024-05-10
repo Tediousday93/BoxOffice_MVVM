@@ -8,16 +8,16 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class ImageProviderTest: XCTestCase {
-    let dummyURL = URL(string: "https://boxoffice.testurl.com")!
-    let sampleImage = Image(data: MockData.sampleImageData)!
+final class ImageProviderTest: XCTestCase {
+    private let dummyURL = URL(string: "https://boxoffice.testurl.com")!
+    private let sampleImage = Image(data: MockData.sampleImageData)!
     
-    var imageProvider: ImageProvider!
-    var mockCache: MockImageCache!
-    var networkSession: NetworkSession!
-    var dummyRequest: URLRequest!
+    private var imageProvider: ImageProvider!
+    private var mockCache: MockImageCache!
+    private var networkSession: NetworkSession!
+    private var dummyRequest: URLRequest!
     
-    var expectation: XCTestExpectation!
+    private var expectation: XCTestExpectation!
     
     override func setUp() {
         let networkConfiguration = URLSessionConfiguration.ephemeral

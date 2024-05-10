@@ -8,10 +8,10 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class InMemoryCacheStorageTest: XCTestCase {
-    typealias TestCacheObject = InMemoryCacheStorage<Int>.CacheObject<Int>
+final class InMemoryCacheStorageTest: XCTestCase {
+    private typealias TestCacheObject = InMemoryCacheStorage<Int>.CacheObject<Int>
     
-    var memoryStorage: InMemoryCacheStorage<Int>!
+    private var memoryStorage: InMemoryCacheStorage<Int>!
     
     override func setUp() {
         memoryStorage = .init(countLimit: 3,

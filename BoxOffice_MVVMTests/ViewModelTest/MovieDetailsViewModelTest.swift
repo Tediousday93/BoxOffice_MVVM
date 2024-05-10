@@ -8,7 +8,14 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class MovieDetailsViewModelTest: XCTestCase {
-    var sut: MovieDetailsViewModel!
-    var mockMovieDetailsProvider: 
+final class MovieDetailsViewModelTest: XCTestCase {
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter
+    }()
+    
+    private var sut: MovieDetailsViewModel!
+    private var mockMovieDetailsProvider: MockMovieDetailsProvider!
 }

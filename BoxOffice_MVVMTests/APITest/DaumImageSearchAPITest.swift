@@ -8,9 +8,9 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class DaumImageSearchAPITest: XCTestCase {
-    var apiProvider: NetworkProvider<DaumImageSearchAPI>!
-    var expectation: XCTestExpectation!
+final class DaumImageSearchAPITest: XCTestCase {
+    private var apiProvider: NetworkProvider<DaumImageSearchAPI>!
+    private var expectation: XCTestExpectation!
     
     override func setUp() {
         let configuration = URLSessionConfiguration.default

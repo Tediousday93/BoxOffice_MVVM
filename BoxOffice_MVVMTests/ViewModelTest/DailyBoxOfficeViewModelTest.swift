@@ -8,27 +8,23 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class DailyBoxOfficeViewModelTest: XCTestCase {
-    let numberFormatter: NumberFormatter = {
+final class DailyBoxOfficeViewModelTest: XCTestCase {
+    private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         
         return formatter
     }()
     
-    let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         
         return formatter
     }()
     
-    var sut: DailyBoxOfficeViewModel!
-    var mockDailyBoxOfficeProvider: MockDailyBoxOfficeProvider!
-    
-    var emittedCellItems: [DailyBoxOfficeCellItem]?
-    var emittedDate: String?
-    var emittedMode: DailyBoxOfficeViewModel.CollectionViewMode?
+    private var sut: DailyBoxOfficeViewModel!
+    private var mockDailyBoxOfficeProvider: MockDailyBoxOfficeProvider!
     
     override func setUp() {
         mockDailyBoxOfficeProvider = .init()
@@ -40,9 +36,6 @@ class DailyBoxOfficeViewModelTest: XCTestCase {
     override func tearDown() {
         mockDailyBoxOfficeProvider = nil
         sut = nil
-        emittedCellItems = nil
-        emittedDate = nil
-        emittedMode = nil
     }
     
     func test_initialValueOfCurrentDateIsYesterday() {

@@ -8,12 +8,12 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class ImageCacheTest: XCTestCase {
-    let sampleImage = Image(data: MockData.sampleImageData)!
+final class ImageCacheTest: XCTestCase {
+    private let sampleImage = Image(data: MockData.sampleImageData)!
     
-    var imageCache: ImageCache!
-    var memoryStorage: InMemoryCacheStorage<Image>!
-    var diskStorage: OnDiskCacheStorage<Image>!
+    private var imageCache: ImageCache!
+    private var memoryStorage: InMemoryCacheStorage<Image>!
+    private var diskStorage: OnDiskCacheStorage<Image>!
     
     override func setUpWithError() throws {
         memoryStorage = .init(countLimit: 3,

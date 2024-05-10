@@ -8,12 +8,12 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class NetworkSessionTest: XCTestCase {
-    let dummyURL = URL(string: "https://boxoffice.testurl.com")!
+final class NetworkSessionTest: XCTestCase {
+    private let dummyURL = URL(string: "https://boxoffice.testurl.com")!
     
-    var networkSession: NetworkSession!
-    var expectation: XCTestExpectation!
-    var dummyRequest: URLRequest!
+    private var networkSession: NetworkSession!
+    private var expectation: XCTestExpectation!
+    private var dummyRequest: URLRequest!
     
     override func setUp() {
         let configuration = URLSessionConfiguration.default

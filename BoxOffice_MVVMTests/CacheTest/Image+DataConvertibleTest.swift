@@ -8,8 +8,8 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class ImageDataConvertibleTest: XCTestCase {
-    var image: Image!
+final class ImageDataConvertibleTest: XCTestCase {
+    private var image: Image!
     
     override func setUp() {
         image = Image(data: MockData.sampleImageData)

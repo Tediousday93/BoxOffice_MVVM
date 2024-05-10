@@ -8,11 +8,11 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class ObservableTest: XCTestCase {
-    var sut: Observable<Int>!
-    var listener: ((Int) -> Void)!
-    var expectation: XCTestExpectation!
-    var emittedValues: [Int]!
+final class ObservableTest: XCTestCase {
+    private var sut: Observable<Int>!
+    private var listener: ((Int) -> Void)!
+    private var expectation: XCTestExpectation!
+    private var emittedValues: [Int]!
     
     override func setUp() {
         sut = .init()

@@ -8,9 +8,9 @@
 import XCTest
 @testable import BoxOffice_MVVM
 
-class DailyBoxOfficeAPITest: XCTestCase {
-    var apiProvider: NetworkProvider<DailyBoxOfficeAPI>!
-    var expectation: XCTestExpectation!
+final class DailyBoxOfficeAPITest: XCTestCase {
+    private var apiProvider: NetworkProvider<DailyBoxOfficeAPI>!
+    private var expectation: XCTestExpectation!
     
     override func setUp() {
         let configuration = URLSessionConfiguration.default

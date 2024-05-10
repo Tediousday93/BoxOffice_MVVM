@@ -9,7 +9,7 @@ import Foundation
 
 typealias Path = String
 
-class MockURLProtocol: URLProtocol {
+final class MockURLProtocol: URLProtocol {
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse?, Data?))?
     
     override class func canInit(with request: URLRequest) -> Bool {

@@ -22,12 +22,12 @@ extension String: DataConvertible {
     }
 }
 
-class OnDiskCacheStorageTest: XCTestCase {
-    typealias FileMeta = OnDiskCacheStorage<String>.FileMeta
+final class OnDiskCacheStorageTest: XCTestCase {
+    private typealias FileMeta = OnDiskCacheStorage<String>.FileMeta
     
-    let innerStorage = FileManager.default
+    private let innerStorage = FileManager.default
     
-    var diskStorage: OnDiskCacheStorage<String>!
+    private var diskStorage: OnDiskCacheStorage<String>!
     
     override func setUpWithError() throws {
         diskStorage = try .init(countLimit: 3, cacheExpiration: .seconds(5))
