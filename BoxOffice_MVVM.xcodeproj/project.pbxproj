@@ -51,6 +51,7 @@
 		ADA1C70C2BECE35100E2EBC5 /* MockDailyBoxOfficeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA1C70B2BECE35100E2EBC5 /* MockDailyBoxOfficeProvider.swift */; };
 		ADA45BB82BEE058C006645B5 /* MovieDetailsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BB72BEE058C006645B5 /* MovieDetailsViewModelTest.swift */; };
 		ADA45BBA2BEE0603006645B5 /* MockMovieDetailsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BB92BEE0603006645B5 /* MockMovieDetailsProvider.swift */; };
+		ADA45BBC2BEE096A006645B5 /* MockImageURLSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA45BBB2BEE096A006645B5 /* MockImageURLSearcher.swift */; };
 		ADC5C0772BBA93DF00B56406 /* OnDiskCacheStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C0762BBA93DF00B56406 /* OnDiskCacheStorageTest.swift */; };
 		ADC5C0852BC40C7D00B56406 /* ImageCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C0842BC40C7D00B56406 /* ImageCacheTest.swift */; };
 		ADC5C08E2BC5016700B56406 /* Image+DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */; };
@@ -139,6 +140,7 @@
 		ADA1C70B2BECE35100E2EBC5 /* MockDailyBoxOfficeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDailyBoxOfficeProvider.swift; sourceTree = "<group>"; };
 		ADA45BB72BEE058C006645B5 /* MovieDetailsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModelTest.swift; sourceTree = "<group>"; };
 		ADA45BB92BEE0603006645B5 /* MockMovieDetailsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieDetailsProvider.swift; sourceTree = "<group>"; };
+		ADA45BBB2BEE096A006645B5 /* MockImageURLSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageURLSearcher.swift; sourceTree = "<group>"; };
 		ADC5C0762BBA93DF00B56406 /* OnDiskCacheStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDiskCacheStorageTest.swift; sourceTree = "<group>"; };
 		ADC5C0842BC40C7D00B56406 /* ImageCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTest.swift; sourceTree = "<group>"; };
 		ADC5C08D2BC5016700B56406 /* Image+DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+DataConvertible.swift"; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				ADFC799E2BC672D60051F183 /* MockImageCache.swift */,
 				ADA1C70B2BECE35100E2EBC5 /* MockDailyBoxOfficeProvider.swift */,
 				ADA45BB92BEE0603006645B5 /* MockMovieDetailsProvider.swift */,
+				ADA45BBB2BEE096A006645B5 /* MockImageURLSearcher.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 			files = (
 				ADA1C70C2BECE35100E2EBC5 /* MockDailyBoxOfficeProvider.swift in Sources */,
 				ADFC799F2BC672D60051F183 /* MockImageCache.swift in Sources */,
+				ADA45BBC2BEE096A006645B5 /* MockImageURLSearcher.swift in Sources */,
 				ADFC799D2BC55D5D0051F183 /* ImageProviderTest.swift in Sources */,
 				AD32E8452BAC435F002AD62C /* Image+DataConvertibleTest.swift in Sources */,
 				AD32E80F2B9EE958002AD62C /* MockData.swift in Sources */,
