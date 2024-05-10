@@ -13,6 +13,8 @@ final class MockMovieDetailsProvider: MovieDetailsProvidable {
     var willThrowNetworkError: Bool = false
     
     func getMovieDetails(movieCode: String, completion: @escaping (Result<MovieDetails, any Error>) -> Void) {
+        getMovieDetailsCallCount += 1
+        
         if willThrowNetworkError {
             completion(.failure(NetworkError.unknown))
             return
