@@ -8,7 +8,7 @@
 import Foundation
 
 final class InMemoryCacheStorage<T> {
-    private let storage: NSCache<NSString, CacheObject<T>>
+    private let storage: NSCache<NSString, CacheObject>
     
     private var cleanTimer: Timer? = nil
     
@@ -19,7 +19,7 @@ final class InMemoryCacheStorage<T> {
     private(set) var keys: Set<String> = []
     
     init(
-        storage: NSCache<NSString, CacheObject<T>>,
+        storage: NSCache<NSString, CacheObject>,
         cacheExpiration: CacheExpiration,
         cleanInterval: TimeInterval
     ) {
@@ -112,7 +112,7 @@ final class InMemoryCacheStorage<T> {
 }
 
 extension InMemoryCacheStorage {
-    final class CacheObject<T> {
+    final class CacheObject {
         let value: T
         let expiration: CacheExpiration
         
