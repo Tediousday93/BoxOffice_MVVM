@@ -46,35 +46,6 @@ final class ImageProviderTest: XCTestCase {
         XCTAssertTrue(mockCache.storage.isEmpty)
     }
     
-    func test_fetchImage_success() {
-        MockURLProtocol.requestHandler = { request in
-            guard let url = request.url else {
-                throw NetworkError.invalidURL
-            }
-            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
-            return (response, MockData.sampleImageData)
-        }
-        var expectation = expectation(description: "ImageProvider Expectation")
-        
-        imageProvider.fetchImage(from: dummyURL) { result in
-            switch result {
-            case let .success(image):
-                XCTAssertEqual(self.mockCache.cacheHitCount, 0)
-                XCTAssertTrue(self.mockCache.isCached(for: self.dummyURL.cacheKey))
-                XCTAssertEqual(
-                    image.jpegData(compressionQuality: 1.0),
-                    self.sampleImage.jpegData(compressionQuality: 1.0)
-                )
-                
-                expectation.fulfill()
-            case let .failure(error):
-                XCTFail("Unexpected Error: \(error)")
-            }
-        }
-        
-        wait(for: [expectation], timeout: 1)
-    }
-    
     func test_fetchImageWithDownload() {
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
@@ -89,6 +60,7 @@ final class ImageProviderTest: XCTestCase {
         imageProvider.fetchImage(from: dummyURL) { result in
             switch result {
             case let .success(image):
+                XCTAssertEqual(self.mockCache.cacheHitCount, 0)
                 XCTAssertEqual(
                     image.jpegData(compressionQuality: 1.0),
                     self.sampleImage.jpegData(compressionQuality: 1.0)
