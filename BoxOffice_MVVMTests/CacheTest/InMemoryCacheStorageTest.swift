@@ -9,7 +9,7 @@ import XCTest
 @testable import BoxOffice_MVVM
 
 final class InMemoryCacheStorageTest: XCTestCase {
-    private typealias TestCacheObject = InMemoryCacheStorage<Int>.CacheObject<Int>
+    private typealias TestCacheObject = InMemoryCacheStorage<Int>.CacheObject
     
     private var memoryStorage: InMemoryCacheStorage<Int>!
     
