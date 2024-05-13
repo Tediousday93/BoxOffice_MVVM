@@ -61,6 +61,13 @@ extension NetworkProvider {
         }
         urlComponents.queryItems = queryItems
         
+        if var currentQueries = urlComponents.queryItems {
+            currentQueries = currentQueries + queryItems
+            urlComponents.queryItems = currentQueries
+        } else {
+            urlComponents.queryItems = queryItems
+        }
+        
         guard let url = urlComponents.url else {
             throw NetworkError.invalidURL
         }
