@@ -31,7 +31,9 @@ final class DailyBoxOfficeCoordinator: Coordinator {
     }
     
     deinit {
+        #if DEBUG
         print("DailyBoxOfficeCoordinator deinitialized")
+        #endif
     }
     
     func start() {

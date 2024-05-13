@@ -34,7 +34,9 @@ final class MovieDetailsCoordinator: Coordinator {
     }
     
     deinit {
+        #if DEBUG
         print("MovieDetailsCoordinator deinitialized")
+        #endif
     }
     
     func start() {

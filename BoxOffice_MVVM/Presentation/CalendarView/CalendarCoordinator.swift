@@ -31,7 +31,9 @@ final class CalendarCoordinator: Coordinator {
     }
     
     deinit {
+        #if DEBUG
         print("CalendarCoordinator deinitialized")
+        #endif
     }
     
     func start() {
