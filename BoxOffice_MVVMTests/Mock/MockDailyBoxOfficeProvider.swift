@@ -9,7 +9,7 @@ import Foundation
 @testable import BoxOffice_MVVM
 
 final class MockDailyBoxOfficeProvider: DailyBoxOfficeProvidable {
-    var getDailyCallCount = 0
+    var getDailyCallCount: Int = .zero
     var willThrowNetworkError: Bool = false
     
     func getDaily(targetDate: String, completion: @escaping (Result<BoxOffice_MVVM.DailyBoxOffice, any Error>) -> Void) {

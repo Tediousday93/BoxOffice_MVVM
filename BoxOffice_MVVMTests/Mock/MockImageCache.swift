@@ -11,6 +11,7 @@ final class MockImageCache: ImageCacheType {
     var storage: [String: Image] = [:]
     var isCacheExpired: Bool = false
     var isCacheHit: Bool = false
+    var removeExpiredCallCount: Int = .zero
     
     func store(_ image: Image, for key: String, option: CacheOption?) throws {
         storage[key] = image

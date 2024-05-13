@@ -11,8 +11,8 @@ import Foundation
 final class MockImageURLSearcher: ImageURLSearchable {
     let dummyURL = URL(string: "https://boxoffice.testurl.com")!
     
-    var searchCallCount = 0
-    var searchSingleCallCount = 0
+    var searchCallCount: Int = .zero
+    var searchSingleCallCount: Int = .zero
     var willThrowNetworkError: Bool = false
     
     func search(for keyword: String, completion: @escaping (Result<[URL], any Error>) -> Void) {

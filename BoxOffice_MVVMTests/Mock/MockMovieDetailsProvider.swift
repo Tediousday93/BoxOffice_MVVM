@@ -9,7 +9,7 @@ import Foundation
 @testable import BoxOffice_MVVM
 
 final class MockMovieDetailsProvider: MovieDetailsProvidable {
-    var getMovieDetailsCallCount = 0
+    var getMovieDetailsCallCount: Int = .zero
     var willThrowNetworkError: Bool = false
     
     func getMovieDetails(movieCode: String, completion: @escaping (Result<MovieDetails, any Error>) -> Void) {
