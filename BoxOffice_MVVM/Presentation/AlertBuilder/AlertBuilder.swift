@@ -10,7 +10,7 @@ import UIKit
 final class AlertBuilder {
     private let alertController: UIAlertController
     
-    private let presentingViewController: UIViewController
+    private weak var presentingViewController: UIViewController?
     
     init(
         alertStyle: UIAlertController.Style,
@@ -46,6 +46,6 @@ final class AlertBuilder {
     }
     
     func show() {
-        presentingViewController.present(alertController, animated: true)
+        presentingViewController?.present(alertController, animated: true)
     }
 }
