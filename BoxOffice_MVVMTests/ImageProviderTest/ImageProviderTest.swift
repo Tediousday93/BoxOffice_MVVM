@@ -17,8 +17,6 @@ final class ImageProviderTest: XCTestCase {
     private var networkSession: NetworkSession!
     private var dummyRequest: URLRequest!
     
-    private var expectation: XCTestExpectation!
-    
     override func setUp() {
         let networkConfiguration = URLSessionConfiguration.ephemeral
         networkConfiguration.protocolClasses = [MockURLProtocol.self]
@@ -27,7 +25,6 @@ final class ImageProviderTest: XCTestCase {
         mockCache = .init()
         imageProvider = .init(cache: mockCache, loader: networkSession)
         dummyRequest = .init(url: dummyURL)
-        expectation = expectation(description: "ImageProvider Expectation")
     }
     
     override func tearDown() {
@@ -35,10 +32,21 @@ final class ImageProviderTest: XCTestCase {
         networkSession = nil
         imageProvider = nil
         dummyRequest = nil
-        expectation = nil
     }
     
     func test_initRemoveExpiredCall() {
+        try! mockCache.store(sampleImage, for: dummyURL.cacheKey)
+        mockCache.isCacheExpired = true
+        XCTAssertFalse(mockCache.isCached(for: dummyURL.cacheKey))
+        
+        imageProvider = .init(cache: mockCache, loader: networkSession)
+        
+        XCTAssertFalse(mockCache.isCached(for: dummyURL.cacheKey))
+        XCTAssertEqual(mockCache.removeExpiredCallCount, 2)
+        XCTAssertTrue(mockCache.storage.isEmpty)
+    }
+    
+    func test_fetchImage_success() {
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
                 throw NetworkError.invalidURL
@@ -46,27 +54,19 @@ final class ImageProviderTest: XCTestCase {
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
             return (response, MockData.sampleImageData)
         }
-        
-        try! mockCache.store(sampleImage, for: dummyURL.cacheKey)
-        mockCache.isCacheExpired = true
-        XCTAssertFalse(mockCache.isCached(for: dummyURL.cacheKey))
-        
-        imageProvider = .init(cache: mockCache, loader: networkSession)
-        
-        XCTAssertFalse(mockCache.isCacheExpired)
-        XCTAssertFalse(mockCache.isCached(for: dummyURL.cacheKey))
+        var expectation = expectation(description: "ImageProvider Expectation")
         
         imageProvider.fetchImage(from: dummyURL) { result in
             switch result {
             case let .success(image):
-                XCTAssertFalse(self.mockCache.isCacheHit)
+                XCTAssertEqual(self.mockCache.cacheHitCount, 0)
                 XCTAssertTrue(self.mockCache.isCached(for: self.dummyURL.cacheKey))
                 XCTAssertEqual(
                     image.jpegData(compressionQuality: 1.0),
                     self.sampleImage.jpegData(compressionQuality: 1.0)
                 )
                 
-                self.expectation.fulfill()
+                expectation.fulfill()
             case let .failure(error):
                 XCTFail("Unexpected Error: \(error)")
             }
@@ -83,7 +83,7 @@ final class ImageProviderTest: XCTestCase {
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
             return (response, MockData.sampleImageData)
         }
-        
+        var expectation = expectation(description: "ImageProvider Expectation")
         let cacheKey = dummyURL.cacheKey
         
         imageProvider.fetchImage(from: dummyURL) { result in
@@ -95,30 +95,31 @@ final class ImageProviderTest: XCTestCase {
                 )
                 XCTAssertTrue(self.mockCache.isCached(for: cacheKey))
                 
-                self.expectation.fulfill()
+                expectation.fulfill()
             case let .failure(error):
                 XCTFail("Unexpected Error: \(error)")
             }
         }
         
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 1)
     }
     
-    func test_fetchCachedImage() {
+    func test_fetchImageFromCache() {
+        var expectation = expectation(description: "ImageProvider Expectation")
         let cacheKey = dummyURL.cacheKey
         try! mockCache.store(sampleImage, for: cacheKey)
         
         imageProvider.fetchImage(from: dummyURL) { result in
             switch result {
             case let .success(image):
-                XCTAssertTrue(self.mockCache.isCacheHit)
+                XCTAssertEqual(self.mockCache.cacheHitCount, 1)
                 XCTAssertTrue(self.mockCache.isCached(for: cacheKey))
                 XCTAssertEqual(
                     image.jpegData(compressionQuality: 1.0),
                     self.sampleImage.jpegData(compressionQuality: 1.0)
                 )
                 
-                self.expectation.fulfill()
+                expectation.fulfill()
             case let .failure(error):
                 XCTFail("Unexpected Error: \(error)")
             }
@@ -135,6 +136,7 @@ final class ImageProviderTest: XCTestCase {
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
             return (response, Data())
         }
+        var expectation = expectation(description: "ImageProvider Expectation")
         
         imageProvider.fetchImage(from: dummyURL) { result in
             switch result {
@@ -145,10 +147,10 @@ final class ImageProviderTest: XCTestCase {
                     XCTAssertEqual(error, .imageConvertingFail(imageURL: self.dummyURL))
                 }
                 
-                self.expectation.fulfill()
+                expectation.fulfill()
             }
         }
         
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 1)
     }
 }

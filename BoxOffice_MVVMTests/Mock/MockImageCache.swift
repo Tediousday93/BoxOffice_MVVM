@@ -10,7 +10,7 @@
 final class MockImageCache: ImageCacheType {
     var storage: [String: Image] = [:]
     var isCacheExpired: Bool = false
-    var isCacheHit: Bool = false
+    var cacheHitCount: Int = .zero
     var removeExpiredCallCount: Int = .zero
     
     func store(_ image: Image, for key: String, option: CacheOption?) throws {
@@ -18,11 +18,14 @@ final class MockImageCache: ImageCacheType {
     }
     
     func retrieveImage(for key: String) throws -> BoxOffice_MVVM.Image? {
-        isCacheHit = true
+        if isCacheExpired { return nil }
+        cacheHitCount += 1
         return storage[key]
     }
     
     func removeExpired(option: CacheOption?) throws {
+        removeExpiredCallCount += 1
+        
         if isCacheExpired {
             storage.removeAll()
             isCacheExpired = false
