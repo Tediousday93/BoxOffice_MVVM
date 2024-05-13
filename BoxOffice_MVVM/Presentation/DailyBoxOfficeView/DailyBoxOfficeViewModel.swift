@@ -40,7 +40,9 @@ final class DailyBoxOfficeViewModel {
     }
     
     private func fetchDailyBoxOffice(targetDate: String) {
-        boxOffice.getDaily(targetDate: targetDate) { result in
+        boxOffice.getDaily(targetDate: targetDate) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case let .success(dailyBoxOffice):
                 let items = dailyBoxOffice.boxOfficeResult.dailyBoxOfficeList

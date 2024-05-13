@@ -51,7 +51,9 @@ final class MovieDetailsViewModel {
     }
     
     private func fetchMovieInfo() {
-        boxOffice.getMovieDetails(movieCode: movieCode) { result in
+        boxOffice.getMovieDetails(movieCode: movieCode) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case let .success(movieDetails):
                 self.movieDetailsItem.value = self.parseMovieInfo(movieDetails.movieInfoResult.movieInfo)
