@@ -63,7 +63,7 @@ final class SingleMovieInfoView: UIView {
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            titleLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.15)
+            titleLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2)
         ])
     }
 }
