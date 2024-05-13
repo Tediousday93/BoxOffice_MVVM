@@ -9,7 +9,6 @@ import Foundation
 
 enum CacheExpiration: Equatable {
     case seconds(TimeInterval)
-    
     case days(Int)
     
     func estimatedExpirationSince(_ date: Date) -> Date {
@@ -25,8 +24,6 @@ enum CacheExpiration: Equatable {
 
 enum ExpirationExtending {
     case none
-    
     case cacheTime
-    
     case newExpiration(CacheExpiration)
 }
