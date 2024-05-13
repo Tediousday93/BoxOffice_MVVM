@@ -175,6 +175,16 @@ final class MovieDetailsViewController: UIViewController {
     
     private func configureNavigationBar() {
         self.navigationItem.title = viewModel.movieTitle
+    
+        let button = UIBarButtonItem(barButtonSystemItem: .search, 
+                                     target: self,
+                                     action: #selector(searchButtonAction))
+        self.navigationItem.rightBarButtonItem = button
+    }
+    
+    @objc
+    private func searchButtonAction() {
+        coordinator?.toSearchPoster()
     }
     
     private func configureRootView() {

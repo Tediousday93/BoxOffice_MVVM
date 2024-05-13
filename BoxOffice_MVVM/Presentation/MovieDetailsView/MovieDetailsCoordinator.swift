@@ -55,6 +55,10 @@ final class MovieDetailsCoordinator: Coordinator {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func toSearchPoster() {
+        
+    }
+    
     func finish() {
         parent?.removeFinishedChild(self)
     }
