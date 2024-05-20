@@ -48,7 +48,6 @@ final class DailyBoxOfficeViewController: UIViewController {
         setUpSubviews()
         setUpConstraints()
         configureNavigationBar()
-        configureToolbar()
         configureRootView()
         configureCollectionView()
         setUpBindings()
@@ -68,26 +67,21 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
+        let modeChangeButton = UIBarButtonItem(title: Constant.modeChangeButtonTitle,
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(modeChangeButtonAction))
         let dateChoiceButton = UIBarButtonItem(title: Constant.dateChoiceButtonTitle,
                                                style: .plain,
                                                target: self,
                                                action: #selector(dateChoiceButtonAction))
+        self.navigationItem.leftBarButtonItem = modeChangeButton
         self.navigationItem.rightBarButtonItem = dateChoiceButton
     }
     
     @objc
     private func dateChoiceButtonAction() {
         coordinator?.toCalendar(currentDate: viewModel.currentDate)
-    }
-    
-    private func configureToolbar() {
-        let modeChangeButton = UIBarButtonItem(title: Constant.modeChangeButtonTitle,
-                                               style: .plain,
-                                               target: self,
-                                               action: #selector(modeChangeButtonAction))
-        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
-        
-        self.toolbarItems = [spacer, modeChangeButton, spacer]
     }
     
     @objc
@@ -97,7 +91,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         let actionTitle = currentMode.toggle().buttonTitle
         
         AlertBuilder(alertStyle: .actionSheet, presentingViewController: self)
-            .setTitle(Constant.modeChangeButtonTitle)
+            .setTitle(Constant.actionSheetTitle)
             .addAction(title: actionTitle,
                        style: .default,
                        handler: viewModel.changeCollectionViewMode)
@@ -257,7 +251,8 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
 extension DailyBoxOfficeViewController {
     private enum Constant {
         static let dateChoiceButtonTitle = "날짜선택"
-        static let modeChangeButtonTitle = "화면 모드 변경"
+        static let modeChangeButtonTitle = "화면모드"
+        static let actionSheetTitle = "화면 모드 변경"
         static let cancelButtonTitle = "취소"
     }
 }
