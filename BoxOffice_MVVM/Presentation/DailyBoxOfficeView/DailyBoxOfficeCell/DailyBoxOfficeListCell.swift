@@ -36,6 +36,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
         label.font = .preferredFont(forTextStyle: .title3)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         
         return label
     }()
@@ -43,6 +44,7 @@ final class DailyBoxOfficeListCell: UICollectionViewListCell, Reusable {
     private let audienceCountLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         return label
     }()
