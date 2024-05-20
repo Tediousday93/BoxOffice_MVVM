@@ -8,12 +8,6 @@
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    var navigationController: UINavigationController?
-    
-    var parent: Coordinator? = nil
-    
-    var children: [Coordinator] = []
-    
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -28,22 +22,40 @@ final class AppCoordinator: Coordinator {
         return formatter
     }()
     
-    init(navigationController: UINavigationController?) {
-        self.navigationController = navigationController
+    var navigationController: UINavigationController? = nil
+    var parent: Coordinator? = nil
+    var children: [Coordinator] = []
+    let window: UIWindow?
+    
+    init(window: UIWindow?) {
+        self.window = window
+        window?.makeKeyAndVisible()
     }
     
     func start() {
-        toDailyBoxOffice()
+        configureMainUI()
     }
     
-    private func toDailyBoxOffice() {
-        let childCoordinator = DailyBoxOfficeCoordinator(
-            navigationController: navigationController,
+    private func configureMainUI() {
+        let dailyBoxOfficeNavigationController = UINavigationController()
+        dailyBoxOfficeNavigationController.tabBarItem = UITabBarItem(
+            title: "일일 박스오피스",
+            image: UIImage(systemName: "popcorn"),
+            selectedImage: UIImage(systemName: "popcorn.fill")
+        )
+        let dailyBoxOfficeCoordinator = DailyBoxOfficeCoordinator(
+            navigationController: dailyBoxOfficeNavigationController,
             parent: self,
             numberFormatter: numberFormatter,
             dateFormatter: dateFormatter
         )
-        children.append(childCoordinator)
-        childCoordinator.start()
+        children.append(dailyBoxOfficeCoordinator)
+        
+        let tabbarController = UITabBarController()
+        tabbarController.viewControllers = [dailyBoxOfficeNavigationController]
+        
+        window?.rootViewController = tabbarController
+        
+        dailyBoxOfficeCoordinator.start()
     }
 }
