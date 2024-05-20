@@ -15,13 +15,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        configureToolbarAppearance()
+        
         let navigationController = UINavigationController()
+        navigationController.isToolbarHidden = false
         appCoordinator = .init(navigationController: navigationController)
         appCoordinator?.start()
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+    
+    private func configureToolbarAppearance() {
+        let appToolbar = UIToolbar.appearance()
+        let toolbarAppearance = UIToolbarAppearance()
+        toolbarAppearance.configureWithDefaultBackground()
+        appToolbar.standardAppearance = toolbarAppearance
+        appToolbar.scrollEdgeAppearance = toolbarAppearance
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -51,7 +62,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 

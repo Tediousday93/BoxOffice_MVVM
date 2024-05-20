@@ -128,8 +128,14 @@ final class MovieDetailsViewController: UIViewController {
         setUpSubviews()
         setUpConstraints()
         configureNavigationBar()
+        configureToolbar()
         configureRootView()
         setUpBindings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isToolbarHidden = false
     }
     
     private func setUpSubviews() {
@@ -175,11 +181,18 @@ final class MovieDetailsViewController: UIViewController {
     
     private func configureNavigationBar() {
         self.navigationItem.title = viewModel.movieTitle
+    }
     
-        let button = UIBarButtonItem(barButtonSystemItem: .search, 
-                                     target: self,
-                                     action: #selector(searchButtonAction))
-        self.navigationItem.rightBarButtonItem = button
+    private func configureToolbar() {
+        let searchPosterButton = UIBarButtonItem(
+            title: "다른 포스터 찾기",
+            style: .plain,
+            target: self,
+            action: #selector(searchButtonAction)
+        )
+        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
+        
+        self.toolbarItems = [spacer, searchPosterButton, spacer]
     }
     
     @objc
