@@ -51,11 +51,25 @@ final class AppCoordinator: Coordinator {
         )
         children.append(dailyBoxOfficeCoordinator)
         
-        let tabbarController = UITabBarController()
-        tabbarController.viewControllers = [dailyBoxOfficeNavigationController]
+        let movieSearchNavigationController = UINavigationController()
+        movieSearchNavigationController.tabBarItem = UITabBarItem(
+            title: "영화 검색",
+            image: UIImage(systemName: "magnifyingglass.circle"),
+            selectedImage: UIImage(systemName: "magnifyingglass.circle.fill")
+        )
+        let movieSearchCoordinator = MovieSearchCoordinator(
+            navigationController: movieSearchNavigationController,
+            parent: self
+        )
+        children.append(movieSearchCoordinator)
         
+        let tabbarController = UITabBarController()
+        tabbarController.viewControllers = [
+            dailyBoxOfficeNavigationController, movieSearchNavigationController
+        ]
         window?.rootViewController = tabbarController
         
         dailyBoxOfficeCoordinator.start()
+        movieSearchCoordinator.start()
     }
 }
