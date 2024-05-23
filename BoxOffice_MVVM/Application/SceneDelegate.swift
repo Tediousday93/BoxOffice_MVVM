@@ -15,17 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        configureToolbarAppearance()
         appCoordinator = .init(window: window)
         appCoordinator?.start()
-    }
-    
-    private func configureToolbarAppearance() {
-        let appToolbar = UIToolbar.appearance()
-        let toolbarAppearance = UIToolbarAppearance()
-        toolbarAppearance.configureWithDefaultBackground()
-        appToolbar.standardAppearance = toolbarAppearance
-        appToolbar.scrollEdgeAppearance = toolbarAppearance
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
