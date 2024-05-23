@@ -40,7 +40,8 @@ final class MovieDetailsAPITest: XCTestCase {
         }
         
         // when
-        apiProvider.request(.init(movieCode: "20124079")) { result in
+        let api = MovieDetailsAPI(queryParameters: .movieCode("20124079"))
+        apiProvider.request(api) { result in
             // then
             switch result {
             case let .success(movieDetails):

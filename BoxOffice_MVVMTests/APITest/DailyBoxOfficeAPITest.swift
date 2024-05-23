@@ -40,7 +40,8 @@ final class DailyBoxOfficeAPITest: XCTestCase {
         }
         
         // when
-        apiProvider.request(.init(targetDate: "20120101")) { result in
+        let api = DailyBoxOfficeAPI(queryParameters: .targetDate("20120101"))
+        apiProvider.request(api) { result in
             // then
             switch result {
             case let .success(dailyBoxOffice):
