@@ -25,17 +25,14 @@ struct DaumImageSearchAPI: APIConfigurationType {
         ]
     }
     
-    var queryParameters: [String : Any]
+    var queryParameters: [String : Any] = [:]
     
     var bodyParameters: [String : Any]? = nil
     
     init(queryParameters: QueryParameter...) {
-        var queries: [String: Any] = [:]
-        queryParameters.forEach { parameter in
-            queries[parameter.key] = parameter.value
+        for parameter in queryParameters {
+            self.queryParameters[parameter.key] = parameter.value
         }
-        
-        self.queryParameters = queries
     }
 }
 
