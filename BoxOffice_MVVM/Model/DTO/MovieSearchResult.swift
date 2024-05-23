@@ -39,7 +39,7 @@ struct MovieListResult: Decodable {
             let name: String
             
             enum CodingKeys:String, CodingKey {
-                case name = "peoleNm"
+                case name = "peopleNm"
             }
         }
     }
