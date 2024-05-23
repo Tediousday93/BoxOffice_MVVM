@@ -10,8 +10,6 @@ import Foundation
 struct DailyBoxOfficeAPI: APIConfigurationType {
     typealias Response = DailyBoxOffice
     
-    let targetDate: String
-    
     var baseURL: String {
         "http://www.kobis.or.kr/kobisopenapi/webservice/rest/"
     }
@@ -24,15 +22,38 @@ struct DailyBoxOfficeAPI: APIConfigurationType {
     
     var headers: [String : String] { [:] }
     
-    var queryParameters: [String : Any] {
-        guard let key = Bundle.main.infoDictionary?["KOBIS_API_KEY"]
+    var queryParameters: [String : Any] = {
+        guard let apiKey = Bundle.main.infoDictionary?["KOBIS_API_KEY"]
         else { fatalError("Could not find KOBIS_API_KEY from main bundle's infoDictionary") }
         
-        return [
-            "key": key,
-            "targetDt": targetDate
-        ]
-    }
+        return ["key": apiKey]
+    }()
     
     var bodyParameters: [String : Any]? = nil
+    
+    init(queryParameters: QueryParameter...) {
+        for parameter in queryParameters {
+            self.queryParameters[parameter.key] = parameter.value
+        }
+    }
+}
+
+extension DailyBoxOfficeAPI {
+    enum QueryParameter {
+        case targetDate(String)
+        
+        var key: String {
+            switch self {
+            case .targetDate:
+                return "targetDt"
+            }
+        }
+        
+        var value: Any {
+            switch self {
+            case let .targetDate(date):
+                return date
+            }
+        }
+    }
 }

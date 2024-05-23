@@ -26,9 +26,7 @@ struct MovieListAPI: APIConfigurationType {
         guard let apiKey = Bundle.main.infoDictionary?["KOBIS_API_KEY"]
         else { fatalError("Could not find KOBIS_API_KEY from main bundle's infoDictionary") }
         
-        var parameters: [String: Any] = ["key": apiKey]
-        
-        return parameters
+        return ["key": apiKey]
     }()
     
     var bodyParameters: [String : Any]? = nil

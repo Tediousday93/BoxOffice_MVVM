@@ -25,7 +25,7 @@ final class BoxOffice: BoxOfficeType {
         completion: @escaping (Result<DailyBoxOffice, Error>) -> Void
     ) {
         dailyBoxOfficeProvider.request(
-            .init(targetDate: targetDate)
+            .init(queryParameters: .targetDate(targetDate))
         ) { result in
             switch result {
             case let .success(dailyBoxOffice):
@@ -41,7 +41,7 @@ final class BoxOffice: BoxOfficeType {
         completion: @escaping (Result<MovieDetails, Error>) -> Void
     ) {
         movieDetailsProvider.request(
-            .init(movieCode: movieCode)
+            .init(queryParameters: .movieCode(movieCode))
         ) { result in
             switch result {
             case let .success(movieDetails):
