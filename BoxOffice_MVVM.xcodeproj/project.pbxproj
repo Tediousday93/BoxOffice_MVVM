@@ -64,6 +64,8 @@
 		ADEA6A1F2BFB939D009103A4 /* MovieSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6A1E2BFB939D009103A4 /* MovieSearchCoordinator.swift */; };
 		ADEA6A212BFB9404009103A4 /* MovieSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6A202BFB9404009103A4 /* MovieSearchViewController.swift */; };
 		ADEA6A232BFB941B009103A4 /* MovieSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6A222BFB941B009103A4 /* MovieSearchViewModel.swift */; };
+		ADEA6A2A2BFDFD88009103A4 /* MovieListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6A292BFDFD88009103A4 /* MovieListAPI.swift */; };
+		ADEA6A2C2BFE0F02009103A4 /* MovieSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6A2B2BFE0F02009103A4 /* MovieSearchResult.swift */; };
 		ADFC799D2BC55D5D0051F183 /* ImageProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */; };
 		ADFC799F2BC672D60051F183 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC799E2BC672D60051F183 /* MockImageCache.swift */; };
 		ADFC79A62BC7F58D0051F183 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFC79A52BC7F58D0051F183 /* Coordinator.swift */; };
@@ -160,6 +162,8 @@
 		ADEA6A1E2BFB939D009103A4 /* MovieSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchCoordinator.swift; sourceTree = "<group>"; };
 		ADEA6A202BFB9404009103A4 /* MovieSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewController.swift; sourceTree = "<group>"; };
 		ADEA6A222BFB941B009103A4 /* MovieSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewModel.swift; sourceTree = "<group>"; };
+		ADEA6A292BFDFD88009103A4 /* MovieListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListAPI.swift; sourceTree = "<group>"; };
+		ADEA6A2B2BFE0F02009103A4 /* MovieSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResult.swift; sourceTree = "<group>"; };
 		ADFC799C2BC55D5D0051F183 /* ImageProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProviderTest.swift; sourceTree = "<group>"; };
 		ADFC799E2BC672D60051F183 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
 		ADFC79A52BC7F58D0051F183 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 				AD1C436E2B85C9FE00D856EC /* DailyBoxOffice.swift */,
 				AD1C43702B85CA2800D856EC /* MovieDetails.swift */,
 				AD1C43722B85CA4A00D856EC /* DaumSearchResult.swift */,
+				ADEA6A2B2BFE0F02009103A4 /* MovieSearchResult.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				AD1C43C02B8DB85400D856EC /* DaumImageSearchAPI.swift */,
 				AD32E8252BA4681A002AD62C /* DailyBoxOfficeAPI.swift */,
 				AD32E8272BA4684C002AD62C /* MovieDetailsAPI.swift */,
+				ADEA6A292BFDFD88009103A4 /* MovieListAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -725,11 +731,13 @@
 				ADFC79BD2BCD4B620051F183 /* Observable.swift in Sources */,
 				ADFC79D22BD10BA40051F183 /* MovieDetailsViewController.swift in Sources */,
 				AD1C43882B879A1400D856EC /* NetworkProvider.swift in Sources */,
+				ADEA6A2C2BFE0F02009103A4 /* MovieSearchResult.swift in Sources */,
 				AD2D7A2B2B7DC6C100F5A7C0 /* APIConfigurationType.swift in Sources */,
 				AD1C43CC2B8E2EBD00D856EC /* ImageURLSearchError.swift in Sources */,
 				AD32E8232BA46633002AD62C /* BoxOffice.swift in Sources */,
 				ADC5C08E2BC5016700B56406 /* Image+DataConvertible.swift in Sources */,
 				AD1C43C32B8DC61200D856EC /* ImageURLSearchable.swift in Sources */,
+				ADEA6A2A2BFDFD88009103A4 /* MovieListAPI.swift in Sources */,
 				AD1C438F2B885AF500D856EC /* NetworkJSONDecoder.swift in Sources */,
 				ADFC79D02BD0FA230051F183 /* MovieDetailsCoordinator.swift in Sources */,
 				ADFC79DD2BD28A540051F183 /* MovieDetailsItem.swift in Sources */,
