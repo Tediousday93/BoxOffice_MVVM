@@ -18,7 +18,7 @@ final class DailyBoxOfficeAPITest: XCTestCase {
         let urlSession = URLSession(configuration: configuration)
         
         apiProvider = .init(networkSession: NetworkSession(session: urlSession))
-        expectation = .init(description: "DailyBoxOfficeAPI Expectation")
+        expectation = .init(description: "DailyBoxOfficeAPITest Expectation")
     }
     
     override func tearDown() {
@@ -28,7 +28,7 @@ final class DailyBoxOfficeAPITest: XCTestCase {
     
     func test_requestSuccess() {
         // given
-        let successData = MockData.dailyBoxOffice
+        let mockData = MockData.dailyBoxOffice
         
         MockURLProtocol.requestHandler = { request in
             guard let url = request.url else {
@@ -36,7 +36,7 @@ final class DailyBoxOfficeAPITest: XCTestCase {
             }
             
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
-            return (response, successData)
+            return (response, mockData)
         }
         
         // when
